@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Modelos
+﻿namespace Modelos
 {
     public class Usuario
     {
-        string _user;
-        string _clave;
-        int _idEmpleado;
-        int _idRol;
-
-        public string User { get => _user; set => _user = value; }
-        public int IdEmpleado { get => _idEmpleado; set => _idEmpleado = value; }
-        public string Clave { get => _clave; set => _clave = value; }
-        public int IdRol { get => _idRol; set => _idRol = value; }
+        public int UsuarioId { get; set; }
+        public string User { get; set; }
+        public string Clave { get; set; }
+        public int IdEmpleado { get; set; }
+        public int IdRol { get; set; }
+        public string Rol { get; set; }
     }
 }

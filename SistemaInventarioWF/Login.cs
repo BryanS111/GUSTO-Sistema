@@ -1,4 +1,4 @@
-﻿using DAO;
+using DAO;
 using Modelos;
 using System;
 using System.Collections.Generic;
@@ -21,12 +21,11 @@ namespace GUSTO_Sistema
 
         private void btn_ingresar_Click(object sender, EventArgs e)
         {
-            if (credencialesValidas()) 
+            Usuario usuario = credencialesValidas();
+            if (usuario != null)
             {
-                MessageBox.Show("Acceso concedido",
-                                "Mensaje",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                this.Hide();
+                AbrirMenuSegunRol(usuario);
             }
         }
 
@@ -35,17 +34,15 @@ namespace GUSTO_Sistema
             Application.Exit();
         }
 
-        private bool credencialesValidas() 
+        private Usuario credencialesValidas()
         {
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-
-            if (string.IsNullOrEmpty(txt_user.Text)) 
+            if (string.IsNullOrEmpty(txt_user.Text))
             {
                 MessageBox.Show("Debe ingresar el usuario",
                                 "Error",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
-                return false;
+                return null;
             }
 
             if (string.IsNullOrEmpty(txt_pass.Text))
@@ -54,33 +51,91 @@ namespace GUSTO_Sistema
                                 "Error",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
-                return false;
+                return null;
             }
 
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
             Usuario usuario = usuarioDAO.ObtenerPorId(txt_user.Text, out string msjError);
 
-            if (usuario == null && !string.IsNullOrEmpty(msjError)) 
+            if (usuario == null)
             {
-                MessageBox.Show(msjError, 
+                MessageBox.Show(string.IsNullOrEmpty(msjError) ? "No fue posible validar el usuario." : msjError,
                                 "Error",
-                                MessageBoxButtons.OK, 
+                                MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
-                return false;
+                return null;
             }
-            
-            string claveEnc = Utils.GenerateMD5Hash(txt_pass.Text);
 
-            if (!usuario.Clave.ToLower().Equals(claveEnc.ToLower())) 
+            // Comparacion en texto plano (sin MD5)
+            if (!usuario.Clave.Equals(txt_pass.Text))
             {
                 MessageBox.Show("Credenciales no validas",
                                 "Error",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
-                return false;
+                return null;
             }
 
-            return true;
+            return usuario;
+        }
 
+        private void AbrirMenuSegunRol(Usuario usuario)
+        {
+            switch (usuario.Rol.ToUpper())
+            {
+                case "ADMINISTRADOR":
+                    // TODO: reemplazar por -> new MenuAdministrador(usuario)
+                    MessageBox.Show("Bienvenido Administrador: " + usuario.User,
+                                    "Acceso concedido",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                    this.Show();
+                    break;
+
+                case "CAJERO":
+                    // TODO: reemplazar por -> new MenuCajero(usuario)
+                    MessageBox.Show("Bienvenido Cajero: " + usuario.User,
+                                    "Acceso concedido",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                    this.Show();
+                    break;
+
+                case "COCINERO":
+                    // TODO: reemplazar por -> new MenuCocinero(usuario)
+                    MessageBox.Show("Bienvenido Cocinero: " + usuario.User,
+                                    "Acceso concedido",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                    this.Show();
+                    break;
+
+                case "REPARTIDOR":
+                    // TODO: reemplazar por -> new MenuRepartidor(usuario)
+                    MessageBox.Show("Bienvenido Repartidor: " + usuario.User,
+                                    "Acceso concedido",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                    this.Show();
+                    break;
+
+                case "BODEGUERO":
+                    // TODO: reemplazar por -> new MenuBodeguero(usuario)
+                    MessageBox.Show("Bienvenido Bodeguero: " + usuario.User,
+                                    "Acceso concedido",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                    this.Show();
+                    break;
+
+                default:
+                    MessageBox.Show("Rol no reconocido: " + usuario.Rol,
+                                    "Error",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                    this.Show();
+                    break;
+            }
         }
     }
 }

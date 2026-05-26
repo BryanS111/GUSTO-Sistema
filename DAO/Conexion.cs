@@ -1,41 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAO
 {
     class Conexion
     {
-        private string connString = string.Empty;
+        private readonly string connString = string.Empty;
+        private readonly string configError = string.Empty;
+
         public SqlConnection conn;
+
         public Conexion()
         {
             conn = new SqlConnection();
+
             try
             {
-                connString = ConfigurationManager.ConnectionStrings["connSQLServer"].ConnectionString;
+                ConnectionStringSettings settings = ConfigurationManager.ConnectionStrings["connSQLServer"];
+                if (settings == null || string.IsNullOrWhiteSpace(settings.ConnectionString))
+                {
+                    configError = "No se encontro la cadena de conexion 'connSQLServer' en App.config.";
+                    return;
+                }
+
+                connString = settings.ConnectionString;
+                conn.ConnectionString = connString;
             }
-            catch (SqlException ex) 
-            { 
-                Console.WriteLine(ex.Message);
+            catch (ConfigurationErrorsException ex)
+            {
+                configError = ex.Message;
             }
         }
 
-        public SqlConnection AbrirConexion(out string pError) 
+        public SqlConnection AbrirConexion(out string pError)
         {
             pError = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(configError))
+            {
+                pError = configError;
+                return null;
+            }
+
             try
             {
-                if (conn.State == ConnectionState.Closed) 
-                { 
-                    conn.ConnectionString = connString;
+                if (conn.State == ConnectionState.Closed)
+                {
                     conn.Open();
-                }                
+                }
+
                 return conn;
             }
             catch (SqlException ex)
@@ -43,25 +58,32 @@ namespace DAO
                 pError = ex.Message;
                 return null;
             }
+            catch (InvalidOperationException ex)
+            {
+                pError = ex.Message;
+                return null;
+            }
         }
 
-        public void CerrarConexion(out string pError)//SqlConnection pConn) 
+        public void CerrarConexion(out string pError)
         {
             pError = string.Empty;
+
             try
             {
                 if (conn.State == ConnectionState.Open)
                 {
                     conn.Close();
                 }
-                
-                Console.WriteLine("Conexion cerrada");
             }
             catch (SqlException ex)
             {
                 pError = ex.Message;
             }
+            catch (InvalidOperationException ex)
+            {
+                pError = ex.Message;
+            }
         }
     }
-
 }

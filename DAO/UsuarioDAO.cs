@@ -1,10 +1,7 @@
-﻿using Modelos;
+using Modelos;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAO
 {
@@ -29,60 +26,58 @@ namespace DAO
         {
             pError = string.Empty;
             Conexion conn = new Conexion();
-            SqlCommand cmd;
-            SqlDataReader dr;
+            SqlConnection sqlConn = null;
             Usuario usuario = null;
 
-            string cmdStr = "SELECT usuario, clave, idEmpleado, idRol " +
-                            "FROM Usuario " +
-                            "WHERE estado = 'A' " +
-                            "AND usuario = '" + id + "'";
+            string cmdStr = @"SELECT u.UsuarioId, u.Usuario, u.Clave, u.RolId, r.Rol
+                              FROM AUTENTICACION.USUARIO u
+                              INNER JOIN AUTENTICACION.ROL r ON u.RolId = r.RolId
+                              WHERE u.EstadoId = (
+                                  SELECT EstadoId FROM GLOBAL.ESTADO
+                                  WHERE Estado = 'ACTIVO'
+                                  AND EntidadId = (
+                                      SELECT EntidadId FROM GLOBAL.ENTIDAD WHERE Entidad = 'USUARIO'
+                                  )
+                              )
+                              AND u.Usuario = @usuario";
             try
             {
-                conn.AbrirConexion(out pError);
-                if (!string.IsNullOrEmpty(pError)) //problema al abrir conexion
-                {
-                    throw new Exception(pError);
-                }
+                sqlConn = conn.AbrirConexion(out pError);
+                if (sqlConn == null) throw new Exception(pError);
 
-                cmd = new SqlCommand(cmdStr, conn.conn);
-                dr = cmd.ExecuteReader();                
-                while (dr.Read()) 
+                using (SqlCommand cmd = new SqlCommand(cmdStr, sqlConn))
                 {
-                    usuario = new Usuario();
-                    usuario.User = dr.GetString(0);
-                    usuario.Clave = dr.GetString(1);
-                    usuario.IdEmpleado = dr.GetInt32(2);
-                    usuario.IdRol = dr.GetInt32(3);
+                    cmd.Parameters.AddWithValue("@usuario", id);
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            usuario = new Usuario();
+                            usuario.UsuarioId = dr.GetInt32(0);
+                            usuario.User = dr.GetString(1);
+                            usuario.Clave = dr.GetString(2);
+                            usuario.IdRol = dr.GetInt32(3);
+                            usuario.Rol = dr.GetString(4);
+                        }
+                    }
                 }
-                if (usuario == null) 
-                {
-                    pError = "El usuario no existe";
-                }
-
-                dr.Close();
-                conn.CerrarConexion(out pError);
-                if (!string.IsNullOrEmpty(pError)) //problema al cerrar conexion
-                {
-                    throw new Exception(pError);
-                }
+                if (usuario == null) pError = "El usuario no existe";
             }
             catch (SqlException ex)
             {
                 pError = ex.Message;
-                Console.WriteLine(pError);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                if (string.IsNullOrEmpty(pError))
-                {
-                   pError = ex.Message;
-                }
-                Console.WriteLine(pError);
+                if (string.IsNullOrEmpty(pError)) pError = ex.Message;
             }
-
+            finally
+            {
+                conn.CerrarConexion(out string errorCerrar);
+                if (string.IsNullOrEmpty(pError) && !string.IsNullOrEmpty(errorCerrar))
+                    pError = errorCerrar;
+            }
             return usuario;
-
         }
 
         public override List<Usuario> ObtenerTodos(out string pError)
