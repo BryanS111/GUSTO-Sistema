@@ -132,7 +132,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackgroundImage = global::SistemaInventarioWF.Properties.Resources.logo_1000x1000px;
+            this.pictureBox1.BackgroundImage = global::SistemaInventarioWF.Properties.Resources.procesos;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(222, 654);
             this.pictureBox1.Name = "pictureBox1";

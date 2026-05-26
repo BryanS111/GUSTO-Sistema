@@ -63,6 +63,16 @@ namespace SistemaInventarioWF.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap consultas {
+            get {
+                object obj = ResourceManager.GetObject("consultas", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap dashboardsTempleate {
             get {
                 object obj = ResourceManager.GetObject("dashboardsTempleate", resourceCulture);
@@ -116,6 +126,26 @@ namespace SistemaInventarioWF.Properties {
         internal static System.Drawing.Bitmap logo_100x100px1 {
             get {
                 object obj = ResourceManager.GetObject("logo_100x100px1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mantenimientos_crud_ {
+            get {
+                object obj = ResourceManager.GetObject("mantenimientos(crud)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap procesos {
+            get {
+                object obj = ResourceManager.GetObject("procesos", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
