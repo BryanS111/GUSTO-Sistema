@@ -63,6 +63,36 @@ namespace SistemaInventarioWF.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap dashboardsTempleate {
+            get {
+                object obj = ResourceManager.GetObject("dashboardsTempleate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap dashboardsTempleate1 {
+            get {
+                object obj = ResourceManager.GetObject("dashboardsTempleate1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_1000x1000px {
+            get {
+                object obj = ResourceManager.GetObject("logo_1000x1000px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap logo_100x100px {
             get {
                 object obj = ResourceManager.GetObject("logo_100x100px", resourceCulture);
@@ -116,6 +146,16 @@ namespace SistemaInventarioWF.Properties {
         internal static System.Drawing.Bitmap wallpaper1_login_ConElementos_ {
             get {
                 object obj = ResourceManager.GetObject("wallpaper1_login(ConElementos)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap wallpaper1_login1 {
+            get {
+                object obj = ResourceManager.GetObject("wallpaper1_login1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

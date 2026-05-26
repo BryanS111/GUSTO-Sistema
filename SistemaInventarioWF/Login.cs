@@ -1,5 +1,6 @@
 using DAO;
 using Modelos;
+using SistemaInventarioWF;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -81,51 +82,52 @@ namespace GUSTO_Sistema
 
         private void AbrirMenuSegunRol(Usuario usuario)
         {
+            Form formularioMenu = null;
+
             switch (usuario.Rol.ToUpper())
             {
                 case "ADMINISTRADOR":
-                    // TODO: reemplazar por -> new MenuAdministrador(usuario)
                     MessageBox.Show("Bienvenido Administrador: " + usuario.User,
                                     "Acceso concedido",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
-                    this.Show();
+                    formularioMenu = new InterfazPrincipal_Admin(usuario);
                     break;
 
                 case "CAJERO":
-                    // TODO: reemplazar por -> new MenuCajero(usuario)
                     MessageBox.Show("Bienvenido Cajero: " + usuario.User,
                                     "Acceso concedido",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
-                    this.Show();
+                    // Temporalmente redirige a Admin por pruebas
+                    formularioMenu = new InterfazPrincipal_Admin(usuario);
                     break;
 
                 case "COCINERO":
-                    // TODO: reemplazar por -> new MenuCocinero(usuario)
                     MessageBox.Show("Bienvenido Cocinero: " + usuario.User,
                                     "Acceso concedido",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
-                    this.Show();
+                    // Temporalmente redirige a Admin por pruebas
+                    formularioMenu = new InterfazPrincipal_Admin(usuario);
                     break;
 
                 case "REPARTIDOR":
-                    // TODO: reemplazar por -> new MenuRepartidor(usuario)
                     MessageBox.Show("Bienvenido Repartidor: " + usuario.User,
                                     "Acceso concedido",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
-                    this.Show();
+                    // Temporalmente redirige a Admin por pruebas
+                    formularioMenu = new InterfazPrincipal_Admin(usuario);
                     break;
 
                 case "BODEGUERO":
-                    // TODO: reemplazar por -> new MenuBodeguero(usuario)
                     MessageBox.Show("Bienvenido Bodeguero: " + usuario.User,
                                     "Acceso concedido",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
-                    this.Show();
+                    // Temporalmente redirige a Admin por pruebas
+                    formularioMenu = new InterfazPrincipal_Admin(usuario);
                     break;
 
                 default:
@@ -134,7 +136,14 @@ namespace GUSTO_Sistema
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Error);
                     this.Show();
-                    break;
+                    return;
+            }
+
+            // Enlaza el cierre del menú para finalizar por completo el proceso de la aplicación
+            if (formularioMenu != null)
+            {
+                formularioMenu.FormClosed += (sender, args) => Application.Exit();
+                formularioMenu.Show();
             }
         }
 

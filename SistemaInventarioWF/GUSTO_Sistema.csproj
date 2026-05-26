@@ -46,6 +46,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmConsultas_Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConsultas_Menu.Designer.cs">
+      <DependentUpon>frmConsultas_Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInicio_Dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInicio_Dashboard.Designer.cs">
+      <DependentUpon>frmInicio_Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMantenimientos_Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMantenimientos_Menu.Designer.cs">
+      <DependentUpon>frmMantenimientos_Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProcesos_Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProcesos_Menu.Designer.cs">
+      <DependentUpon>frmProcesos_Menu.cs</DependentUpon>
+    </Compile>
     <Compile Include="InterfazPrincipal_Admin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +84,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmConsultas_Menu.resx">
+      <DependentUpon>frmConsultas_Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInicio_Dashboard.resx">
+      <DependentUpon>frmInicio_Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMantenimientos_Menu.resx">
+      <DependentUpon>frmMantenimientos_Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProcesos_Menu.resx">
+      <DependentUpon>frmProcesos_Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfazPrincipal_Admin.resx">
+      <DependentUpon>InterfazPrincipal_Admin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -113,6 +152,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\user_elemento.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dashboardsTempleate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dashboardsTempleate1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wallpaper1_login1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_1000x1000px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
