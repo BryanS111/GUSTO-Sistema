@@ -137,5 +137,15 @@ namespace GUSTO_Sistema
                     break;
             }
         }
+
+        private void usuario_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

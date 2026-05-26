@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InterfazPrincipal_Admin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfazPrincipal_Admin.Designer.cs">
+      <DependentUpon>InterfazPrincipal_Admin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +71,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -88,6 +95,24 @@
       <Project>{f8356d2f-c530-4fb0-a27f-4e971cbe73ec}</Project>
       <Name>Modelos</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wallpaper1_login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_100x100px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_100x100px1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_100x100px%281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wallpaper1_login%28ConElementos%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user_elemento.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
