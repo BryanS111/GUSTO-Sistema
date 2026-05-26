@@ -13,7 +13,7 @@ namespace SistemaInventarioWF
 {
     public partial class InterfazPrincipal_Admin : Form
     {
-        public InterfazPrincipal_Admin(Usuario usuario)
+        public InterfazPrincipal_Admin()
         {
             InitializeComponent();
         }
@@ -36,12 +36,12 @@ namespace SistemaInventarioWF
         private void btnMantenimientos_Admin_Click(object sender, EventArgs e)
         {
 
-            AbrirFormularioEnPanel(new frmMantenimientos_Menu());
+            AbrirFormularioEnPanel(new frmMantenimientos_Menu(this));
 
         }
 
         // Método para abrir formularios dentro del panel contenedor
-        private void AbrirFormularioEnPanel(Form formHijo)
+        public void AbrirFormularioEnPanel(Form formHijo)
         {
             // 1. Verificamos si ya hay un formulario abierto en el panel y lo quitamos
             if (this.pnlContenedor.Controls.Count > 0)
