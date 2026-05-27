@@ -99,7 +99,6 @@ namespace GUSTO_Sistema
                                     "Acceso concedido",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
-                    // Temporalmente redirige a Admin por pruebas
                     formularioMenu = new InterfazPrincipal_Admin(usuario);
                     break;
 
@@ -108,7 +107,6 @@ namespace GUSTO_Sistema
                                     "Acceso concedido",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
-                    // Temporalmente redirige a Admin por pruebas
                     formularioMenu = new InterfazPrincipal_Admin(usuario);
                     break;
 
@@ -117,7 +115,6 @@ namespace GUSTO_Sistema
                                     "Acceso concedido",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
-                    // Temporalmente redirige a Admin por pruebas
                     formularioMenu = new InterfazPrincipal_Admin(usuario);
                     break;
 
@@ -126,7 +123,6 @@ namespace GUSTO_Sistema
                                     "Acceso concedido",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
-                    // Temporalmente redirige a Admin por pruebas
                     formularioMenu = new InterfazPrincipal_Admin(usuario);
                     break;
 
@@ -139,7 +135,6 @@ namespace GUSTO_Sistema
                     return;
             }
 
-            // Enlaza el cierre del menú para finalizar por completo el proceso de la aplicación
             if (formularioMenu != null)
             {
                 formularioMenu.FormClosed += (sender, args) => Application.Exit();

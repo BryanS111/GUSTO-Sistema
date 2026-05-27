@@ -41,7 +41,7 @@ namespace SistemaInventarioWF
         }
 
         // Método para abrir formularios dentro del panel contenedor
-        private void AbrirFormularioEnPanel(Form formHijo)
+        public void AbrirFormularioEnPanel(Form formHijo)
         {
             // 1. Verificamos si ya hay un formulario abierto en el panel y lo quitamos
             if (this.pnlContenedor.Controls.Count > 0)

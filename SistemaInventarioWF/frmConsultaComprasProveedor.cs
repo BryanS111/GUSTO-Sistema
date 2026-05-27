@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace SistemaInventarioWF
 {
-    public partial class frmMantenimientos_Menu : Form
+    public partial class frmConsultaComprasProveedor : Form
     {
-        public frmMantenimientos_Menu()
+        public frmConsultaComprasProveedor()
         {
             InitializeComponent();
-        }
-
-        private void btnClientes_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

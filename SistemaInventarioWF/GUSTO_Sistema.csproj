@@ -46,11 +46,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmConsultaComprasProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConsultaComprasProveedor.Designer.cs">
+      <DependentUpon>frmConsultaComprasProveedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConsultaEnviosDelivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConsultaEnviosDelivery.Designer.cs">
+      <DependentUpon>frmConsultaEnviosDelivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConsultaHistorialAuditoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConsultaHistorialAuditoria.Designer.cs">
+      <DependentUpon>frmConsultaHistorialAuditoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConsultasOrdenesActivas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConsultasOrdenesActivas.Designer.cs">
+      <DependentUpon>frmConsultasOrdenesActivas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConsultaStockInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConsultaStockInventario.Designer.cs">
+      <DependentUpon>frmConsultaStockInventario.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmConsultas_Menu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmConsultas_Menu.Designer.cs">
       <DependentUpon>frmConsultas_Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConsultaVentasFecha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConsultaVentasFecha.Designer.cs">
+      <DependentUpon>frmConsultaVentasFecha.cs</DependentUpon>
     </Compile>
     <Compile Include="frmInicio_Dashboard.cs">
       <SubType>Form</SubType>
@@ -84,8 +120,26 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmConsultaComprasProveedor.resx">
+      <DependentUpon>frmConsultaComprasProveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConsultaEnviosDelivery.resx">
+      <DependentUpon>frmConsultaEnviosDelivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConsultaHistorialAuditoria.resx">
+      <DependentUpon>frmConsultaHistorialAuditoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConsultasOrdenesActivas.resx">
+      <DependentUpon>frmConsultasOrdenesActivas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConsultaStockInventario.resx">
+      <DependentUpon>frmConsultaStockInventario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmConsultas_Menu.resx">
       <DependentUpon>frmConsultas_Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConsultaVentasFecha.resx">
+      <DependentUpon>frmConsultaVentasFecha.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInicio_Dashboard.resx">
       <DependentUpon>frmInicio_Dashboard.cs</DependentUpon>
