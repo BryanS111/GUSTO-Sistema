@@ -12,13 +12,16 @@ namespace SistemaInventarioWF
 {
     public partial class ClientesView : Form
     {
-        public ClientesView()
+        InterfazPrincipal_Admin _abuelo;
+        public ClientesView(InterfazPrincipal_Admin abuelo)
         {
             InitializeComponent();
+            _abuelo = abuelo;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            _abuelo.AbrirFormularioEnPanel(new frmMantenimientos_Menu(_abuelo));
             this.Close();
         }
 

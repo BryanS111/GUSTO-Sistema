@@ -12,9 +12,12 @@ namespace SistemaInventarioWF
 {
     public partial class RepartidoresView : Form
     {
-        public RepartidoresView()
+
+        private InterfazPrincipal_Admin _abuelo;
+        public RepartidoresView(InterfazPrincipal_Admin abuelo)
         {
             InitializeComponent();
+            _abuelo = abuelo;
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -24,6 +27,7 @@ namespace SistemaInventarioWF
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
+            _abuelo.AbrirFormularioEnPanel(new frmMantenimientos_Menu(_abuelo));
             this.Close();
         }
 

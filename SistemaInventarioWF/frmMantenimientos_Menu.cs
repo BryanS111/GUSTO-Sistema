@@ -22,7 +22,7 @@ namespace SistemaInventarioWF
 
         private void btnClientes_Click(object sender, EventArgs e)
         {
-            _abuelo.AbrirFormularioEnPanel(new ClientesView());
+            _abuelo.AbrirFormularioEnPanel(new ClientesView(_abuelo));
         }
 
         private void frmMantenimientos_Menu_Load(object sender, EventArgs e)
@@ -32,32 +32,32 @@ namespace SistemaInventarioWF
 
         private void btnEmpleados_Click(object sender, EventArgs e)
         {
-            _abuelo.AbrirFormularioEnPanel(new EmpleadoView());
+            _abuelo.AbrirFormularioEnPanel(new EmpleadoView(_abuelo));
         }
 
         private void btnRepartidores_Click(object sender, EventArgs e)
         {
-            _abuelo.AbrirFormularioEnPanel(new RepartidoresView());
+            _abuelo.AbrirFormularioEnPanel(new RepartidoresView(_abuelo));
         }
 
         private void btnProveedores_Click(object sender, EventArgs e)
         {
-            _abuelo.AbrirFormularioEnPanel(new ProveedoresView());
+            _abuelo.AbrirFormularioEnPanel(new ProveedoresView(_abuelo));
         }
 
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
-            _abuelo.AbrirFormularioEnPanel(new UsuariosView());
+            _abuelo.AbrirFormularioEnPanel(new UsuariosView(_abuelo));
         }
 
         private void btnMenuCombos_Click(object sender, EventArgs e)
         {
-            _abuelo.AbrirFormularioEnPanel(new MenuCombosView());
+            _abuelo.AbrirFormularioEnPanel(new MenuCombosView(_abuelo));
         }
 
         private void btnInventario_Click(object sender, EventArgs e)
         {
-            _abuelo.AbrirFormularioEnPanel(new InventarioView());
+            _abuelo.AbrirFormularioEnPanel(new InventarioView(_abuelo));
         }
 
         private void btnCategorias_Click(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace SistemaInventarioWF
 
         private void btnMunicipiosDir_Click(object sender, EventArgs e)
         {
-            _abuelo.AbrirFormularioEnPanel(new DireccionesMunicipiosView());
+            _abuelo.AbrirFormularioEnPanel(new DireccionesMunicipiosView(_abuelo));
         }
     }
 }

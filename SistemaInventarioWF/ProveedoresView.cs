@@ -12,13 +12,16 @@ namespace SistemaInventarioWF
 {
     public partial class ProveedoresView : Form
     {
-        public ProveedoresView()
+        private InterfazPrincipal_Admin _abuelo;
+        public ProveedoresView(InterfazPrincipal_Admin abuelo)
         {
             InitializeComponent();
+            _abuelo = abuelo;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            _abuelo.AbrirFormularioEnPanel(new frmMantenimientos_Menu(_abuelo));
             this.Close();
         }
 

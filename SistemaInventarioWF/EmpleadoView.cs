@@ -12,9 +12,11 @@ namespace SistemaInventarioWF
 {
     public partial class EmpleadoView : Form
     {
-        public EmpleadoView()
+        private InterfazPrincipal_Admin _abuelo;
+        public EmpleadoView(InterfazPrincipal_Admin abuelo)
         {
             InitializeComponent();
+            _abuelo = abuelo;
         }
 
         private void EmpleadoView_Load(object sender, EventArgs e)
@@ -23,6 +25,7 @@ namespace SistemaInventarioWF
         }
         private void button4_Click_1(object sender, EventArgs e)
         {
+            _abuelo.AbrirFormularioEnPanel(new frmMantenimientos_Menu(_abuelo));
             this.Close();
         }
 

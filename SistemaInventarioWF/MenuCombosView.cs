@@ -12,13 +12,16 @@ namespace SistemaInventarioWF
 {
     public partial class MenuCombosView : Form
     {
-        public MenuCombosView()
+        private InterfazPrincipal_Admin _abuelo;
+        public MenuCombosView(InterfazPrincipal_Admin abuelo)
         {
             InitializeComponent();
+            _abuelo = abuelo;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            _abuelo.AbrirFormularioEnPanel(new frmMantenimientos_Menu(_abuelo));
             this.Close();
         }
 

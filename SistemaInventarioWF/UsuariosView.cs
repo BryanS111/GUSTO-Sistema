@@ -12,9 +12,12 @@ namespace SistemaInventarioWF
 {
     public partial class UsuariosView : Form
     {
-        public UsuariosView()
+
+        private InterfazPrincipal_Admin _abuelo;
+        public UsuariosView(InterfazPrincipal_Admin abuelo)
         {
             InitializeComponent();
+            _abuelo = abuelo;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -40,6 +43,12 @@ namespace SistemaInventarioWF
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             grpBoxData.Enabled = false;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            _abuelo.AbrirFormularioEnPanel(new frmMantenimientos_Menu(_abuelo));
+            this.Close();
         }
     }
 }

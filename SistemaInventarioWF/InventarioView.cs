@@ -12,9 +12,12 @@ namespace SistemaInventarioWF
 {
     public partial class InventarioView : Form
     {
-        public InventarioView()
+
+        private InterfazPrincipal_Admin _abuelo;
+        public InventarioView(InterfazPrincipal_Admin abuelo)
         {
             InitializeComponent();
+            _abuelo = abuelo;
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -24,6 +27,7 @@ namespace SistemaInventarioWF
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            _abuelo.AbrirFormularioEnPanel(new frmMantenimientos_Menu(_abuelo));
             this.Close();
         }
 
