@@ -46,35 +46,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CategoriasView.cs">
+    <Compile Include="frmConsultaComprasProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CategoriasView.Designer.cs">
-      <DependentUpon>CategoriasView.cs</DependentUpon>
+    <Compile Include="frmConsultaComprasProveedor.Designer.cs">
+      <DependentUpon>frmConsultaComprasProveedor.cs</DependentUpon>
     </Compile>
-    <Compile Include="ClientesView.cs">
+    <Compile Include="frmConsultaEnviosDelivery.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ClientesView.Designer.cs">
-      <DependentUpon>ClientesView.cs</DependentUpon>
+    <Compile Include="frmConsultaEnviosDelivery.Designer.cs">
+      <DependentUpon>frmConsultaEnviosDelivery.cs</DependentUpon>
     </Compile>
-    <Compile Include="DireccionesMunicipiosView.cs">
+    <Compile Include="frmConsultaHistorialAuditoria.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DireccionesMunicipiosView.Designer.cs">
-      <DependentUpon>DireccionesMunicipiosView.cs</DependentUpon>
+    <Compile Include="frmConsultaHistorialAuditoria.Designer.cs">
+      <DependentUpon>frmConsultaHistorialAuditoria.cs</DependentUpon>
     </Compile>
-    <Compile Include="EmpleadoView.cs">
+    <Compile Include="frmConsultasOrdenesActivas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EmpleadoView.Designer.cs">
-      <DependentUpon>EmpleadoView.cs</DependentUpon>
+    <Compile Include="frmConsultasOrdenesActivas.Designer.cs">
+      <DependentUpon>frmConsultasOrdenesActivas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConsultaStockInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConsultaStockInventario.Designer.cs">
+      <DependentUpon>frmConsultaStockInventario.cs</DependentUpon>
     </Compile>
     <Compile Include="frmConsultas_Menu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmConsultas_Menu.Designer.cs">
       <DependentUpon>frmConsultas_Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConsultaVentasFecha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConsultaVentasFecha.Designer.cs">
+      <DependentUpon>frmConsultaVentasFecha.cs</DependentUpon>
     </Compile>
     <Compile Include="frmInicio_Dashboard.cs">
       <SubType>Form</SubType>
@@ -88,41 +100,11 @@
     <Compile Include="frmMantenimientos_Menu.Designer.cs">
       <DependentUpon>frmMantenimientos_Menu.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmOrdenProduccion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmOrdenProduccion.Designer.cs">
-      <DependentUpon>frmOrdenProduccion.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmProcesoDelivery.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmProcesoDelivery.Designer.cs">
-      <DependentUpon>frmProcesoDelivery.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmProcesos_Menu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmProcesos_Menu.Designer.cs">
       <DependentUpon>frmProcesos_Menu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmProcesoVenta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmProcesoVenta.Designer.cs">
-      <DependentUpon>frmProcesoVenta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmRegistroCompra.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmRegistroCompra.Designer.cs">
-      <DependentUpon>frmRegistroCompra.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmRegistroOrden.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmRegistroOrden.Designer.cs">
-      <DependentUpon>frmRegistroOrden.cs</DependentUpon>
     </Compile>
     <Compile Include="InterfazPrincipal_Admin.cs">
       <SubType>Form</SubType>
@@ -130,58 +112,34 @@
     <Compile Include="InterfazPrincipal_Admin.Designer.cs">
       <DependentUpon>InterfazPrincipal_Admin.cs</DependentUpon>
     </Compile>
-    <Compile Include="InventarioView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InventarioView.Designer.cs">
-      <DependentUpon>InventarioView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuCombosView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MenuCombosView.Designer.cs">
-      <DependentUpon>MenuCombosView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProveedoresView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ProveedoresView.Designer.cs">
-      <DependentUpon>ProveedoresView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="RepartidoresView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RepartidoresView.Designer.cs">
-      <DependentUpon>RepartidoresView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UsuariosView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UsuariosView.Designer.cs">
-      <DependentUpon>UsuariosView.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="CategoriasView.resx">
-      <DependentUpon>CategoriasView.cs</DependentUpon>
+    <EmbeddedResource Include="frmConsultaComprasProveedor.resx">
+      <DependentUpon>frmConsultaComprasProveedor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClientesView.resx">
-      <DependentUpon>ClientesView.cs</DependentUpon>
+    <EmbeddedResource Include="frmConsultaEnviosDelivery.resx">
+      <DependentUpon>frmConsultaEnviosDelivery.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DireccionesMunicipiosView.resx">
-      <DependentUpon>DireccionesMunicipiosView.cs</DependentUpon>
+    <EmbeddedResource Include="frmConsultaHistorialAuditoria.resx">
+      <DependentUpon>frmConsultaHistorialAuditoria.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EmpleadoView.resx">
-      <DependentUpon>EmpleadoView.cs</DependentUpon>
+    <EmbeddedResource Include="frmConsultasOrdenesActivas.resx">
+      <DependentUpon>frmConsultasOrdenesActivas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConsultaStockInventario.resx">
+      <DependentUpon>frmConsultaStockInventario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmConsultas_Menu.resx">
       <DependentUpon>frmConsultas_Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConsultaVentasFecha.resx">
+      <DependentUpon>frmConsultaVentasFecha.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInicio_Dashboard.resx">
       <DependentUpon>frmInicio_Dashboard.cs</DependentUpon>
@@ -189,35 +147,14 @@
     <EmbeddedResource Include="frmMantenimientos_Menu.resx">
       <DependentUpon>frmMantenimientos_Menu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmOrdenProduccion.resx">
-      <DependentUpon>frmOrdenProduccion.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmProcesoDelivery.resx">
-      <DependentUpon>frmProcesoDelivery.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmProcesos_Menu.resx">
       <DependentUpon>frmProcesos_Menu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmProcesoVenta.resx">
-      <DependentUpon>frmProcesoVenta.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmRegistroCompra.resx">
-      <DependentUpon>frmRegistroCompra.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmRegistroOrden.resx">
-      <DependentUpon>frmRegistroOrden.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InterfazPrincipal_Admin.resx">
       <DependentUpon>InterfazPrincipal_Admin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InventarioView.resx">
-      <DependentUpon>InventarioView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MenuCombosView.resx">
-      <DependentUpon>MenuCombosView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -229,15 +166,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ProveedoresView.resx">
-      <DependentUpon>ProveedoresView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RepartidoresView.resx">
-      <DependentUpon>RepartidoresView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UsuariosView.resx">
-      <DependentUpon>UsuariosView.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
