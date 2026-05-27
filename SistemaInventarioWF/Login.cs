@@ -22,12 +22,16 @@ namespace GUSTO_Sistema
 
         private void btn_ingresar_Click(object sender, EventArgs e)
         {
-            Usuario usuario = credencialesValidas();
-            if (usuario != null)
-            {
-                this.Hide();
-                AbrirMenuSegunRol(usuario);
-            }
+            //Usuario usuario = credencialesValidas();
+            //if (usuario != null)
+            //{
+            //    this.Hide();
+            //    AbrirMenuSegunRol(usuario);
+            //}
+
+            Form formularioMenu = new InterfazPrincipal_Admin();
+            formularioMenu.Show();
+            this.Hide();
         }
 
         private void btn_salir_Click(object sender, EventArgs e)
@@ -91,7 +95,7 @@ namespace GUSTO_Sistema
                                     "Acceso concedido",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
-                    formularioMenu = new InterfazPrincipal_Admin(usuario);
+                    formularioMenu = new InterfazPrincipal_Admin();
                     break;
 
                 case "CAJERO":
@@ -100,7 +104,7 @@ namespace GUSTO_Sistema
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
                     // Temporalmente redirige a Admin por pruebas
-                    formularioMenu = new InterfazPrincipal_Admin(usuario);
+                    formularioMenu = new InterfazPrincipal_Admin();
                     break;
 
                 case "COCINERO":
@@ -109,7 +113,7 @@ namespace GUSTO_Sistema
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
                     // Temporalmente redirige a Admin por pruebas
-                    formularioMenu = new InterfazPrincipal_Admin(usuario);
+                    formularioMenu = new InterfazPrincipal_Admin();
                     break;
 
                 case "REPARTIDOR":
@@ -118,7 +122,7 @@ namespace GUSTO_Sistema
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
                     // Temporalmente redirige a Admin por pruebas
-                    formularioMenu = new InterfazPrincipal_Admin(usuario);
+                    formularioMenu = new InterfazPrincipal_Admin();
                     break;
 
                 case "BODEGUERO":
@@ -127,7 +131,7 @@ namespace GUSTO_Sistema
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
                     // Temporalmente redirige a Admin por pruebas
-                    formularioMenu = new InterfazPrincipal_Admin(usuario);
+                    formularioMenu = new InterfazPrincipal_Admin();
                     break;
 
                 default:
@@ -145,16 +149,6 @@ namespace GUSTO_Sistema
                 formularioMenu.FormClosed += (sender, args) => Application.Exit();
                 formularioMenu.Show();
             }
-        }
-
-        private void usuario_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -13,7 +13,7 @@ namespace SistemaInventarioWF
 {
     public partial class InterfazPrincipal_Admin : Form
     {
-        public InterfazPrincipal_Admin(Usuario usuario)
+        public InterfazPrincipal_Admin()
         {
             InitializeComponent();
         }
@@ -36,7 +36,7 @@ namespace SistemaInventarioWF
         private void btnMantenimientos_Admin_Click(object sender, EventArgs e)
         {
 
-            AbrirFormularioEnPanel(new frmMantenimientos_Menu());
+            AbrirFormularioEnPanel(new frmMantenimientos_Menu(this));
 
         }
 
