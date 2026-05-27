@@ -64,11 +64,41 @@
     <Compile Include="frmMantenimientos_Menu.Designer.cs">
       <DependentUpon>frmMantenimientos_Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmOrdenProduccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOrdenProduccion.Designer.cs">
+      <DependentUpon>frmOrdenProduccion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProcesoDelivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProcesoDelivery.Designer.cs">
+      <DependentUpon>frmProcesoDelivery.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmProcesos_Menu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmProcesos_Menu.Designer.cs">
       <DependentUpon>frmProcesos_Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProcesoVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProcesoVenta.Designer.cs">
+      <DependentUpon>frmProcesoVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRegistroCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRegistroCompra.Designer.cs">
+      <DependentUpon>frmRegistroCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRegistroOrden.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRegistroOrden.Designer.cs">
+      <DependentUpon>frmRegistroOrden.cs</DependentUpon>
     </Compile>
     <Compile Include="InterfazPrincipal_Admin.cs">
       <SubType>Form</SubType>
@@ -93,8 +123,23 @@
     <EmbeddedResource Include="frmMantenimientos_Menu.resx">
       <DependentUpon>frmMantenimientos_Menu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmOrdenProduccion.resx">
+      <DependentUpon>frmOrdenProduccion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProcesoDelivery.resx">
+      <DependentUpon>frmProcesoDelivery.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmProcesos_Menu.resx">
       <DependentUpon>frmProcesos_Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProcesoVenta.resx">
+      <DependentUpon>frmProcesoVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRegistroCompra.resx">
+      <DependentUpon>frmRegistroCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRegistroOrden.resx">
+      <DependentUpon>frmRegistroOrden.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InterfazPrincipal_Admin.resx">
       <DependentUpon>InterfazPrincipal_Admin.cs</DependentUpon>

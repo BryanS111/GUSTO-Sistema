@@ -138,7 +138,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "InterfazPrincipal_Admin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "INTERFAZ - ADMINISTRACION";
+            this.Text = "G.U.S.T.O - ADMINISTRADOR";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.InterfazPrincipal_Admin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

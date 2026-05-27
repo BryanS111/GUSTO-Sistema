@@ -35,7 +35,7 @@
             this.btnMenuCombos = new System.Windows.Forms.Button();
             this.btnRepartidores = new System.Windows.Forms.Button();
             this.btnEmpleados = new System.Windows.Forms.Button();
-            this.btnClientes = new System.Windows.Forms.Button();
+            this.btnRegistroOrden = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -75,8 +75,9 @@
             this.btnProveedores.Name = "btnProveedores";
             this.btnProveedores.Size = new System.Drawing.Size(651, 102);
             this.btnProveedores.TabIndex = 23;
-            this.btnProveedores.Text = "CONSULTA DE STOCK DE INVENTARIO";
+            this.btnProveedores.Text = "PROCESO DE VENTA";
             this.btnProveedores.UseVisualStyleBackColor = false;
+            this.btnProveedores.Click += new System.EventHandler(this.btnProveedores_Click);
             // 
             // btnMenuCombos
             // 
@@ -88,8 +89,9 @@
             this.btnMenuCombos.Name = "btnMenuCombos";
             this.btnMenuCombos.Size = new System.Drawing.Size(651, 102);
             this.btnMenuCombos.TabIndex = 22;
-            this.btnMenuCombos.Text = "CONSULTA DE HISTORIAL DE AUDITORIA";
+            this.btnMenuCombos.Text = "PROCESO DE DELIVERY";
             this.btnMenuCombos.UseVisualStyleBackColor = false;
+            this.btnMenuCombos.Click += new System.EventHandler(this.btnMenuCombos_Click);
             // 
             // btnRepartidores
             // 
@@ -101,8 +103,9 @@
             this.btnRepartidores.Name = "btnRepartidores";
             this.btnRepartidores.Size = new System.Drawing.Size(651, 102);
             this.btnRepartidores.TabIndex = 21;
-            this.btnRepartidores.Text = "CONSULTA DE COMPRAS POR PROVEEDOR";
+            this.btnRepartidores.Text = "ORDEN DE PRODUCCION";
             this.btnRepartidores.UseVisualStyleBackColor = false;
+            this.btnRepartidores.Click += new System.EventHandler(this.btnRepartidores_Click);
             // 
             // btnEmpleados
             // 
@@ -114,21 +117,23 @@
             this.btnEmpleados.Name = "btnEmpleados";
             this.btnEmpleados.Size = new System.Drawing.Size(651, 102);
             this.btnEmpleados.TabIndex = 20;
-            this.btnEmpleados.Text = "CONSULTA DE ORDENES ACTIVA";
+            this.btnEmpleados.Text = "REGISTRO DE COMPRA";
             this.btnEmpleados.UseVisualStyleBackColor = false;
+            this.btnEmpleados.Click += new System.EventHandler(this.btnEmpleados_Click);
             // 
-            // btnClientes
+            // btnRegistroOrden
             // 
-            this.btnClientes.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnClientes.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.btnClientes.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClientes.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnClientes.Location = new System.Drawing.Point(716, 280);
-            this.btnClientes.Name = "btnClientes";
-            this.btnClientes.Size = new System.Drawing.Size(651, 102);
-            this.btnClientes.TabIndex = 19;
-            this.btnClientes.Text = "CONSULTA DE VENTAS POR FECHA";
-            this.btnClientes.UseVisualStyleBackColor = false;
+            this.btnRegistroOrden.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnRegistroOrden.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.btnRegistroOrden.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegistroOrden.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnRegistroOrden.Location = new System.Drawing.Point(716, 280);
+            this.btnRegistroOrden.Name = "btnRegistroOrden";
+            this.btnRegistroOrden.Size = new System.Drawing.Size(651, 102);
+            this.btnRegistroOrden.TabIndex = 19;
+            this.btnRegistroOrden.Text = "REGISTRO DE ORDEN";
+            this.btnRegistroOrden.UseVisualStyleBackColor = false;
+            this.btnRegistroOrden.Click += new System.EventHandler(this.btnClientes_Click);
             // 
             // pictureBox1
             // 
@@ -152,7 +157,7 @@
             this.Controls.Add(this.btnMenuCombos);
             this.Controls.Add(this.btnRepartidores);
             this.Controls.Add(this.btnEmpleados);
-            this.Controls.Add(this.btnClientes);
+            this.Controls.Add(this.btnRegistroOrden);
             this.Name = "frmProcesos_Menu";
             this.Text = "frmProcesos_Menu";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -169,7 +174,7 @@
         private System.Windows.Forms.Button btnMenuCombos;
         private System.Windows.Forms.Button btnRepartidores;
         private System.Windows.Forms.Button btnEmpleados;
-        private System.Windows.Forms.Button btnClientes;
+        private System.Windows.Forms.Button btnRegistroOrden;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

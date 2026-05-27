@@ -26,5 +26,61 @@ namespace SistemaInventarioWF
         {
 
         }
+
+        private void btnClientes_Click(object sender, EventArgs e)
+        {
+            InterfazPrincipal_Admin principal = Application.OpenForms["InterfazPrincipal_Admin"] as InterfazPrincipal_Admin;
+
+            if (principal != null)
+            {
+                // Reemplaza 'frmRegistro_Orden' por el nombre real de tu clase/formulario
+                principal.AbrirFormularioEnPanel(new frmRegistroOrden());
+            }
+        }
+
+
+        private void btnProveedores_Click(object sender, EventArgs e) //este clic es de el proceso de ventas
+        {
+            InterfazPrincipal_Admin principal = Application.OpenForms["InterfazPrincipal_Admin"] as InterfazPrincipal_Admin;
+
+            if (principal != null)
+            {
+                // Reemplaza 'frmRegistro_Orden' por el nombre real de tu clase/formulario
+                principal.AbrirFormularioEnPanel(new frmProcesoVenta());
+            }
+        }
+
+        private void btnMenuCombos_Click(object sender, EventArgs e) // boton de proceso de delivery (olvide cambiarle el nombre)
+        {
+            InterfazPrincipal_Admin principal = Application.OpenForms["InterfazPrincipal_Admin"] as InterfazPrincipal_Admin;
+
+            if (principal != null)
+            {
+                // Reemplaza 'frmRegistro_Orden' por el nombre real de tu clase/formulario
+                principal.AbrirFormularioEnPanel(new frmProcesoDelivery());
+            }
+        }
+
+        private void btnEmpleados_Click(object sender, EventArgs e)//registro de compras boton clic
+        {
+            InterfazPrincipal_Admin principal = Application.OpenForms["InterfazPrincipal_Admin"] as InterfazPrincipal_Admin;
+
+            if (principal != null)
+            {
+                // Reemplaza 'frmRegistro_Orden' por el nombre real de tu clase/formulario
+                principal.AbrirFormularioEnPanel(new frmRegistroCompra());
+            }
+        }
+
+        private void btnRepartidores_Click(object sender, EventArgs e)
+        {
+            InterfazPrincipal_Admin principal = Application.OpenForms["InterfazPrincipal_Admin"] as InterfazPrincipal_Admin;
+
+            if (principal != null)
+            {
+                // Reemplaza 'frmRegistro_Orden' por el nombre real de tu clase/formulario
+                principal.AbrirFormularioEnPanel(new frmOrdenProduccion());
+            }
+        }
     }
 }
