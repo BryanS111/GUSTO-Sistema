@@ -22,16 +22,15 @@ namespace GUSTO_Sistema
 
         private void btn_ingresar_Click(object sender, EventArgs e)
         {
-            //Usuario usuario = credencialesValidas();
-            //if (usuario != null)
-            //{
-            //    this.Hide();
-            //    AbrirMenuSegunRol(usuario);
-            //}
+            // 1. Validamos las credenciales directamente con la Base de Datos
+            Usuario usuario = credencialesValidas();
 
-            Form formularioMenu = new InterfazPrincipal_Admin();
-            formularioMenu.Show();
-            this.Hide();
+            // 2. Si el usuario existe y la clave es correcta, ocultamos el login y abrimos el menú
+            if (usuario != null)
+            {
+                this.Hide();
+                AbrirMenuSegunRol(usuario);
+            }
         }
 
         private void btn_salir_Click(object sender, EventArgs e)
