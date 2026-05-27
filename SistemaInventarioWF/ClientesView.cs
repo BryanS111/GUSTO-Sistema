@@ -17,19 +17,29 @@ namespace SistemaInventarioWF
             InitializeComponent();
         }
 
-        private void btnClientes_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            grpBoxData.Enabled = true;
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            grpBoxData.Enabled = false;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            grpBoxData.Enabled = false;
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            grpBoxData.Enabled = true;
         }
     }
 }

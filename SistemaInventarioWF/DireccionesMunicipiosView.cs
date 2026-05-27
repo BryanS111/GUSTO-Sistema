@@ -16,10 +16,19 @@ namespace SistemaInventarioWF
         {
             InitializeComponent();
         }
-
-        private void button4_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            grpBoxData.Enabled = false;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            grpBoxData.Enabled = false;
         }
     }
 }

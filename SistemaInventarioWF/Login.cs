@@ -22,6 +22,13 @@ namespace GUSTO_Sistema
 
         private void btn_ingresar_Click(object sender, EventArgs e)
         {
+            //Usuario usuario = credencialesValidas();
+            //if (usuario != null)
+            //{
+            //    this.Hide();
+            //    AbrirMenuSegunRol(usuario);
+            //}
+
             Form formularioMenu = new InterfazPrincipal_Admin();
             formularioMenu.Show();
             this.Hide();
@@ -142,16 +149,6 @@ namespace GUSTO_Sistema
                 formularioMenu.FormClosed += (sender, args) => Application.Exit();
                 formularioMenu.Show();
             }
-        }
-
-        private void usuario_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

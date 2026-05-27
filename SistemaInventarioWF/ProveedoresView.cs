@@ -21,5 +21,25 @@ namespace SistemaInventarioWF
         {
             this.Close();
         }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            grpBoxData.Enabled = true;
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            grpBoxData.Enabled = true;
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            grpBoxData.Enabled = false;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            grpBoxData.Enabled = false;
+        }
     }
 }
