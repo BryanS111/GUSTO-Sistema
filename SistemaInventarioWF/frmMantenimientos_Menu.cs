@@ -70,9 +70,6 @@ namespace SistemaInventarioWF
             _abuelo.AbrirFormularioEnPanel(new DireccionesMunicipiosView(_abuelo));
         }
 
-        private void btnClientes_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

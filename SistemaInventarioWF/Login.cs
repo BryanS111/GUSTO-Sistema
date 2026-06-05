@@ -28,6 +28,8 @@ namespace GUSTO_Sistema
             // 2. Si el usuario existe y la clave es correcta, ocultamos el login y abrimos el menú
             if (usuario != null)
             {
+                SesionActual.UsuarioId = usuario.UsuarioId;
+
                 this.Hide();
                 AbrirMenuSegunRol(usuario);
             }

@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace DAO
 {
-    class Conexion
+    public class Conexion
     {
         private readonly string connString = string.Empty;
         private readonly string configError = string.Empty;

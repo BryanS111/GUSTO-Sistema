@@ -43,10 +43,9 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DarkRed;
-            this.label1.Location = new System.Drawing.Point(270, 64);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(405, 98);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(479, 31);
+            this.label1.Size = new System.Drawing.Size(702, 45);
             this.label1.TabIndex = 18;
             this.label1.Text = "CONSULTA DE STOCK DE INVENTARIO";
             // 
@@ -55,10 +54,9 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label2.Location = new System.Drawing.Point(208, 229);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(312, 352);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(152, 19);
+            this.label2.Size = new System.Drawing.Size(229, 29);
             this.label2.TabIndex = 20;
             this.label2.Text = "Tipo de Inventario:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -72,9 +70,10 @@
             "Todos",
             "Ingredientes",
             "Bebidas"});
-            this.comboBox1.Location = new System.Drawing.Point(395, 226);
+            this.comboBox1.Location = new System.Drawing.Point(592, 348);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(200, 26);
+            this.comboBox1.Size = new System.Drawing.Size(298, 35);
             this.comboBox1.TabIndex = 21;
             // 
             // btn_buscar
@@ -82,10 +81,9 @@
             this.btn_buscar.BackColor = System.Drawing.Color.DarkRed;
             this.btn_buscar.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_buscar.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_buscar.Location = new System.Drawing.Point(655, 178);
-            this.btn_buscar.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_buscar.Location = new System.Drawing.Point(982, 274);
             this.btn_buscar.Name = "btn_buscar";
-            this.btn_buscar.Size = new System.Drawing.Size(115, 48);
+            this.btn_buscar.Size = new System.Drawing.Size(172, 74);
             this.btn_buscar.TabIndex = 26;
             this.btn_buscar.Text = "BUSCAR";
             this.btn_buscar.UseVisualStyleBackColor = false;
@@ -93,16 +91,19 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(98, 319);
+            this.dataGridView1.Location = new System.Drawing.Point(147, 491);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(814, 269);
+            this.dataGridView1.RowHeadersWidth = 62;
+            this.dataGridView1.Size = new System.Drawing.Size(1221, 414);
             this.dataGridView1.TabIndex = 27;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(395, 164);
+            this.textBox1.Location = new System.Drawing.Point(592, 252);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 20);
+            this.textBox1.Size = new System.Drawing.Size(298, 26);
             this.textBox1.TabIndex = 29;
             // 
             // label3
@@ -110,19 +111,18 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label3.Location = new System.Drawing.Point(208, 165);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(312, 254);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 19);
+            this.label3.Size = new System.Drawing.Size(239, 29);
             this.label3.TabIndex = 28;
-            this.label3.Text = "Cantidad:";
+            this.label3.Text = "Codigo del insumo:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmConsultaStockInventario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(862, 508);
+            this.ClientSize = new System.Drawing.Size(1293, 782);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dataGridView1);
@@ -130,6 +130,7 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmConsultaStockInventario";
             this.Text = "frmConsultaStockInventario";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

@@ -75,5 +75,10 @@ namespace SistemaInventarioWF
         {
             AbrirFormularioEnPanel(new frmProcesos_Menu());
         }
+
+        private void pnlContenedor_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
