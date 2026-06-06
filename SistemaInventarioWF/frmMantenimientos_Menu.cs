@@ -62,7 +62,7 @@ namespace SistemaInventarioWF
 
         private void btnCategorias_Click(object sender, EventArgs e)
         {
-            _abuelo.AbrirFormularioEnPanel(new CategoriasView());
+            _abuelo.AbrirFormularioEnPanel(new CategoriasView(_abuelo));
         }
 
         private void btnMunicipiosDir_Click(object sender, EventArgs e)

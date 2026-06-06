@@ -29,10 +29,10 @@ namespace Modelos
             get { return $"{Nombre} {Apellido}"; }
         }
 
-        public string EstadoActual
-        {
-            get { return EstadoId == 1 ? "Activo" : "Inactivo"; }
-        }
+        //public string EstadoActual
+        //{
+        //    get { return EstadoId == 1 ? "Activo" : "Inactivo"; }
+        //}
 
         public Empleado() { }
 

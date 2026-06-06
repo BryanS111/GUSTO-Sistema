@@ -13,14 +13,17 @@ namespace SistemaInventarioWF
         private List<Categoria> _listaCategorias;
         private bool _modoEdicion;
         private int _categoriaIdActual;
+        private InterfazPrincipal_Admin _abuelo;
 
-        public CategoriasView()
+        public CategoriasView(InterfazPrincipal_Admin abuelo)
         {
             InitializeComponent();
+            _abuelo = abuelo;
             _categoriaDAO = new CategoriaDAO();
             _modoEdicion = false;
             _categoriaIdActual = 0;
             this.Load += new EventHandler(CategoriasView_Load);
+            _abuelo = abuelo;
         }
 
         private void CategoriasView_Load(object sender, EventArgs e)
@@ -33,6 +36,7 @@ namespace SistemaInventarioWF
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            _abuelo.AbrirFormularioEnPanel(new frmMantenimientos_Menu(_abuelo));
             this.Close();
         }
 
