@@ -42,8 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Categoria.cs" />
+    <Compile Include="Direccion.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="LoginInfo.cs" />
+    <Compile Include="Municipio.cs" />
     <Compile Include="Proveedor.cs" />
     <Compile Include="Repartidor.cs" />
     <Compile Include="SesionActual .cs" />
