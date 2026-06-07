@@ -43,10 +43,13 @@
   <ItemGroup>
     <Compile Include="Categoria.cs" />
     <Compile Include="Cliente.cs" />
+    <Compile Include="Combo.cs" />
+    <Compile Include="DetalleCombo.cs" />
     <Compile Include="Direccion.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="Inventario.cs" />
     <Compile Include="LoginInfo.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Municipio.cs" />
     <Compile Include="Proveedor.cs" />
     <Compile Include="Repartidor.cs" />

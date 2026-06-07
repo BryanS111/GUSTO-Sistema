@@ -49,6 +49,7 @@
     <Compile Include="DireccionDAO.cs" />
     <Compile Include="EmpleadoDAO.cs" />
     <Compile Include="InventarioDAO.cs" />
+    <Compile Include="MenuComboDAO.cs" />
     <Compile Include="MunicipioDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProveedorDAO.cs" />
