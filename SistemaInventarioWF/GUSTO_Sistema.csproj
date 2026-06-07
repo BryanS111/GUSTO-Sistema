@@ -112,6 +112,12 @@
     <Compile Include="frmConsultaVentasFecha.Designer.cs">
       <DependentUpon>frmConsultaVentasFecha.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDescuentosPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDescuentosPopup.Designer.cs">
+      <DependentUpon>frmDescuentosPopup.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmInicio_Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -236,6 +242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmConsultaVentasFecha.resx">
       <DependentUpon>frmConsultaVentasFecha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDescuentosPopup.resx">
+      <DependentUpon>frmDescuentosPopup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInicio_Dashboard.resx">
       <DependentUpon>frmInicio_Dashboard.cs</DependentUpon>

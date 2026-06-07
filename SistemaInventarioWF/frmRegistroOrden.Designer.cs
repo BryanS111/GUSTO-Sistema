@@ -28,56 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cbxCliente = new System.Windows.Forms.ComboBox();
+            this.cboClientes = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.cbxTipoOrden = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.cbxDescuento = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaOrden = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cboProductosMenu = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cboCombos = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numUpDownCantidadMenuOCombo = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtPrecioMenuOCombo = new System.Windows.Forms.TextBox();
+            this.btnAgregarItem = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.dgvDetalleOrden = new System.Windows.Forms.DataGridView();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnConfirmarOrden = new System.Windows.Forms.Button();
+            this.txtTotalPagar = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.btnCrudDescuentos = new System.Windows.Forms.Button();
+            this.txtDescuento = new System.Windows.Forms.TextBox();
+            this.cboTipoOrden = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDownCantidadMenuOCombo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleOrden)).BeginInit();
             this.SuspendLayout();
             // 
-            // cbxCliente
+            // cboClientes
             // 
-            this.cbxCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxCliente.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbxCliente.FormattingEnabled = true;
-            this.cbxCliente.Items.AddRange(new object[] {
-            "JUAN MARTINEZ",
-            "MARIA GUZMAN",
-            "ANTONIO RAMIREZ",
-            "SANDRA ACEVEDO",
-            "NICOL GUTIERREZ",
-            "RODRIGO MENDOZA",
-            "OSCAR PEREZ"});
-            this.cbxCliente.Location = new System.Drawing.Point(230, 123);
-            this.cbxCliente.Name = "cbxCliente";
-            this.cbxCliente.Size = new System.Drawing.Size(455, 31);
-            this.cbxCliente.TabIndex = 0;
+            this.cboClientes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboClientes.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboClientes.FormattingEnabled = true;
+            this.cboClientes.Location = new System.Drawing.Point(230, 123);
+            this.cboClientes.Name = "cboClientes";
+            this.cboClientes.Size = new System.Drawing.Size(455, 31);
+            this.cboClientes.TabIndex = 0;
+            this.cboClientes.SelectedIndexChanged += new System.EventHandler(this.cboClientes_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -101,20 +95,6 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "TIPO ORDEN:";
             // 
-            // cbxTipoOrden
-            // 
-            this.cbxTipoOrden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxTipoOrden.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbxTipoOrden.FormattingEnabled = true;
-            this.cbxTipoOrden.Items.AddRange(new object[] {
-            "PARA LLEVAR",
-            "COMER EN RESTAURANTE",
-            "A DOMICILIO"});
-            this.cbxTipoOrden.Location = new System.Drawing.Point(963, 122);
-            this.cbxTipoOrden.Name = "cbxTipoOrden";
-            this.cbxTipoOrden.Size = new System.Drawing.Size(455, 31);
-            this.cbxTipoOrden.TabIndex = 3;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -125,27 +105,6 @@
             this.label3.Size = new System.Drawing.Size(169, 29);
             this.label3.TabIndex = 4;
             this.label3.Text = "DESCUENTO:";
-            // 
-            // cbxDescuento
-            // 
-            this.cbxDescuento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxDescuento.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbxDescuento.FormattingEnabled = true;
-            this.cbxDescuento.Items.AddRange(new object[] {
-            "10%",
-            "20%",
-            "30%",
-            "40%",
-            "50%",
-            "60%",
-            "70%",
-            "80%",
-            "90%"});
-            this.cbxDescuento.Location = new System.Drawing.Point(963, 192);
-            this.cbxDescuento.Name = "cbxDescuento";
-            this.cbxDescuento.Size = new System.Drawing.Size(455, 31);
-            this.cbxDescuento.TabIndex = 5;
-            this.cbxDescuento.SelectedIndexChanged += new System.EventHandler(this.cbxDescuento_SelectedIndexChanged);
             // 
             // textBox1
             // 
@@ -178,14 +137,15 @@
             this.label5.TabIndex = 8;
             this.label5.Text = "FECHA:";
             // 
-            // dateTimePicker1
+            // dtpFechaOrden
             // 
-            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Enabled = false;
-            this.dateTimePicker1.Location = new System.Drawing.Point(230, 194);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(455, 26);
-            this.dateTimePicker1.TabIndex = 9;
+            this.dtpFechaOrden.CalendarFont = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpFechaOrden.Enabled = false;
+            this.dtpFechaOrden.Location = new System.Drawing.Point(230, 194);
+            this.dtpFechaOrden.Name = "dtpFechaOrden";
+            this.dtpFechaOrden.Size = new System.Drawing.Size(455, 26);
+            this.dtpFechaOrden.TabIndex = 9;
+            this.dtpFechaOrden.ValueChanged += new System.EventHandler(this.dtpFechaOrden_ValueChanged);
             // 
             // label6
             // 
@@ -218,15 +178,16 @@
             this.label7.TabIndex = 13;
             this.label7.Text = "PRODUCTO:";
             // 
-            // comboBox1
+            // cboProductosMenu
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(260, 354);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(425, 31);
-            this.comboBox1.TabIndex = 12;
+            this.cboProductosMenu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboProductosMenu.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboProductosMenu.FormattingEnabled = true;
+            this.cboProductosMenu.Location = new System.Drawing.Point(260, 354);
+            this.cboProductosMenu.Name = "cboProductosMenu";
+            this.cboProductosMenu.Size = new System.Drawing.Size(425, 31);
+            this.cboProductosMenu.TabIndex = 12;
+            this.cboProductosMenu.SelectedIndexChanged += new System.EventHandler(this.cboProductosMenu_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -239,15 +200,16 @@
             this.label8.TabIndex = 15;
             this.label8.Text = "COMBO:";
             // 
-            // comboBox2
+            // cboCombos
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(260, 436);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(425, 31);
-            this.comboBox2.TabIndex = 14;
+            this.cboCombos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCombos.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboCombos.FormattingEnabled = true;
+            this.cboCombos.Location = new System.Drawing.Point(260, 436);
+            this.cboCombos.Name = "cboCombos";
+            this.cboCombos.Size = new System.Drawing.Size(425, 31);
+            this.cboCombos.TabIndex = 14;
+            this.cboCombos.SelectedIndexChanged += new System.EventHandler(this.cboCombos_SelectedIndexChanged);
             // 
             // label9
             // 
@@ -260,13 +222,14 @@
             this.label9.TabIndex = 17;
             this.label9.Text = "CANTIDAD:";
             // 
-            // numericUpDown1
+            // numUpDownCantidadMenuOCombo
             // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(907, 355);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(129, 30);
-            this.numericUpDown1.TabIndex = 18;
+            this.numUpDownCantidadMenuOCombo.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDownCantidadMenuOCombo.Location = new System.Drawing.Point(907, 355);
+            this.numUpDownCantidadMenuOCombo.Name = "numUpDownCantidadMenuOCombo";
+            this.numUpDownCantidadMenuOCombo.Size = new System.Drawing.Size(129, 30);
+            this.numUpDownCantidadMenuOCombo.TabIndex = 18;
+            this.numUpDownCantidadMenuOCombo.ValueChanged += new System.EventHandler(this.numUpDownCantidadMenuOCombo_ValueChanged);
             // 
             // label10
             // 
@@ -279,28 +242,30 @@
             this.label10.TabIndex = 19;
             this.label10.Text = "PRECIO:";
             // 
-            // textBox3
+            // txtPrecioMenuOCombo
             // 
-            this.textBox3.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.ForeColor = System.Drawing.Color.SeaGreen;
-            this.textBox3.Location = new System.Drawing.Point(1218, 357);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(200, 30);
-            this.textBox3.TabIndex = 20;
-            this.textBox3.Text = "$0.00";
+            this.txtPrecioMenuOCombo.Enabled = false;
+            this.txtPrecioMenuOCombo.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrecioMenuOCombo.ForeColor = System.Drawing.Color.SeaGreen;
+            this.txtPrecioMenuOCombo.Location = new System.Drawing.Point(1218, 357);
+            this.txtPrecioMenuOCombo.Name = "txtPrecioMenuOCombo";
+            this.txtPrecioMenuOCombo.ReadOnly = true;
+            this.txtPrecioMenuOCombo.Size = new System.Drawing.Size(200, 30);
+            this.txtPrecioMenuOCombo.TabIndex = 20;
+            this.txtPrecioMenuOCombo.TextChanged += new System.EventHandler(this.txtPrecioMenuOCombo_TextChanged);
             // 
-            // button1
+            // btnAgregarItem
             // 
-            this.button1.BackColor = System.Drawing.Color.DarkRed;
-            this.button1.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Transparent;
-            this.button1.Location = new System.Drawing.Point(748, 411);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(670, 54);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "AGREGAR ITEM";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnAgregarItem.BackColor = System.Drawing.Color.DarkRed;
+            this.btnAgregarItem.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarItem.ForeColor = System.Drawing.Color.Transparent;
+            this.btnAgregarItem.Location = new System.Drawing.Point(748, 411);
+            this.btnAgregarItem.Name = "btnAgregarItem";
+            this.btnAgregarItem.Size = new System.Drawing.Size(670, 54);
+            this.btnAgregarItem.TabIndex = 21;
+            this.btnAgregarItem.Text = "AGREGAR ITEM";
+            this.btnAgregarItem.UseVisualStyleBackColor = false;
+            this.btnAgregarItem.Click += new System.EventHandler(this.btnAgregarItem_Click);
             // 
             // label11
             // 
@@ -322,50 +287,53 @@
             this.textBox4.Size = new System.Drawing.Size(1527, 26);
             this.textBox4.TabIndex = 22;
             // 
-            // dataGridView1
+            // dgvDetalleOrden
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(53, 586);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(1407, 247);
-            this.dataGridView1.TabIndex = 24;
+            this.dgvDetalleOrden.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDetalleOrden.Location = new System.Drawing.Point(53, 586);
+            this.dgvDetalleOrden.Name = "dgvDetalleOrden";
+            this.dgvDetalleOrden.RowHeadersWidth = 62;
+            this.dgvDetalleOrden.RowTemplate.Height = 28;
+            this.dgvDetalleOrden.Size = new System.Drawing.Size(1407, 247);
+            this.dgvDetalleOrden.TabIndex = 24;
+            this.dgvDetalleOrden.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalleOrden_CellContentClick);
             // 
-            // button2
+            // btnCancelar
             // 
-            this.button2.BackColor = System.Drawing.Color.DarkRed;
-            this.button2.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.Transparent;
-            this.button2.Location = new System.Drawing.Point(53, 896);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(411, 54);
-            this.button2.TabIndex = 25;
-            this.button2.Text = "LIMPIAR PANTALLA";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnCancelar.BackColor = System.Drawing.Color.DarkRed;
+            this.btnCancelar.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.ForeColor = System.Drawing.Color.Transparent;
+            this.btnCancelar.Location = new System.Drawing.Point(53, 896);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(411, 54);
+            this.btnCancelar.TabIndex = 25;
+            this.btnCancelar.Text = "CANCELAR";
+            this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // button3
+            // btnConfirmarOrden
             // 
-            this.button3.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.button3.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.DarkGreen;
-            this.button3.Location = new System.Drawing.Point(525, 896);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(411, 54);
-            this.button3.TabIndex = 26;
-            this.button3.Text = "CONFIRMAR ORDEN";
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnConfirmarOrden.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnConfirmarOrden.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfirmarOrden.ForeColor = System.Drawing.Color.DarkGreen;
+            this.btnConfirmarOrden.Location = new System.Drawing.Point(525, 896);
+            this.btnConfirmarOrden.Name = "btnConfirmarOrden";
+            this.btnConfirmarOrden.Size = new System.Drawing.Size(411, 54);
+            this.btnConfirmarOrden.TabIndex = 26;
+            this.btnConfirmarOrden.Text = "CONFIRMAR ORDEN";
+            this.btnConfirmarOrden.UseVisualStyleBackColor = false;
+            this.btnConfirmarOrden.Click += new System.EventHandler(this.btnConfirmarOrden_Click);
             // 
-            // textBox5
+            // txtTotalPagar
             // 
-            this.textBox5.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.ForeColor = System.Drawing.Color.SeaGreen;
-            this.textBox5.Location = new System.Drawing.Point(1234, 909);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(226, 30);
-            this.textBox5.TabIndex = 28;
-            this.textBox5.Text = "$0.00";
+            this.txtTotalPagar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalPagar.ForeColor = System.Drawing.Color.SeaGreen;
+            this.txtTotalPagar.Location = new System.Drawing.Point(1234, 909);
+            this.txtTotalPagar.Name = "txtTotalPagar";
+            this.txtTotalPagar.ReadOnly = true;
+            this.txtTotalPagar.Size = new System.Drawing.Size(226, 35);
+            this.txtTotalPagar.TabIndex = 28;
+            this.txtTotalPagar.TextChanged += new System.EventHandler(this.txtTotalPagar_TextChanged);
             // 
             // label12
             // 
@@ -389,44 +357,81 @@
             this.label13.TabIndex = 36;
             this.label13.Text = "REGISTRO ORDEN";
             // 
+            // btnCrudDescuentos
+            // 
+            this.btnCrudDescuentos.BackColor = System.Drawing.Color.DarkRed;
+            this.btnCrudDescuentos.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCrudDescuentos.ForeColor = System.Drawing.Color.Transparent;
+            this.btnCrudDescuentos.Location = new System.Drawing.Point(1289, 187);
+            this.btnCrudDescuentos.Name = "btnCrudDescuentos";
+            this.btnCrudDescuentos.Size = new System.Drawing.Size(171, 42);
+            this.btnCrudDescuentos.TabIndex = 37;
+            this.btnCrudDescuentos.Text = "CRUD - Descuentos";
+            this.btnCrudDescuentos.UseVisualStyleBackColor = false;
+            this.btnCrudDescuentos.Click += new System.EventHandler(this.btnCrudDescuentos_Click);
+            // 
+            // txtDescuento
+            // 
+            this.txtDescuento.Enabled = false;
+            this.txtDescuento.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDescuento.ForeColor = System.Drawing.Color.SeaGreen;
+            this.txtDescuento.Location = new System.Drawing.Point(918, 190);
+            this.txtDescuento.Name = "txtDescuento";
+            this.txtDescuento.ReadOnly = true;
+            this.txtDescuento.Size = new System.Drawing.Size(365, 30);
+            this.txtDescuento.TabIndex = 38;
+            this.txtDescuento.TextChanged += new System.EventHandler(this.txtDescuento_TextChanged);
+            // 
+            // cboTipoOrden
+            // 
+            this.cboTipoOrden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTipoOrden.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboTipoOrden.FormattingEnabled = true;
+            this.cboTipoOrden.Location = new System.Drawing.Point(963, 122);
+            this.cboTipoOrden.Name = "cboTipoOrden";
+            this.cboTipoOrden.Size = new System.Drawing.Size(497, 31);
+            this.cboTipoOrden.TabIndex = 3;
+            this.cboTipoOrden.SelectedIndexChanged += new System.EventHandler(this.cboTipoOrden_SelectedIndexChanged);
+            // 
             // frmRegistroOrden
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1515, 983);
+            this.Controls.Add(this.txtDescuento);
+            this.Controls.Add(this.btnCrudDescuentos);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.txtTotalPagar);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.btnConfirmarOrden);
+            this.Controls.Add(this.btnCancelar);
+            this.Controls.Add(this.dgvDetalleOrden);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.btnAgregarItem);
+            this.Controls.Add(this.txtPrecioMenuOCombo);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.numUpDownCantidadMenuOCombo);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.cboCombos);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cboProductosMenu);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dtpFechaOrden);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.cbxDescuento);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.cbxTipoOrden);
+            this.Controls.Add(this.cboTipoOrden);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.cbxCliente);
+            this.Controls.Add(this.cboClientes);
             this.Name = "frmRegistroOrden";
             this.Text = "frmRegistroOrden";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDownCantidadMenuOCombo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleOrden)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -434,34 +439,35 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cbxCliente;
+        private System.Windows.Forms.ComboBox cboClientes;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cbxTipoOrden;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cbxDescuento;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpFechaOrden;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cboProductosMenu;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cboCombos;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numUpDownCantidadMenuOCombo;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtPrecioMenuOCombo;
+        private System.Windows.Forms.Button btnAgregarItem;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.DataGridView dgvDetalleOrden;
+        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnConfirmarOrden;
+        private System.Windows.Forms.TextBox txtTotalPagar;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button btnCrudDescuentos;
+        private System.Windows.Forms.TextBox txtDescuento;
+        private System.Windows.Forms.ComboBox cboTipoOrden;
     }
 }

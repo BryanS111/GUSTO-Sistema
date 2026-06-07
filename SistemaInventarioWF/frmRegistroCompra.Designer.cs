@@ -50,11 +50,9 @@
             this.btnLimpiarCampos = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.txtTotalCompra = new System.Windows.Forms.TextBox();
-            this.btnNuevo = new System.Windows.Forms.Button();
-            this.btnEditar = new System.Windows.Forms.Button();
-            this.btnEliminadoLogico = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.btnNuevo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownCantidad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleCompra)).BeginInit();
             this.SuspendLayout();
@@ -322,45 +320,6 @@
             this.txtTotalCompra.TabIndex = 59;
             this.txtTotalCompra.TextChanged += new System.EventHandler(this.txtTotalCompra_TextChanged);
             // 
-            // btnNuevo
-            // 
-            this.btnNuevo.BackColor = System.Drawing.Color.DarkRed;
-            this.btnNuevo.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNuevo.ForeColor = System.Drawing.Color.Transparent;
-            this.btnNuevo.Location = new System.Drawing.Point(737, 191);
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(209, 49);
-            this.btnNuevo.TabIndex = 61;
-            this.btnNuevo.Text = "NUEVO";
-            this.btnNuevo.UseVisualStyleBackColor = false;
-            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.BackColor = System.Drawing.Color.DarkRed;
-            this.btnEditar.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.ForeColor = System.Drawing.Color.Transparent;
-            this.btnEditar.Location = new System.Drawing.Point(952, 191);
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(209, 49);
-            this.btnEditar.TabIndex = 62;
-            this.btnEditar.Text = "EDITAR";
-            this.btnEditar.UseVisualStyleBackColor = false;
-            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
-            // 
-            // btnEliminadoLogico
-            // 
-            this.btnEliminadoLogico.BackColor = System.Drawing.Color.DarkRed;
-            this.btnEliminadoLogico.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminadoLogico.ForeColor = System.Drawing.Color.Transparent;
-            this.btnEliminadoLogico.Location = new System.Drawing.Point(1179, 191);
-            this.btnEliminadoLogico.Name = "btnEliminadoLogico";
-            this.btnEliminadoLogico.Size = new System.Drawing.Size(209, 49);
-            this.btnEliminadoLogico.TabIndex = 63;
-            this.btnEliminadoLogico.Text = "ELIMINAR";
-            this.btnEliminadoLogico.UseVisualStyleBackColor = false;
-            this.btnEliminadoLogico.Click += new System.EventHandler(this.btnEliminadoLogico_Click);
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -387,13 +346,24 @@
             this.label13.Text = "_________________________________________________________________________________" +
     "__________________________________________________-_________";
             // 
+            // btnNuevo
+            // 
+            this.btnNuevo.BackColor = System.Drawing.Color.DarkRed;
+            this.btnNuevo.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNuevo.ForeColor = System.Drawing.Color.Transparent;
+            this.btnNuevo.Location = new System.Drawing.Point(1179, 187);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(209, 49);
+            this.btnNuevo.TabIndex = 61;
+            this.btnNuevo.Text = "NUEVO";
+            this.btnNuevo.UseVisualStyleBackColor = false;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
+            // 
             // frmRegistroCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1515, 983);
-            this.Controls.Add(this.btnEliminadoLogico);
-            this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.txtTotalCompra);
@@ -452,10 +422,8 @@
         private System.Windows.Forms.Button btnLimpiarCampos;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtTotalCompra;
-        private System.Windows.Forms.Button btnNuevo;
-        private System.Windows.Forms.Button btnEditar;
-        private System.Windows.Forms.Button btnEliminadoLogico;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button btnNuevo;
     }
 }

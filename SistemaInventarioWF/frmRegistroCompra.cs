@@ -217,8 +217,8 @@ namespace SistemaInventarioWF
             btnAgregarInsumo.Enabled = habilitar;
             btnRegistrarCompra.Enabled = habilitar;
             btnNuevo.Enabled = !habilitar;
-            btnEditar.Enabled = !habilitar;
-            btnEliminadoLogico.Enabled = !habilitar;
+            //btnEditar.Enabled = !habilitar;
+            //btnEliminadoLogico.Enabled = !habilitar;
             if (habilitar)
             {
                 // Al habilitar, forzar a seleccionar un proveedor e insumo
