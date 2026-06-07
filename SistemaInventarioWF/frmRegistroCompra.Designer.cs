@@ -30,31 +30,33 @@
         {
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtNumDoc = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.cbxCliente = new System.Windows.Forms.ComboBox();
+            this.cboProveedores = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaCompra = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.txtCostoUnitario = new System.Windows.Forms.TextBox();
+            this.cboInsumo = new System.Windows.Forms.ComboBox();
+            this.numUpDownCantidad = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAgregarInsumo = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.dgvDetalleCompra = new System.Windows.Forms.DataGridView();
+            this.btnRegistrarCompra = new System.Windows.Forms.Button();
+            this.btnLimpiarCampos = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.txtTotalCompra = new System.Windows.Forms.TextBox();
+            this.btnNuevo = new System.Windows.Forms.Button();
+            this.btnEditar = new System.Windows.Forms.Button();
+            this.btnEliminadoLogico = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDownCantidad)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleCompra)).BeginInit();
             this.SuspendLayout();
             // 
             // label8
@@ -71,34 +73,26 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.DarkRed;
-            this.label4.Location = new System.Drawing.Point(526, 40);
+            this.label4.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(12, 43);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(477, 29);
+            this.label4.Size = new System.Drawing.Size(530, 33);
             this.label4.TabIndex = 38;
             this.label4.Text = "DATOS DE PROVEEDOR Y DOCUMENTO";
             // 
-            // textBox1
+            // txtNumDoc
             // 
-            this.textBox1.BackColor = System.Drawing.Color.DarkRed;
-            this.textBox1.Location = new System.Drawing.Point(0, 40);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(1527, 26);
-            this.textBox1.TabIndex = 37;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.textBox3.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.ForeColor = System.Drawing.Color.LightGray;
-            this.textBox3.Location = new System.Drawing.Point(372, 197);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(281, 30);
-            this.textBox3.TabIndex = 41;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.txtNumDoc.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.txtNumDoc.Enabled = false;
+            this.txtNumDoc.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNumDoc.ForeColor = System.Drawing.Color.LightGray;
+            this.txtNumDoc.Location = new System.Drawing.Point(372, 197);
+            this.txtNumDoc.Name = "txtNumDoc";
+            this.txtNumDoc.ReadOnly = true;
+            this.txtNumDoc.Size = new System.Drawing.Size(281, 30);
+            this.txtNumDoc.TabIndex = 41;
+            this.txtNumDoc.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label5
             // 
@@ -111,25 +105,18 @@
             this.label5.TabIndex = 40;
             this.label5.Text = "FECHA:";
             // 
-            // cbxCliente
+            // cboProveedores
             // 
-            this.cbxCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxCliente.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbxCliente.ForeColor = System.Drawing.Color.Silver;
-            this.cbxCliente.FormattingEnabled = true;
-            this.cbxCliente.Items.AddRange(new object[] {
-            "JUAN MARTINEZ",
-            "MARIA GUZMAN",
-            "ANTONIO RAMIREZ",
-            "SANDRA ACEVEDO",
-            "NICOL GUTIERREZ",
-            "RODRIGO MENDOZA",
-            "OSCAR PEREZ"});
-            this.cbxCliente.Location = new System.Drawing.Point(263, 115);
-            this.cbxCliente.Name = "cbxCliente";
-            this.cbxCliente.Size = new System.Drawing.Size(390, 31);
-            this.cbxCliente.TabIndex = 39;
-            this.cbxCliente.Tag = "ORDENES ACTIVAS";
+            this.cboProveedores.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboProveedores.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboProveedores.ForeColor = System.Drawing.Color.DimGray;
+            this.cboProveedores.FormattingEnabled = true;
+            this.cboProveedores.Location = new System.Drawing.Point(263, 115);
+            this.cboProveedores.Name = "cboProveedores";
+            this.cboProveedores.Size = new System.Drawing.Size(390, 31);
+            this.cboProveedores.TabIndex = 39;
+            this.cboProveedores.Tag = "ORDENES ACTIVAS";
+            this.cboProveedores.SelectedIndexChanged += new System.EventHandler(this.cboProveedores_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -142,13 +129,14 @@
             this.label1.TabIndex = 42;
             this.label1.Text = "PROVEEDOR:";
             // 
-            // dateTimePicker1
+            // dtpFechaCompra
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(866, 114);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(522, 30);
-            this.dateTimePicker1.TabIndex = 43;
+            this.dtpFechaCompra.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpFechaCompra.Location = new System.Drawing.Point(866, 114);
+            this.dtpFechaCompra.Name = "dtpFechaCompra";
+            this.dtpFechaCompra.Size = new System.Drawing.Size(522, 30);
+            this.dtpFechaCompra.TabIndex = 43;
+            this.dtpFechaCompra.ValueChanged += new System.EventHandler(this.dtpFechaCompra_ValueChanged);
             // 
             // label2
             // 
@@ -164,22 +152,13 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.DarkRed;
-            this.label3.Location = new System.Drawing.Point(609, 273);
+            this.label3.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(32, 275);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(311, 29);
+            this.label3.Size = new System.Drawing.Size(347, 33);
             this.label3.TabIndex = 46;
             this.label3.Text = "SELECCION DE INSUMOS";
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.Color.DarkRed;
-            this.textBox2.Location = new System.Drawing.Point(0, 273);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(1527, 26);
-            this.textBox2.TabIndex = 45;
             // 
             // label6
             // 
@@ -203,25 +182,26 @@
             this.label7.TabIndex = 49;
             this.label7.Text = "INSUMO:";
             // 
-            // textBox4
+            // txtCostoUnitario
             // 
-            this.textBox4.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.textBox4.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.ForeColor = System.Drawing.Color.LightGray;
-            this.textBox4.Location = new System.Drawing.Point(1003, 340);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(309, 30);
-            this.textBox4.TabIndex = 48;
-            this.textBox4.Text = "$0.00";
+            this.txtCostoUnitario.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.txtCostoUnitario.Enabled = false;
+            this.txtCostoUnitario.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCostoUnitario.ForeColor = System.Drawing.Color.LightGray;
+            this.txtCostoUnitario.Location = new System.Drawing.Point(1003, 340);
+            this.txtCostoUnitario.Name = "txtCostoUnitario";
+            this.txtCostoUnitario.ReadOnly = true;
+            this.txtCostoUnitario.Size = new System.Drawing.Size(309, 30);
+            this.txtCostoUnitario.TabIndex = 48;
+            this.txtCostoUnitario.TextChanged += new System.EventHandler(this.txtCostoUnitario_TextChanged);
             // 
-            // comboBox1
+            // cboInsumo
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.ForeColor = System.Drawing.Color.Silver;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cboInsumo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboInsumo.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboInsumo.ForeColor = System.Drawing.Color.DimGray;
+            this.cboInsumo.FormattingEnabled = true;
+            this.cboInsumo.Items.AddRange(new object[] {
             "JUAN MARTINEZ",
             "MARIA GUZMAN",
             "ANTONIO RAMIREZ",
@@ -229,19 +209,21 @@
             "NICOL GUTIERREZ",
             "RODRIGO MENDOZA",
             "OSCAR PEREZ"});
-            this.comboBox1.Location = new System.Drawing.Point(238, 342);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(365, 31);
-            this.comboBox1.TabIndex = 47;
-            this.comboBox1.Tag = "ORDENES ACTIVAS";
+            this.cboInsumo.Location = new System.Drawing.Point(238, 342);
+            this.cboInsumo.Name = "cboInsumo";
+            this.cboInsumo.Size = new System.Drawing.Size(365, 31);
+            this.cboInsumo.TabIndex = 47;
+            this.cboInsumo.Tag = "ORDENES ACTIVAS";
+            this.cboInsumo.SelectedIndexChanged += new System.EventHandler(this.cboInsumo_SelectedIndexChanged);
             // 
-            // numericUpDown1
+            // numUpDownCantidad
             // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(238, 405);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(186, 30);
-            this.numericUpDown1.TabIndex = 51;
+            this.numUpDownCantidad.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDownCantidad.Location = new System.Drawing.Point(238, 405);
+            this.numUpDownCantidad.Name = "numUpDownCantidad";
+            this.numUpDownCantidad.Size = new System.Drawing.Size(186, 30);
+            this.numUpDownCantidad.TabIndex = 51;
+            this.numUpDownCantidad.ValueChanged += new System.EventHandler(this.numUpDownCantidad_ValueChanged);
             // 
             // label9
             // 
@@ -254,71 +236,67 @@
             this.label9.TabIndex = 52;
             this.label9.Text = "COSTO UNITARIO:";
             // 
-            // button1
+            // btnAgregarInsumo
             // 
-            this.button1.BackColor = System.Drawing.Color.DarkRed;
-            this.button1.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Transparent;
-            this.button1.Location = new System.Drawing.Point(67, 469);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(453, 54);
-            this.button1.TabIndex = 53;
-            this.button1.Text = "AGREGAR INSUMO";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnAgregarInsumo.BackColor = System.Drawing.Color.DarkRed;
+            this.btnAgregarInsumo.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarInsumo.ForeColor = System.Drawing.Color.Transparent;
+            this.btnAgregarInsumo.Location = new System.Drawing.Point(67, 469);
+            this.btnAgregarInsumo.Name = "btnAgregarInsumo";
+            this.btnAgregarInsumo.Size = new System.Drawing.Size(453, 54);
+            this.btnAgregarInsumo.TabIndex = 53;
+            this.btnAgregarInsumo.Text = "AGREGAR INSUMO";
+            this.btnAgregarInsumo.UseVisualStyleBackColor = false;
+            this.btnAgregarInsumo.Click += new System.EventHandler(this.btnAgregarInsumo_Click);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.DarkRed;
-            this.label10.Location = new System.Drawing.Point(608, 563);
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(33, 569);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(313, 29);
+            this.label10.Size = new System.Drawing.Size(346, 33);
             this.label10.TabIndex = 55;
             this.label10.Text = "DETALLE DE LA COMPRA";
             // 
-            // textBox5
+            // dgvDetalleCompra
             // 
-            this.textBox5.BackColor = System.Drawing.Color.DarkRed;
-            this.textBox5.Location = new System.Drawing.Point(0, 563);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(1527, 26);
-            this.textBox5.TabIndex = 54;
+            this.dgvDetalleCompra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDetalleCompra.Location = new System.Drawing.Point(38, 622);
+            this.dgvDetalleCompra.Name = "dgvDetalleCompra";
+            this.dgvDetalleCompra.RowHeadersWidth = 62;
+            this.dgvDetalleCompra.RowTemplate.Height = 28;
+            this.dgvDetalleCompra.Size = new System.Drawing.Size(1428, 220);
+            this.dgvDetalleCompra.TabIndex = 56;
+            this.dgvDetalleCompra.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalleCompra_CellContentClick);
             // 
-            // dataGridView1
+            // btnRegistrarCompra
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(38, 622);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(1428, 220);
-            this.dataGridView1.TabIndex = 56;
+            this.btnRegistrarCompra.BackColor = System.Drawing.Color.DarkRed;
+            this.btnRegistrarCompra.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegistrarCompra.ForeColor = System.Drawing.Color.Transparent;
+            this.btnRegistrarCompra.Location = new System.Drawing.Point(510, 887);
+            this.btnRegistrarCompra.Name = "btnRegistrarCompra";
+            this.btnRegistrarCompra.Size = new System.Drawing.Size(411, 54);
+            this.btnRegistrarCompra.TabIndex = 58;
+            this.btnRegistrarCompra.Text = "REGISTRAR COMPRA";
+            this.btnRegistrarCompra.UseVisualStyleBackColor = false;
+            this.btnRegistrarCompra.Click += new System.EventHandler(this.btnRegistrarCompra_Click);
             // 
-            // button3
+            // btnLimpiarCampos
             // 
-            this.button3.BackColor = System.Drawing.Color.DarkRed;
-            this.button3.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.Transparent;
-            this.button3.Location = new System.Drawing.Point(510, 887);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(411, 54);
-            this.button3.TabIndex = 58;
-            this.button3.Text = "REGISTRAR COMPRA";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.DarkRed;
-            this.button2.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.Transparent;
-            this.button2.Location = new System.Drawing.Point(38, 887);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(411, 54);
-            this.button2.TabIndex = 57;
-            this.button2.Text = "LIMPIAR";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnLimpiarCampos.BackColor = System.Drawing.Color.DarkRed;
+            this.btnLimpiarCampos.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiarCampos.ForeColor = System.Drawing.Color.Transparent;
+            this.btnLimpiarCampos.Location = new System.Drawing.Point(38, 887);
+            this.btnLimpiarCampos.Name = "btnLimpiarCampos";
+            this.btnLimpiarCampos.Size = new System.Drawing.Size(411, 54);
+            this.btnLimpiarCampos.TabIndex = 57;
+            this.btnLimpiarCampos.Text = "CANCELAR";
+            this.btnLimpiarCampos.UseVisualStyleBackColor = false;
+            this.btnLimpiarCampos.Click += new System.EventHandler(this.btnLimpiarCampos_Click);
             // 
             // label11
             // 
@@ -331,52 +309,120 @@
             this.label11.TabIndex = 60;
             this.label11.Text = "TOTAL COMPRA:";
             // 
-            // textBox6
+            // txtTotalCompra
             // 
-            this.textBox6.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.textBox6.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.ForeColor = System.Drawing.Color.LightGray;
-            this.textBox6.Location = new System.Drawing.Point(1258, 893);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(189, 41);
-            this.textBox6.TabIndex = 59;
-            this.textBox6.Text = "$0.00";
+            this.txtTotalCompra.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.txtTotalCompra.Enabled = false;
+            this.txtTotalCompra.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalCompra.ForeColor = System.Drawing.Color.Black;
+            this.txtTotalCompra.Location = new System.Drawing.Point(1258, 893);
+            this.txtTotalCompra.Name = "txtTotalCompra";
+            this.txtTotalCompra.ReadOnly = true;
+            this.txtTotalCompra.Size = new System.Drawing.Size(189, 41);
+            this.txtTotalCompra.TabIndex = 59;
+            this.txtTotalCompra.TextChanged += new System.EventHandler(this.txtTotalCompra_TextChanged);
+            // 
+            // btnNuevo
+            // 
+            this.btnNuevo.BackColor = System.Drawing.Color.DarkRed;
+            this.btnNuevo.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNuevo.ForeColor = System.Drawing.Color.Transparent;
+            this.btnNuevo.Location = new System.Drawing.Point(737, 191);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(209, 49);
+            this.btnNuevo.TabIndex = 61;
+            this.btnNuevo.Text = "NUEVO";
+            this.btnNuevo.UseVisualStyleBackColor = false;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
+            // 
+            // btnEditar
+            // 
+            this.btnEditar.BackColor = System.Drawing.Color.DarkRed;
+            this.btnEditar.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditar.ForeColor = System.Drawing.Color.Transparent;
+            this.btnEditar.Location = new System.Drawing.Point(952, 191);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(209, 49);
+            this.btnEditar.TabIndex = 62;
+            this.btnEditar.Text = "EDITAR";
+            this.btnEditar.UseVisualStyleBackColor = false;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            // 
+            // btnEliminadoLogico
+            // 
+            this.btnEliminadoLogico.BackColor = System.Drawing.Color.DarkRed;
+            this.btnEliminadoLogico.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminadoLogico.ForeColor = System.Drawing.Color.Transparent;
+            this.btnEliminadoLogico.Location = new System.Drawing.Point(1179, 191);
+            this.btnEliminadoLogico.Name = "btnEliminadoLogico";
+            this.btnEliminadoLogico.Size = new System.Drawing.Size(209, 49);
+            this.btnEliminadoLogico.TabIndex = 63;
+            this.btnEliminadoLogico.Text = "ELIMINAR";
+            this.btnEliminadoLogico.UseVisualStyleBackColor = false;
+            this.btnEliminadoLogico.Click += new System.EventHandler(this.btnEliminadoLogico_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.DimGray;
+            this.label12.Location = new System.Drawing.Point(-20, 526);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(1703, 33);
+            this.label12.TabIndex = 64;
+            this.label12.Text = "_________________________________________________________________________________" +
+    "__________________________________________________-_________";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.DimGray;
+            this.label13.Location = new System.Drawing.Point(-45, 230);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(1703, 33);
+            this.label13.TabIndex = 65;
+            this.label13.Text = "_________________________________________________________________________________" +
+    "__________________________________________________-_________";
             // 
             // frmRegistroCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1515, 983);
+            this.Controls.Add(this.btnEliminadoLogico);
+            this.Controls.Add(this.btnEditar);
+            this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.txtTotalCompra);
+            this.Controls.Add(this.btnRegistrarCompra);
+            this.Controls.Add(this.btnLimpiarCampos);
+            this.Controls.Add(this.dgvDetalleCompra);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnAgregarInsumo);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.numUpDownCantidad);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.txtCostoUnitario);
+            this.Controls.Add(this.cboInsumo);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dtpFechaCompra);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.txtNumDoc);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.cbxCliente);
+            this.Controls.Add(this.cboProveedores);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label8);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label13);
             this.Name = "frmRegistroCompra";
             this.Text = "frmRegistroCompra";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDownCantidad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleCompra)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -386,28 +432,30 @@
 
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtNumDoc;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cbxCliente;
+        private System.Windows.Forms.ComboBox cboProveedores;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpFechaCompra;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.TextBox txtCostoUnitario;
+        private System.Windows.Forms.ComboBox cboInsumo;
+        private System.Windows.Forms.NumericUpDown numUpDownCantidad;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAgregarInsumo;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DataGridView dgvDetalleCompra;
+        private System.Windows.Forms.Button btnRegistrarCompra;
+        private System.Windows.Forms.Button btnLimpiarCampos;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtTotalCompra;
+        private System.Windows.Forms.Button btnNuevo;
+        private System.Windows.Forms.Button btnEditar;
+        private System.Windows.Forms.Button btnEliminadoLogico;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
     }
 }
