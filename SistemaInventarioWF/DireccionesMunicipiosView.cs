@@ -224,8 +224,8 @@ namespace SistemaInventarioWF
             dgvDirecciones.AutoGenerateColumns = true;
             dgvDirecciones.DataSource = _listaDirecciones;
 
-            if (dgvDirecciones.Columns["DireccionId"] != null)
-                dgvDirecciones.Columns["DireccionId"].Visible = false;
+            //if (dgvDirecciones.Columns["DireccionId"] != null)
+            //    dgvDirecciones.Columns["DireccionId"].Visible = false;
             if (dgvDirecciones.Columns["MunicipioId"] != null)
                 dgvDirecciones.Columns["MunicipioId"].Visible = false;
             if (dgvDirecciones.Columns["EstadoId"] != null)
