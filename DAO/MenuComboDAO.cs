@@ -267,6 +267,7 @@ namespace DAO
                 Precio = Convert.ToDecimal(row["Precio"]),
                 InventarioId = row["InventarioId"] != DBNull.Value ? Convert.ToInt32(row["InventarioId"]) : (int?)null,
                 InventarioNombre = row["InventarioNombre"].ToString(),
+                Stock = row["Stock"] != DBNull.Value ? Convert.ToDouble(row["Stock"]) : 0,  // ← NUEVA LÍNEA
                 CategoriaId = Convert.ToInt32(row["CategoriaId"]),
                 Categoria = row["Categoria"].ToString(),
                 EstadoId = Convert.ToInt32(row["EstadoId"]),

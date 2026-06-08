@@ -55,19 +55,19 @@
             this.label10 = new System.Windows.Forms.Label();
             this.cboTipo = new System.Windows.Forms.ComboBox();
             this.gbxItems = new System.Windows.Forms.GroupBox();
+            this.numCantidad = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dgvCombo = new System.Windows.Forms.DataGridView();
             this.btnAgregarMenu = new System.Windows.Forms.Button();
             this.dgvInventario = new System.Windows.Forms.DataGridView();
             this.btnQuitarMenu = new System.Windows.Forms.Button();
-            this.numCantidad = new System.Windows.Forms.NumericUpDown();
             this.grpBoxData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatosComboMenu)).BeginInit();
             this.gbxItems.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCantidad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCombo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventario)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCantidad)).BeginInit();
             this.SuspendLayout();
             // 
             // btnClose
@@ -228,7 +228,7 @@
             this.grpBoxData.Margin = new System.Windows.Forms.Padding(4);
             this.grpBoxData.Name = "grpBoxData";
             this.grpBoxData.Padding = new System.Windows.Forms.Padding(4);
-            this.grpBoxData.Size = new System.Drawing.Size(1229, 478);
+            this.grpBoxData.Size = new System.Drawing.Size(1229, 515);
             this.grpBoxData.TabIndex = 13;
             this.grpBoxData.TabStop = false;
             this.grpBoxData.Text = "Datos";
@@ -298,7 +298,7 @@
             this.dgvDatosComboMenu.Name = "dgvDatosComboMenu";
             this.dgvDatosComboMenu.RowHeadersWidth = 51;
             this.dgvDatosComboMenu.RowTemplate.Height = 24;
-            this.dgvDatosComboMenu.Size = new System.Drawing.Size(1169, 176);
+            this.dgvDatosComboMenu.Size = new System.Drawing.Size(1169, 213);
             this.dgvDatosComboMenu.TabIndex = 16;
             this.dgvDatosComboMenu.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatosComboMenu_CellContentClick);
             // 
@@ -418,13 +418,32 @@
             this.gbxItems.Controls.Add(this.btnAgregarMenu);
             this.gbxItems.Controls.Add(this.dgvInventario);
             this.gbxItems.Controls.Add(this.btnQuitarMenu);
-            this.gbxItems.Location = new System.Drawing.Point(30, 627);
+            this.gbxItems.Location = new System.Drawing.Point(30, 664);
             this.gbxItems.Name = "gbxItems";
-            this.gbxItems.Size = new System.Drawing.Size(1435, 344);
+            this.gbxItems.Size = new System.Drawing.Size(1435, 307);
             this.gbxItems.TabIndex = 27;
             this.gbxItems.TabStop = false;
             this.gbxItems.Text = "Seleccionar Item de Inventario / Menu";
             this.gbxItems.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // numCantidad
+            // 
+            this.numCantidad.Location = new System.Drawing.Point(946, 39);
+            this.numCantidad.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.numCantidad.Name = "numCantidad";
+            this.numCantidad.Size = new System.Drawing.Size(120, 26);
+            this.numCantidad.TabIndex = 32;
+            this.numCantidad.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numCantidad.Visible = false;
+            this.numCantidad.ValueChanged += new System.EventHandler(this.numCantidad_ValueChanged);
             // 
             // label9
             // 
@@ -460,7 +479,7 @@
             this.dgvCombo.Name = "dgvCombo";
             this.dgvCombo.RowHeadersWidth = 51;
             this.dgvCombo.RowTemplate.Height = 24;
-            this.dgvCombo.Size = new System.Drawing.Size(1333, 239);
+            this.dgvCombo.Size = new System.Drawing.Size(1333, 202);
             this.dgvCombo.TabIndex = 30;
             this.dgvCombo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCombo_CellContentClick_1);
             // 
@@ -491,7 +510,7 @@
             this.dgvInventario.Name = "dgvInventario";
             this.dgvInventario.RowHeadersWidth = 51;
             this.dgvInventario.RowTemplate.Height = 24;
-            this.dgvInventario.Size = new System.Drawing.Size(1352, 239);
+            this.dgvInventario.Size = new System.Drawing.Size(1352, 202);
             this.dgvInventario.TabIndex = 26;
             this.dgvInventario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInventario_CellContentClick_1);
             // 
@@ -510,25 +529,6 @@
             this.btnQuitarMenu.Text = "QUITAR";
             this.btnQuitarMenu.UseVisualStyleBackColor = false;
             this.btnQuitarMenu.Click += new System.EventHandler(this.btnQuitarMenu_Click);
-            // 
-            // numCantidad
-            // 
-            this.numCantidad.Location = new System.Drawing.Point(946, 39);
-            this.numCantidad.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.numCantidad.Name = "numCantidad";
-            this.numCantidad.Size = new System.Drawing.Size(120, 26);
-            this.numCantidad.TabIndex = 32;
-            this.numCantidad.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numCantidad.Visible = false;
-            this.numCantidad.ValueChanged += new System.EventHandler(this.numCantidad_ValueChanged);
             // 
             // MenuCombosView
             // 
@@ -555,9 +555,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatosComboMenu)).EndInit();
             this.gbxItems.ResumeLayout(false);
             this.gbxItems.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCantidad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCombo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInventario)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCantidad)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

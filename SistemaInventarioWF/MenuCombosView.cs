@@ -134,6 +134,11 @@ namespace SistemaInventarioWF
             dgvDatosComboMenu.DataSource = null;
             dgvDatosComboMenu.AutoGenerateColumns = true;
             dgvDatosComboMenu.DataSource = _listaMenus;
+
+            // Ocultar columna de stock (no aplica para la mayoría de menús)
+            if (dgvDatosComboMenu.Columns["Stock"] != null)
+                dgvDatosComboMenu.Columns["Stock"].Visible = false;
+
             OcultarColumnasMenu();
         }
 

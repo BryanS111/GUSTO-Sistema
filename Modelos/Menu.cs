@@ -11,5 +11,6 @@
         public string Categoria { get; set; }
         public int EstadoId { get; set; }
         public string EstadoNombre { get; set; }
+        public double Stock { get; set; }
     }
 }
