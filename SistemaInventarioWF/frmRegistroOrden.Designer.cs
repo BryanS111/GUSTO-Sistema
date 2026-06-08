@@ -375,6 +375,7 @@
             this.txtDescuento.Enabled = false;
             this.txtDescuento.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDescuento.ForeColor = System.Drawing.Color.SeaGreen;
+            this.txtDescuento.HideSelection = false;
             this.txtDescuento.Location = new System.Drawing.Point(918, 190);
             this.txtDescuento.Name = "txtDescuento";
             this.txtDescuento.ReadOnly = true;

@@ -31,20 +31,23 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtCliente = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.cbxCliente = new System.Windows.Forms.ComboBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.cboOrdenesPendientes = new System.Windows.Forms.ComboBox();
+            this.txtDireccion = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtTarifa = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.cboRepartidorDisponible = new System.Windows.Forms.ComboBox();
+            this.btnAsignarEnvio = new System.Windows.Forms.Button();
+            this.btnLimpiarPantalla = new System.Windows.Forms.Button();
+            this.txtCoordenadas = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnDireccionLocal = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label8
@@ -78,16 +81,18 @@
             this.textBox1.Size = new System.Drawing.Size(1527, 26);
             this.textBox1.TabIndex = 37;
             // 
-            // textBox3
+            // txtCliente
             // 
-            this.textBox3.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.textBox3.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.ForeColor = System.Drawing.Color.LightGray;
-            this.textBox3.Location = new System.Drawing.Point(366, 178);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(372, 30);
-            this.textBox3.TabIndex = 42;
+            this.txtCliente.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.txtCliente.Enabled = false;
+            this.txtCliente.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCliente.ForeColor = System.Drawing.Color.LightGray;
+            this.txtCliente.Location = new System.Drawing.Point(318, 178);
+            this.txtCliente.Name = "txtCliente";
+            this.txtCliente.ReadOnly = true;
+            this.txtCliente.Size = new System.Drawing.Size(372, 30);
+            this.txtCliente.TabIndex = 42;
+            this.txtCliente.TextChanged += new System.EventHandler(this.txtCliente_TextChanged);
             // 
             // label5
             // 
@@ -111,28 +116,31 @@
             this.label1.TabIndex = 40;
             this.label1.Text = "ORDEN PENDIENTE:";
             // 
-            // cbxCliente
+            // cboOrdenesPendientes
             // 
-            this.cbxCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxCliente.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbxCliente.ForeColor = System.Drawing.Color.Silver;
-            this.cbxCliente.FormattingEnabled = true;
-            this.cbxCliente.Location = new System.Drawing.Point(366, 116);
-            this.cbxCliente.Name = "cbxCliente";
-            this.cbxCliente.Size = new System.Drawing.Size(372, 31);
-            this.cbxCliente.TabIndex = 39;
-            this.cbxCliente.Tag = "ORDENES ACTIVAS";
+            this.cboOrdenesPendientes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboOrdenesPendientes.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboOrdenesPendientes.ForeColor = System.Drawing.Color.Black;
+            this.cboOrdenesPendientes.FormattingEnabled = true;
+            this.cboOrdenesPendientes.Location = new System.Drawing.Point(318, 117);
+            this.cboOrdenesPendientes.Name = "cboOrdenesPendientes";
+            this.cboOrdenesPendientes.Size = new System.Drawing.Size(372, 31);
+            this.cboOrdenesPendientes.TabIndex = 39;
+            this.cboOrdenesPendientes.Tag = "ORDENES ACTIVAS";
+            this.cboOrdenesPendientes.SelectedIndexChanged += new System.EventHandler(this.cboOrdenesPendientes_SelectedIndexChanged);
             // 
-            // textBox2
+            // txtDireccion
             // 
-            this.textBox2.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.textBox2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.ForeColor = System.Drawing.Color.LightGray;
-            this.textBox2.Location = new System.Drawing.Point(366, 241);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(587, 30);
-            this.textBox2.TabIndex = 46;
+            this.txtDireccion.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.txtDireccion.Enabled = false;
+            this.txtDireccion.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDireccion.ForeColor = System.Drawing.Color.LightGray;
+            this.txtDireccion.Location = new System.Drawing.Point(926, 115);
+            this.txtDireccion.Name = "txtDireccion";
+            this.txtDireccion.ReadOnly = true;
+            this.txtDireccion.Size = new System.Drawing.Size(548, 30);
+            this.txtDireccion.TabIndex = 46;
+            this.txtDireccion.TextChanged += new System.EventHandler(this.txtDireccion_TextChanged);
             // 
             // label2
             // 
@@ -141,9 +149,9 @@
             this.label2.ForeColor = System.Drawing.SystemColors.GrayText;
             this.label2.Location = new System.Drawing.Point(52, 242);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(153, 29);
+            this.label2.Size = new System.Drawing.Size(207, 29);
             this.label2.TabIndex = 45;
-            this.label2.Text = "DIRECCION:";
+            this.label2.Text = "COORDENADAS:";
             // 
             // label3
             // 
@@ -165,17 +173,18 @@
             this.textBox4.Size = new System.Drawing.Size(1527, 26);
             this.textBox4.TabIndex = 47;
             // 
-            // textBox5
+            // txtTarifa
             // 
-            this.textBox5.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.textBox5.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.ForeColor = System.Drawing.Color.LightGray;
-            this.textBox5.Location = new System.Drawing.Point(190, 477);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(190, 30);
-            this.textBox5.TabIndex = 52;
-            this.textBox5.Text = "$0.00";
+            this.txtTarifa.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.txtTarifa.Enabled = false;
+            this.txtTarifa.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTarifa.ForeColor = System.Drawing.Color.LightGray;
+            this.txtTarifa.Location = new System.Drawing.Point(190, 477);
+            this.txtTarifa.Name = "txtTarifa";
+            this.txtTarifa.ReadOnly = true;
+            this.txtTarifa.Size = new System.Drawing.Size(190, 30);
+            this.txtTarifa.TabIndex = 52;
+            this.txtTarifa.TextChanged += new System.EventHandler(this.txtTarifa_TextChanged);
             // 
             // label6
             // 
@@ -199,66 +208,110 @@
             this.label7.TabIndex = 50;
             this.label7.Text = "REPARTIDOR DISPONIBLE:";
             // 
-            // comboBox1
+            // cboRepartidorDisponible
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.ForeColor = System.Drawing.Color.Silver;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(399, 417);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(339, 31);
-            this.comboBox1.TabIndex = 49;
-            this.comboBox1.Tag = "ORDENES ACTIVAS";
+            this.cboRepartidorDisponible.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboRepartidorDisponible.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboRepartidorDisponible.ForeColor = System.Drawing.Color.Black;
+            this.cboRepartidorDisponible.FormattingEnabled = true;
+            this.cboRepartidorDisponible.Location = new System.Drawing.Point(399, 417);
+            this.cboRepartidorDisponible.Name = "cboRepartidorDisponible";
+            this.cboRepartidorDisponible.Size = new System.Drawing.Size(339, 31);
+            this.cboRepartidorDisponible.TabIndex = 49;
+            this.cboRepartidorDisponible.Tag = "Repartidores disponibles";
+            this.cboRepartidorDisponible.SelectedIndexChanged += new System.EventHandler(this.cboRepartidorDisponible_SelectedIndexChanged);
             // 
-            // button3
+            // btnAsignarEnvio
             // 
-            this.button3.BackColor = System.Drawing.Color.DarkRed;
-            this.button3.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.Transparent;
-            this.button3.Location = new System.Drawing.Point(769, 804);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(441, 92);
-            this.button3.TabIndex = 54;
-            this.button3.Text = "ASIGNAR ENVIO";
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnAsignarEnvio.BackColor = System.Drawing.Color.DarkRed;
+            this.btnAsignarEnvio.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAsignarEnvio.ForeColor = System.Drawing.Color.Transparent;
+            this.btnAsignarEnvio.Location = new System.Drawing.Point(451, 876);
+            this.btnAsignarEnvio.Name = "btnAsignarEnvio";
+            this.btnAsignarEnvio.Size = new System.Drawing.Size(350, 67);
+            this.btnAsignarEnvio.TabIndex = 54;
+            this.btnAsignarEnvio.Text = "ASIGNAR ENVIO";
+            this.btnAsignarEnvio.UseVisualStyleBackColor = false;
+            this.btnAsignarEnvio.Click += new System.EventHandler(this.btnAsignarEnvio_Click);
             // 
-            // button2
+            // btnLimpiarPantalla
             // 
-            this.button2.BackColor = System.Drawing.Color.DarkRed;
-            this.button2.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.Transparent;
-            this.button2.Location = new System.Drawing.Point(297, 804);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(441, 92);
-            this.button2.TabIndex = 53;
-            this.button2.Text = "LIMPIAR PANTALLA";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnLimpiarPantalla.BackColor = System.Drawing.Color.DarkRed;
+            this.btnLimpiarPantalla.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiarPantalla.ForeColor = System.Drawing.Color.Transparent;
+            this.btnLimpiarPantalla.Location = new System.Drawing.Point(52, 876);
+            this.btnLimpiarPantalla.Name = "btnLimpiarPantalla";
+            this.btnLimpiarPantalla.Size = new System.Drawing.Size(350, 67);
+            this.btnLimpiarPantalla.TabIndex = 53;
+            this.btnLimpiarPantalla.Text = "LIMPIAR PANTALLA";
+            this.btnLimpiarPantalla.UseVisualStyleBackColor = false;
+            this.btnLimpiarPantalla.Click += new System.EventHandler(this.btnLimpiarPantalla_Click);
+            // 
+            // txtCoordenadas
+            // 
+            this.txtCoordenadas.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.txtCoordenadas.Enabled = false;
+            this.txtCoordenadas.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCoordenadas.ForeColor = System.Drawing.Color.LightGray;
+            this.txtCoordenadas.Location = new System.Drawing.Point(318, 243);
+            this.txtCoordenadas.Name = "txtCoordenadas";
+            this.txtCoordenadas.ReadOnly = true;
+            this.txtCoordenadas.Size = new System.Drawing.Size(372, 30);
+            this.txtCoordenadas.TabIndex = 56;
+            this.txtCoordenadas.TextChanged += new System.EventHandler(this.txtCoordenadas_TextChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label9.Location = new System.Drawing.Point(752, 116);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(153, 29);
+            this.label9.TabIndex = 55;
+            this.label9.Text = "DIRECCION:";
+            // 
+            // btnDireccionLocal
+            // 
+            this.btnDireccionLocal.BackColor = System.Drawing.Color.DarkRed;
+            this.btnDireccionLocal.Font = new System.Drawing.Font("Arial Narrow", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDireccionLocal.ForeColor = System.Drawing.Color.Transparent;
+            this.btnDireccionLocal.Location = new System.Drawing.Point(57, 551);
+            this.btnDireccionLocal.Name = "btnDireccionLocal";
+            this.btnDireccionLocal.Size = new System.Drawing.Size(345, 50);
+            this.btnDireccionLocal.TabIndex = 57;
+            this.btnDireccionLocal.Text = "DEFINIR DIRECCION DEL LOCAL";
+            this.btnDireccionLocal.UseVisualStyleBackColor = false;
+            this.btnDireccionLocal.Click += new System.EventHandler(this.btnDefinirDireccionLocal_Click);
             // 
             // frmProcesoDelivery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1515, 983);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.btnDireccionLocal);
+            this.Controls.Add(this.txtCoordenadas);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.btnAsignarEnvio);
+            this.Controls.Add(this.btnLimpiarPantalla);
+            this.Controls.Add(this.txtTarifa);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cboRepartidorDisponible);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtDireccion);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.txtCliente);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.cbxCliente);
+            this.Controls.Add(this.cboOrdenesPendientes);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label8);
             this.Name = "frmProcesoDelivery";
             this.Text = "frmProcesoDelivery";
+            this.Load += new System.EventHandler(this.frmProcesoDelivery_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,19 +322,22 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtCliente;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cbxCliente;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ComboBox cboOrdenesPendientes;
+        private System.Windows.Forms.TextBox txtDireccion;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtTarifa;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ComboBox cboRepartidorDisponible;
+        private System.Windows.Forms.Button btnAsignarEnvio;
+        private System.Windows.Forms.Button btnLimpiarPantalla;
+        private System.Windows.Forms.TextBox txtCoordenadas;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnDireccionLocal;
     }
 }

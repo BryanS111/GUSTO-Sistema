@@ -103,7 +103,7 @@ namespace DAO
                     dtDetalle.Rows.Add(
                         det.MenuId.HasValue ? (object)det.MenuId.Value : DBNull.Value,
                         det.ComboId.HasValue ? (object)det.ComboId.Value : DBNull.Value,
-                        det.PrecioUnitario,
+                        det.PrecioConDescuento,  // Precio con descuento aplicado
                         det.Cantidad
                     );
                 }

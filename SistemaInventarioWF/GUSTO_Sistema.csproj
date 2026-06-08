@@ -118,6 +118,12 @@
     <Compile Include="frmDescuentosPopup.Designer.cs">
       <DependentUpon>frmDescuentosPopup.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDireccionLocalPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDireccionLocalPopup.Designer.cs">
+      <DependentUpon>frmDireccionLocalPopup.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmInicio_Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +171,12 @@
     </Compile>
     <Compile Include="frmRegistroOrden.Designer.cs">
       <DependentUpon>frmRegistroOrden.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmWhatpsAppOrden.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWhatpsAppOrden.Designer.cs">
+      <DependentUpon>frmWhatpsAppOrden.cs</DependentUpon>
     </Compile>
     <Compile Include="InterfazPrincipal_Admin.cs">
       <SubType>Form</SubType>
@@ -246,6 +258,9 @@
     <EmbeddedResource Include="frmDescuentosPopup.resx">
       <DependentUpon>frmDescuentosPopup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmDireccionLocalPopup.resx">
+      <DependentUpon>frmDireccionLocalPopup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmInicio_Dashboard.resx">
       <DependentUpon>frmInicio_Dashboard.cs</DependentUpon>
     </EmbeddedResource>
@@ -269,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmRegistroOrden.resx">
       <DependentUpon>frmRegistroOrden.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWhatpsAppOrden.resx">
+      <DependentUpon>frmWhatpsAppOrden.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InterfazPrincipal_Admin.resx">
       <DependentUpon>InterfazPrincipal_Admin.cs</DependentUpon>
@@ -363,6 +381,8 @@
   <ItemGroup>
     <None Include="Resources\mantenimientos%28crud%29.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\whatsapp-icono.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

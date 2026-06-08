@@ -15,15 +15,14 @@ namespace SistemaInventarioWF
         private List<DetalleOrdenItem> _carrito;
         private DataTable _dtMenus;
         private DataTable _dtCombos;
-        private DataTable _dtDescuentos;
-        private int? _descuentoIdSeleccionado;
+        private List<Descuento> _descuentosActivos;
 
         public frmRegistroOrden()
         {
             InitializeComponent();
             _ordenDAO = new OrdenDAO();
             _carrito = new List<DetalleOrdenItem>();
-            _descuentoIdSeleccionado = null;
+            _descuentosActivos = new List<Descuento>();
 
             // Configurar solo lectura
             txtPrecioMenuOCombo.ReadOnly = true;
@@ -39,7 +38,7 @@ namespace SistemaInventarioWF
             CargarTiposOrden();
             CargarMenus();
             CargarCombos();
-            CargarDescuentosActivos();
+            CargarDescuentosActivos(); // ¡esto faltaba!
             dtpFechaOrden.Value = DateTime.Today;
         }
 
@@ -74,7 +73,6 @@ namespace SistemaInventarioWF
             _dtMenus = _ordenDAO.ObtenerMenusActivos(out error);
             if (_dtMenus != null)
             {
-                // Agregar fila "Ninguno" al inicio
                 DataRow rowNone = _dtMenus.NewRow();
                 rowNone["MenuId"] = DBNull.Value;
                 rowNone["Nombre"] = "(Ninguno)";
@@ -93,7 +91,6 @@ namespace SistemaInventarioWF
             _dtCombos = _ordenDAO.ObtenerCombosActivos(out error);
             if (_dtCombos != null)
             {
-                // Agregar fila "Ninguno" al inicio
                 DataRow rowNone = _dtCombos.NewRow();
                 rowNone["ComboId"] = DBNull.Value;
                 rowNone["Nombre"] = "(Ninguno)";
@@ -109,7 +106,31 @@ namespace SistemaInventarioWF
         private void CargarDescuentosActivos()
         {
             string error;
-            _dtDescuentos = _ordenDAO.ObtenerDescuentosActivos(out error);
+            DescuentoDAO descDAO = new DescuentoDAO();
+            List<Descuento> todos = descDAO.ObtenerTodos(out error);
+            if (todos != null)
+            {
+                _descuentosActivos = todos.FindAll(d =>
+                    d.EstadoNombre == "ACTIVO" &&
+                    d.FechaDesde <= DateTime.Today &&
+                    d.FechaHasta >= DateTime.Today);
+            }
+            else
+            {
+                _descuentosActivos = new List<Descuento>();
+            }
+        }
+
+        private Descuento ObtenerDescuento(int? menuId, int? comboId)
+        {
+            if (_descuentosActivos == null) return null;
+            foreach (var d in _descuentosActivos)
+            {
+                if ((menuId.HasValue && d.MenuId == menuId) ||
+                    (comboId.HasValue && d.ComboId == comboId))
+                    return d;
+            }
+            return null;
         }
 
         // ==================== EVENTOS DE SELECCIÓN ====================
@@ -117,13 +138,15 @@ namespace SistemaInventarioWF
         {
             if (cboProductosMenu.SelectedItem is DataRowView drv && drv["MenuId"] != DBNull.Value)
             {
-                txtPrecioMenuOCombo.Text = drv["Precio"].ToString();
-                VerificarDescuentoAutomatico((int)drv["MenuId"], null);
+                int menuId = (int)drv["MenuId"];
+                decimal precio = Convert.ToDecimal(drv["Precio"]);
+                txtPrecioMenuOCombo.Text = precio.ToString("F2");
+                MostrarDescuentoEnTextBox(menuId, null);
             }
             else
             {
                 txtPrecioMenuOCombo.Text = "";
-                VerificarDescuentoAutomatico(null, null);
+                txtDescuento.Text = "";
             }
         }
 
@@ -131,34 +154,25 @@ namespace SistemaInventarioWF
         {
             if (cboCombos.SelectedItem is DataRowView drv && drv["ComboId"] != DBNull.Value)
             {
-                txtPrecioMenuOCombo.Text = drv["Precio"].ToString();
-                VerificarDescuentoAutomatico(null, (int)drv["ComboId"]);
+                int comboId = (int)drv["ComboId"];
+                decimal precio = Convert.ToDecimal(drv["Precio"]);
+                txtPrecioMenuOCombo.Text = precio.ToString("F2");
+                MostrarDescuentoEnTextBox(null, comboId);
             }
             else
             {
                 txtPrecioMenuOCombo.Text = "";
-                VerificarDescuentoAutomatico(null, null);
+                txtDescuento.Text = "";
             }
         }
 
-        private void VerificarDescuentoAutomatico(int? menuId, int? comboId)
+        private void MostrarDescuentoEnTextBox(int? menuId, int? comboId)
         {
-            if (_dtDescuentos == null) return;
-            _descuentoIdSeleccionado = null;
-            txtDescuento.Text = "";
-            foreach (DataRow row in _dtDescuentos.Rows)
-            {
-                // Verificar si el descuento aplica al menú o combo seleccionado
-                bool aplicaMenu = menuId.HasValue && row["MenuId"] != DBNull.Value && (int)row["MenuId"] == menuId.Value;
-                bool aplicaCombo = comboId.HasValue && row["ComboId"] != DBNull.Value && (int)row["ComboId"] == comboId.Value;
-                if (aplicaMenu || aplicaCombo)
-                {
-                    _descuentoIdSeleccionado = Convert.ToInt32(row["Id"]);
-                    txtDescuento.Text = $"{row["Nombre"]} ({row["Porcentaje"]}%)";
-                    break;
-                }
-            }
-            CalcularTotal();
+            var desc = ObtenerDescuento(menuId, comboId);
+            if (desc != null)
+                txtDescuento.Text = $"{desc.Nombre} - {desc.Porcentaje}%";
+            else
+                txtDescuento.Text = "";
         }
 
         // ==================== AGREGAR ITEM ====================
@@ -169,36 +183,33 @@ namespace SistemaInventarioWF
                 MessageBox.Show("La cantidad debe ser mayor a 0.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             if (string.IsNullOrWhiteSpace(txtPrecioMenuOCombo.Text) || !decimal.TryParse(txtPrecioMenuOCombo.Text, out decimal precio))
             {
                 MessageBox.Show("Seleccione un producto o combo primero.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            DetalleOrdenItem item = new DetalleOrdenItem
-            {
-                Cantidad = (int)numUpDownCantidadMenuOCombo.Value,
-                PrecioUnitario = precio
-            };
+            int? menuId = (cboProductosMenu.SelectedValue is int mid && mid > 0) ? mid : (int?)null;
+            int? comboId = (cboCombos.SelectedValue is int cid && cid > 0) ? cid : (int?)null;
 
-            // Verificar si se seleccionó un menú o un combo (puede ser uno o el otro)
-            if (cboProductosMenu.SelectedValue is int menuId)
+            if (!menuId.HasValue && !comboId.HasValue)
             {
-                item.MenuId = menuId;
-                item.NombreProducto = cboProductosMenu.Text;
-            }
-            if (cboCombos.SelectedValue is int comboId)
-            {
-                item.ComboId = comboId;
-                item.NombreProducto = cboCombos.Text;
-            }
-
-            if (!item.MenuId.HasValue && !item.ComboId.HasValue)
-            {
-                MessageBox.Show("Debe seleccionar al menos un producto o un combo.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Debe seleccionar un producto o un combo.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            Descuento descuento = ObtenerDescuento(menuId, comboId);
+
+            DetalleOrdenItem item = new DetalleOrdenItem
+            {
+                MenuId = menuId,
+                ComboId = comboId,
+                NombreProducto = menuId.HasValue ? cboProductosMenu.Text : cboCombos.Text,
+                Cantidad = (int)numUpDownCantidadMenuOCombo.Value,
+                PrecioUnitario = precio,
+                PorcentajeDescuento = descuento?.Porcentaje,
+                NombreDescuento = descuento?.Nombre
+            };
 
             _carrito.Add(item);
             ActualizarGrilla();
@@ -214,23 +225,17 @@ namespace SistemaInventarioWF
                 Producto = d.NombreProducto,
                 d.Cantidad,
                 PrecioUnitario = d.PrecioUnitario.ToString("F2"),
+                Descuento = d.PorcentajeDescuento.HasValue ? $"{d.NombreDescuento} ({d.PorcentajeDescuento}%)" : "",
+                PrecioConDescuento = d.PrecioConDescuento.ToString("F2"),
                 Total = d.Total.ToString("F2")
             }).ToList();
         }
 
         private void CalcularTotal()
         {
-            decimal subtotal = _carrito.Sum(i => i.Total);
-            if (_descuentoIdSeleccionado.HasValue && _dtDescuentos != null)
-            {
-                DataRow[] rows = _dtDescuentos.Select($"Id = {_descuentoIdSeleccionado.Value}");
-                if (rows.Length > 0)
-                {
-                    decimal porcentaje = Convert.ToDecimal(rows[0]["Porcentaje"]);
-                    subtotal -= subtotal * porcentaje / 100;
-                }
-            }
-            txtTotalPagar.Text = subtotal.ToString("F2");
+            // El descuento ya está aplicado por ítem, simplemente sumamos los totales de cada línea
+            decimal total = _carrito.Sum(i => i.Total);
+            txtTotalPagar.Text = total.ToString("F2");
         }
 
         // ==================== CONFIRMAR ORDEN ====================
@@ -238,13 +243,14 @@ namespace SistemaInventarioWF
         {
             if (!ValidarOrden()) return;
 
-            // Estado por defecto: PENDIENTE (debes obtener el ID real desde la BD, aquí usamos 1 como ejemplo)
-            int estadoId = 1; // Ajustar con: SELECT EstadoId FROM GLOBAL.ESTADO WHERE Estado = 'PENDIENTE' AND EntidadId = (SELECT EntidadId FROM GLOBAL.ENTIDAD WHERE Entidad = 'ORDEN')
+            int estadoId = 15; // ID del estado "PENDIENTE"
             string error;
+
+            // Ya no enviamos _descuentoIdSeleccionado porque los descuentos son por ítem
             int ordenId = _ordenDAO.RegistrarOrden(
                 (int)cboClientes.SelectedValue,
                 (int)cboTipoOrden.SelectedValue,
-                _descuentoIdSeleccionado,
+                null, // Sin descuento global
                 estadoId,
                 _carrito,
                 out error);
@@ -290,7 +296,6 @@ namespace SistemaInventarioWF
             dgvDetalleOrden.DataSource = null;
             txtTotalPagar.Text = "0.00";
             txtDescuento.Text = "";
-            _descuentoIdSeleccionado = null;
             numUpDownCantidadMenuOCombo.Value = 0;
             txtPrecioMenuOCombo.Text = "";
             if (cboClientes.Items.Count > 0) cboClientes.SelectedIndex = 0;
@@ -306,8 +311,7 @@ namespace SistemaInventarioWF
             {
                 popup.ShowDialog(this);
             }
-            // Refrescar descuentos al cerrar
-            CargarDescuentosActivos();
+            CargarDescuentosActivos(); // refrescar al cerrar
         }
 
         // ==================== EVENTOS VACÍOS ====================

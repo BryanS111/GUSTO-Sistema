@@ -7,6 +7,11 @@
         public string NombreProducto { get; set; }
         public int Cantidad { get; set; }
         public decimal PrecioUnitario { get; set; }
-        public decimal Total => Cantidad * PrecioUnitario;
+        public decimal? PorcentajeDescuento { get; set; }
+        public string NombreDescuento { get; set; }
+        public decimal PrecioConDescuento => PorcentajeDescuento.HasValue
+            ? PrecioUnitario - (PrecioUnitario * PorcentajeDescuento.Value / 100)
+            : PrecioUnitario;
+        public decimal Total => Cantidad * PrecioConDescuento;
     }
 }
