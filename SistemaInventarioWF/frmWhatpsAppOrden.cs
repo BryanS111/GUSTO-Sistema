@@ -17,7 +17,7 @@ namespace SistemaInventarioWF
             _telefono = telefono;
             _mensaje = mensaje;
 
-            txtMensaje.Text = $"Desea solicitar envio al whatsapp de {_nombreRepartidor}";
+            txtMensaje.Text = $"¿Desea solicitar envio al whatsapp de {_nombreRepartidor}?";
         }
 
         private void btnSi_Click(object sender, EventArgs e)

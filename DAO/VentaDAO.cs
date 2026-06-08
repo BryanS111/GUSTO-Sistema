@@ -127,27 +127,27 @@ namespace DAO
         public DataTable ObtenerVentasPorFecha(DateTime fechaInicio, DateTime fechaFin, out string pError)
         {
             string consulta = @"
-            SELECT v.VentaId,
-                    v.Fecha,
-                    v.NoDocumento,
-                    c.Nombre + ' ' + c.Apellido AS Cliente,
-                    o.Total,                -- ← CORREGIDO: se obtiene de VENTA.ORDEN
-                    v.MetodoPago,
-                    e.Estado
-            FROM VENTA.VENTA v
-            INNER JOIN VENTA.ORDEN o ON v.OrdenId = o.OrdenId
-            INNER JOIN VENTA.CLIENTE c ON o.ClienteId = c.ClienteId
-            INNER JOIN GLOBAL.ESTADO e ON v.EstadoId = e.EstadoId
-            WHERE v.Fecha >= @FechaInicio AND v.Fecha < DATEADD(DAY, 1, @FechaFin)
-            ORDER BY v.Fecha DESC";
+        SELECT v.VentaId,
+               v.Fecha,
+               v.NoDocumento,
+               c.Nombre + ' ' + c.Apellido AS Cliente,
+               o.Total,
+               v.MetodoPago,
+               eo.Estado AS Estado            -- ← Estado de la ORDEN, no de la venta
+        FROM VENTA.VENTA v
+        INNER JOIN VENTA.ORDEN o ON v.OrdenId = o.OrdenId
+        INNER JOIN VENTA.CLIENTE c ON o.ClienteId = c.ClienteId
+        INNER JOIN GLOBAL.ESTADO eo ON o.EstadoId = eo.EstadoId
+        WHERE v.Fecha >= @FechaInicio AND v.Fecha < DATEADD(DAY, 1, @FechaFin)
+        ORDER BY v.Fecha DESC";
 
-                SqlParameter[] parametros = {
-                    new SqlParameter("@FechaInicio", fechaInicio.Date),
-                    new SqlParameter("@FechaFin", fechaFin.Date)
-                };
+            SqlParameter[] parametros = {
+        new SqlParameter("@FechaInicio", fechaInicio.Date),
+        new SqlParameter("@FechaFin", fechaFin.Date)
+    };
 
-                return EjecutarReader(consulta, parametros, out pError);
+            return EjecutarReader(consulta, parametros, out pError);
         }
-    
+
     }
 }

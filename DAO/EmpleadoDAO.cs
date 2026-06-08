@@ -67,25 +67,29 @@ namespace DAO
         }
 
         // ==================== GUARDAR (CON AUDITORÍA) ====================
+        // ==================== GUARDAR (CON AUDITORÍA) ====================
         public override void GuardarRegistro(Empleado reg, out string pError)
         {
             pError = string.Empty;
 
             SqlParameter[] parametros = {
-                new SqlParameter("@Nombre", SqlDbType.NVarChar) { Value = reg.Nombre },
-                new SqlParameter("@Apellido", SqlDbType.NVarChar) { Value = reg.Apellido },
-                new SqlParameter("@Telefono", SqlDbType.NVarChar) { Value = reg.Telefono ?? (object)DBNull.Value },
-                new SqlParameter("@Email", SqlDbType.NVarChar) { Value = reg.Email ?? (object)DBNull.Value },
-                new SqlParameter("@Direccion", SqlDbType.NVarChar) { Value = reg.Direccion ?? (object)DBNull.Value },
-                new SqlParameter("@FechaNac", SqlDbType.Date) { Value = reg.FechaNac },
-                new SqlParameter("@FechaContratacion", SqlDbType.Date) { Value = reg.FechaContratacion },
-                new SqlParameter("@CargoId", SqlDbType.Int) { Value = reg.CargoId },
-                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = reg.EstadoId },
-                new SqlParameter("@UsuarioRegistroId", SqlDbType.Int) { Value = reg.UsuarioRegistroId }
-            };
+        new SqlParameter("@Nombre", SqlDbType.NVarChar) { Value = reg.Nombre },
+        new SqlParameter("@Apellido", SqlDbType.NVarChar) { Value = reg.Apellido },
+        new SqlParameter("@Telefono", SqlDbType.NVarChar) { Value = reg.Telefono ?? (object)DBNull.Value },
+        new SqlParameter("@Email", SqlDbType.NVarChar) { Value = reg.Email ?? (object)DBNull.Value },
+        new SqlParameter("@Direccion", SqlDbType.NVarChar) { Value = reg.Direccion ?? (object)DBNull.Value },
+        new SqlParameter("@FechaNac", SqlDbType.Date) { Value = reg.FechaNac },
+        new SqlParameter("@FechaContratacion", SqlDbType.Date) { Value = reg.FechaContratacion },
+        new SqlParameter("@CargoId", SqlDbType.Int) { Value = reg.CargoId },
+        new SqlParameter("@EstadoId", SqlDbType.Int) { Value = reg.EstadoId },
+        new SqlParameter("@UsuarioRegistroId", SqlDbType.Int) { Value = reg.UsuarioRegistroId }
+    };
 
             int filas = EjecutarComando("RRHH.SpIsertEmpleado", parametros, out pError);
-            if (string.IsNullOrEmpty(pError))
+            if (!string.IsNullOrEmpty(pError)) return;
+            if (filas == 0)
+                pError = "No se insertó el empleado. Verifique los datos (posible duplicidad de teléfono o email).";
+            else
                 Auditar("INSERCION", $"Nuevo empleado: {reg.Nombre} {reg.Apellido} (Registrado por ID: {SesionActual.UsuarioId})", SesionActual.UsuarioId);
         }
 
@@ -117,18 +121,18 @@ namespace DAO
             }
 
             SqlParameter[] parametros = {
-                new SqlParameter("@EmpleadoId", SqlDbType.Int) { Value = reg.EmpleadoId },
-                new SqlParameter("@Nombre", SqlDbType.NVarChar) { Value = reg.Nombre },
-                new SqlParameter("@Apellido", SqlDbType.NVarChar) { Value = reg.Apellido },
-                new SqlParameter("@Telefono", SqlDbType.NVarChar) { Value = reg.Telefono ?? (object)DBNull.Value },
-                new SqlParameter("@Email", SqlDbType.NVarChar) { Value = reg.Email ?? (object)DBNull.Value },
-                new SqlParameter("@Direccion", SqlDbType.NVarChar) { Value = reg.Direccion ?? (object)DBNull.Value },
-                new SqlParameter("@FechaNac", SqlDbType.Date) { Value = reg.FechaNac },
-                new SqlParameter("@FechaContratacion", SqlDbType.Date) { Value = reg.FechaContratacion },
-                new SqlParameter("@CargoId", SqlDbType.Int) { Value = reg.CargoId },
-                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = reg.EstadoId },
-                new SqlParameter("@UsuarioModificacionId", SqlDbType.Int) { Value = reg.UsuarioModificacionId }
-            };
+        new SqlParameter("@EmpleadoId", SqlDbType.Int) { Value = reg.EmpleadoId },
+        new SqlParameter("@Nombre", SqlDbType.NVarChar) { Value = reg.Nombre },
+        new SqlParameter("@Apellido", SqlDbType.NVarChar) { Value = reg.Apellido },
+        new SqlParameter("@Telefono", SqlDbType.NVarChar) { Value = reg.Telefono ?? (object)DBNull.Value },
+        new SqlParameter("@Email", SqlDbType.NVarChar) { Value = reg.Email ?? (object)DBNull.Value },
+        new SqlParameter("@Direccion", SqlDbType.NVarChar) { Value = reg.Direccion ?? (object)DBNull.Value },
+        new SqlParameter("@FechaNac", SqlDbType.Date) { Value = reg.FechaNac },
+        new SqlParameter("@FechaContratacion", SqlDbType.Date) { Value = reg.FechaContratacion },
+        new SqlParameter("@CargoId", SqlDbType.Int) { Value = reg.CargoId },
+        new SqlParameter("@EstadoId", SqlDbType.Int) { Value = reg.EstadoId },
+        new SqlParameter("@UsuarioModificacionId", SqlDbType.Int) { Value = reg.UsuarioModificacionId }
+    };
 
             int filas = EjecutarComando("RRHH.SpUpdateEmpleado", parametros, out pError);
             if (!string.IsNullOrEmpty(pError)) return;
@@ -151,24 +155,26 @@ namespace DAO
             empleado.EstadoId = 2;
             empleado.UsuarioModificacionId = SesionActual.UsuarioId;
 
-            // Llamamos a ActualizarRegistro pero sin disparar su auditoría interna (ya registramos nosotros)
+            // Ejecutamos el SP directamente (sin llamar a ActualizarRegistro para evitar doble auditoría)
             SqlParameter[] parametros = {
-                new SqlParameter("@EmpleadoId", SqlDbType.Int) { Value = empleado.EmpleadoId },
-                new SqlParameter("@Nombre", SqlDbType.NVarChar) { Value = empleado.Nombre },
-                new SqlParameter("@Apellido", SqlDbType.NVarChar) { Value = empleado.Apellido },
-                new SqlParameter("@Telefono", SqlDbType.NVarChar) { Value = empleado.Telefono ?? (object)DBNull.Value },
-                new SqlParameter("@Email", SqlDbType.NVarChar) { Value = empleado.Email ?? (object)DBNull.Value },
-                new SqlParameter("@Direccion", SqlDbType.NVarChar) { Value = empleado.Direccion ?? (object)DBNull.Value },
-                new SqlParameter("@FechaNac", SqlDbType.Date) { Value = empleado.FechaNac },
-                new SqlParameter("@FechaContratacion", SqlDbType.Date) { Value = empleado.FechaContratacion },
-                new SqlParameter("@CargoId", SqlDbType.Int) { Value = empleado.CargoId },
-                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = empleado.EstadoId },
-                new SqlParameter("@UsuarioModificacionId", SqlDbType.Int) { Value = empleado.UsuarioModificacionId }
-            };
+        new SqlParameter("@EmpleadoId", SqlDbType.Int) { Value = empleado.EmpleadoId },
+        new SqlParameter("@Nombre", SqlDbType.NVarChar) { Value = empleado.Nombre },
+        new SqlParameter("@Apellido", SqlDbType.NVarChar) { Value = empleado.Apellido },
+        new SqlParameter("@Telefono", SqlDbType.NVarChar) { Value = empleado.Telefono ?? (object)DBNull.Value },
+        new SqlParameter("@Email", SqlDbType.NVarChar) { Value = empleado.Email ?? (object)DBNull.Value },
+        new SqlParameter("@Direccion", SqlDbType.NVarChar) { Value = empleado.Direccion ?? (object)DBNull.Value },
+        new SqlParameter("@FechaNac", SqlDbType.Date) { Value = empleado.FechaNac },
+        new SqlParameter("@FechaContratacion", SqlDbType.Date) { Value = empleado.FechaContratacion },
+        new SqlParameter("@CargoId", SqlDbType.Int) { Value = empleado.CargoId },
+        new SqlParameter("@EstadoId", SqlDbType.Int) { Value = empleado.EstadoId },
+        new SqlParameter("@UsuarioModificacionId", SqlDbType.Int) { Value = empleado.UsuarioModificacionId }
+    };
 
             int filas = EjecutarComando("RRHH.SpUpdateEmpleado", parametros, out pError);
             if (string.IsNullOrEmpty(pError) && filas > 0)
                 Auditar("ELIMINACION LOGICA", $"Empleado desactivado: {nombreCompleto} (ID: {id}) por usuario ID {SesionActual.UsuarioId}", SesionActual.UsuarioId);
+            else if (filas == 0 && string.IsNullOrEmpty(pError))
+                pError = "No se pudo desactivar el empleado. Verifique los datos.";
         }
 
         // ==================== BÚSQUEDA Y MÉTODOS AUXILIARES (SIN CAMBIOS) ====================

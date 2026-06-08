@@ -27,15 +27,52 @@ namespace DAO
             return EjecutarReader("DELIVERY.SpSelectRepartidoresDisponibles", null, out pError);
         }
 
-        // Obtener tarifa para un municipio destino
-        public decimal ObtenerTarifa(int municipioId, out string pError)
+        // ==================== TARIFA HÍBRIDA (NUEVO) ====================
+        public decimal ObtenerTarifa(int municipioDestinoId, out string pError)
         {
             pError = string.Empty;
-            DataTable dt = EjecutarReader("SELECT Costo FROM DELIVERY.TARIFA_DELIVERY WHERE MunicipioId = @MunicipioId",
-                new SqlParameter[] { new SqlParameter("@MunicipioId", municipioId) }, out pError);
+
+            // 1. Intentar cálculo por coordenadas
+            try
+            {
+                DataRow configLocal = ObtenerConfiguracionLocal(out pError);
+                if (configLocal == null)
+                    throw new Exception("Ubicación del local no configurada.");
+
+                int municipioLocalId = Convert.ToInt32(configLocal["MunicipioId"]);
+
+                var coordLocal = ObtenerCoordenadasMunicipio(municipioLocalId, out pError);
+                if (coordLocal == null)
+                    throw new Exception("Coordenadas del local no encontradas.");
+
+                var coordDestino = ObtenerCoordenadasMunicipio(municipioDestinoId, out pError);
+                if (coordDestino == null)
+                    throw new Exception("Coordenadas del destino no encontradas.");
+
+                double distancia = CalcularDistancia(coordLocal.Item1, coordLocal.Item2, coordDestino.Item1, coordDestino.Item2);
+
+                // Rangos de tarifa según distancia (en km)
+                if (distancia <= 3) return 2.00m;
+                if (distancia <= 8) return 3.50m;
+                if (distancia <= 15) return 5.00m;
+                if (distancia <= 30) return 7.50m;
+                return 10.00m;
+            }
+            catch (Exception ex)
+            {
+                pError = ex.Message;
+            }
+
+            // 2. Plan B: tabla TARIFA_DELIVERY
+            DataTable dt = EjecutarReader(
+                "SELECT Costo FROM DELIVERY.TARIFA_DELIVERY WHERE MunicipioId = @MunicipioId",
+                new SqlParameter[] { new SqlParameter("@MunicipioId", municipioDestinoId) },
+                out pError);
             if (dt != null && dt.Rows.Count > 0)
                 return Convert.ToDecimal(dt.Rows[0]["Costo"]);
-            return 5.00m; // Tarifa por defecto
+
+            // 3. Plan C: tarifa por defecto
+            return 5.00m;
         }
 
         // Obtener ubicación del local
@@ -47,7 +84,7 @@ namespace DAO
             return null;
         }
 
-        // Asignar un envío (usa el SP SpInsertEnvio existente)
+        // Asignar un envío
         public void AsignarEnvio(int ordenId, int repartidorId, int direccionId, decimal tarifa, out string pError)
         {
             pError = string.Empty;
@@ -61,7 +98,7 @@ namespace DAO
             EjecutarNonQuery("DELIVERY.SpInsertEnvio", parametros, out pError);
         }
 
-        // Obtener teléfono del repartidor a partir de su ID
+        // Teléfono del repartidor
         public string ObtenerTelefonoRepartidor(int repartidorId, out string pError)
         {
             pError = string.Empty;
@@ -88,34 +125,68 @@ namespace DAO
             ", parametros, out pError);
         }
 
-        // Guardar o actualizar tarifa
-        public void GuardarTarifa(int municipioId, decimal costo, out string pError)
+        // Consulta de envíos
+        public DataTable ObtenerEnvios(string filtroRepartidor, string estadoEnvio, out string pError)
+        {
+            string consulta = @"
+        SELECT e.EnvioId,
+               o.OrdenId,
+               c.Nombre + ' ' + c.Apellido AS Cliente,
+               emp.Nombre + ' ' + emp.Apellido AS Repartidor,
+               e.Tarifa,
+               es.Estado AS EstadoEnvio,
+               e.DireccionId
+        FROM DELIVERY.ENVIO e
+        INNER JOIN VENTA.ORDEN o ON e.OrdenId = o.OrdenId
+        INNER JOIN VENTA.CLIENTE c ON o.ClienteId = c.ClienteId
+        INNER JOIN DELIVERY.REPARTIDOR r ON e.RepartidorId = r.RepartidorId
+        INNER JOIN RRHH.EMPLEADO emp ON r.EmpleadoId = emp.EmpleadoId
+        INNER JOIN GLOBAL.ESTADO es ON e.EstadoId = es.EstadoId
+        WHERE 1 = 1";
+
+            if (!string.IsNullOrWhiteSpace(filtroRepartidor))
+                consulta += " AND (emp.Nombre + ' ' + emp.Apellido LIKE '%' + @Repartidor + '%')";
+
+            if (!string.IsNullOrWhiteSpace(estadoEnvio) && estadoEnvio != "Todos")
+                consulta += " AND es.Estado = @EstadoEnvio";
+
+            consulta += " ORDER BY e.EnvioId DESC";
+
+            SqlParameter[] parametros = {
+        new SqlParameter("@Repartidor", filtroRepartidor ?? (object)DBNull.Value),
+        new SqlParameter("@EstadoEnvio", estadoEnvio ?? (object)DBNull.Value)
+    };
+
+            return EjecutarReader(consulta, parametros, out pError);
+        }
+
+        // ==================== MÉTODOS PRIVADOS ====================
+        private Tuple<double, double> ObtenerCoordenadasMunicipio(int municipioId, out string pError)
         {
             pError = string.Empty;
-            SqlParameter[] parametros = {
-                new SqlParameter("@MunicipioId", municipioId),
-                new SqlParameter("@Costo", costo)
-            };
-            EjecutarNonQuery(@"
-                IF EXISTS (SELECT * FROM DELIVERY.TARIFA_DELIVERY WHERE MunicipioId = @MunicipioId)
-                    UPDATE DELIVERY.TARIFA_DELIVERY SET Costo = @Costo WHERE MunicipioId = @MunicipioId;
-                ELSE
-                    INSERT INTO DELIVERY.TARIFA_DELIVERY(MunicipioId, Costo) VALUES (@MunicipioId, @Costo);
-            ", parametros, out pError);
+            string consulta = "SELECT Latitud, Longitud FROM DELIVERY.COORDENADAS_MUNICIPIO WHERE MunicipioId = @MunicipioId";
+            DataTable dt = EjecutarReader(consulta, new SqlParameter[] { new SqlParameter("@MunicipioId", municipioId) }, out pError);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                double lat = Convert.ToDouble(dt.Rows[0]["Latitud"]);
+                double lon = Convert.ToDouble(dt.Rows[0]["Longitud"]);
+                return Tuple.Create(lat, lon);
+            }
+            return null;
         }
 
-        // Obtener todas las tarifas para mostrarlas en un DataGridView (en el popup de configuración)
-        public DataTable ObtenerTarifas(out string pError)
+        private double CalcularDistancia(double lat1, double lon1, double lat2, double lon2)
         {
-            return EjecutarReader(@"
-                SELECT t.TarifaId, m.Nombre AS Municipio, t.Costo
-                FROM DELIVERY.TARIFA_DELIVERY t
-                INNER JOIN DELIVERY.MUNICIPIO m ON t.MunicipioId = m.MunicipioId
-                ORDER BY m.Nombre
-            ", null, out pError);
+            const double R = 6371;
+            double dLat = (lat2 - lat1) * Math.PI / 180;
+            double dLon = (lon2 - lon1) * Math.PI / 180;
+            double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                       Math.Cos(lat1 * Math.PI / 180) * Math.Cos(lat2 * Math.PI / 180) *
+                       Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            return R * c;
         }
 
-        // Métodos privados
         private DataTable EjecutarReader(string consulta, SqlParameter[] parametros, out string pError)
         {
             pError = string.Empty;
@@ -175,41 +246,7 @@ namespace DAO
                         return Convert.ToInt32(row["Id"]);
                 }
             }
-            return 1; // fallback
-        }
-
-        public DataTable ObtenerEnvios(string filtroRepartidor, string estadoEnvio, out string pError)
-        {
-            string consulta = @"
-        SELECT e.EnvioId,
-               o.OrdenId,
-               c.Nombre + ' ' + c.Apellido AS Cliente,
-               emp.Nombre + ' ' + emp.Apellido AS Repartidor,
-               e.Tarifa,
-               es.Estado AS EstadoEnvio,
-               e.DireccionId
-        FROM DELIVERY.ENVIO e
-        INNER JOIN VENTA.ORDEN o ON e.OrdenId = o.OrdenId
-        INNER JOIN VENTA.CLIENTE c ON o.ClienteId = c.ClienteId
-        INNER JOIN DELIVERY.REPARTIDOR r ON e.RepartidorId = r.RepartidorId
-        INNER JOIN RRHH.EMPLEADO emp ON r.EmpleadoId = emp.EmpleadoId
-        INNER JOIN GLOBAL.ESTADO es ON e.EstadoId = es.EstadoId
-        WHERE 1 = 1";
-
-            if (!string.IsNullOrWhiteSpace(filtroRepartidor))
-                consulta += " AND (emp.Nombre + ' ' + emp.Apellido LIKE '%' + @Repartidor + '%')";
-
-            if (!string.IsNullOrWhiteSpace(estadoEnvio) && estadoEnvio != "Todos")
-                consulta += " AND es.Estado = @EstadoEnvio";
-
-            consulta += " ORDER BY e.EnvioId DESC";
-
-            SqlParameter[] parametros = {
-        new SqlParameter("@Repartidor", filtroRepartidor ?? (object)DBNull.Value),
-        new SqlParameter("@EstadoEnvio", estadoEnvio ?? (object)DBNull.Value)
-    };
-
-            return EjecutarReader(consulta, parametros, out pError);
+            return 1;
         }
     }
 }

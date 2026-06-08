@@ -81,9 +81,15 @@ namespace DAO
 
         // Registrar orden completa
         public int RegistrarOrden(int clienteId, int tipoOrdenId, int? descuentoId, int estadoId,
-                                  List<DetalleOrdenItem> detalles, out string pError)
+                          List<DetalleOrdenItem> detalles, out string pError)
         {
             pError = string.Empty;
+            if (detalles == null || detalles.Count == 0)
+            {
+                pError = "No hay detalles en la orden.";
+                return 0;
+            }
+
             SqlConnection conn = _conexion.AbrirConexion(out pError);
             if (conn == null) return 0;
 
@@ -100,11 +106,15 @@ namespace DAO
 
                 foreach (var det in detalles)
                 {
+                    // Validación crítica: no permitir cantidad 0 o negativa
+                    if (det.Cantidad <= 0)
+                        throw new Exception($"Cantidad inválida ({det.Cantidad}) para el producto '{det.NombreProducto}'.");
+
                     dtDetalle.Rows.Add(
                         det.MenuId.HasValue ? (object)det.MenuId.Value : DBNull.Value,
                         det.ComboId.HasValue ? (object)det.ComboId.Value : DBNull.Value,
                         det.PrecioConDescuento,  // Precio con descuento aplicado
-                        det.Cantidad
+                        det.Cantidad             // Se envía como INT
                     );
                 }
 
