@@ -137,7 +137,7 @@ namespace DAO
             }
         }
 
-        private DataTable EjecutarReader(string consulta, SqlParameter[] parametros, out string pError)
+        private DataTable EjecutarReader(string consulta, SqlParameter[] parametros, out string pError, int timeout = 15)
         {
             pError = string.Empty;
             DataTable dt = new DataTable();
@@ -149,26 +149,39 @@ namespace DAO
                 using (SqlCommand cmd = new SqlCommand(consulta, conn))
                 {
                     cmd.CommandType = CommandType.Text;
-                    if (consulta.StartsWith("VENTA.") || consulta.StartsWith("GLOBAL.") || consulta.StartsWith("COMPRA."))
-                        cmd.CommandType = CommandType.StoredProcedure;
-
+                    cmd.CommandTimeout = timeout;   // ← agregamos timeout
                     if (parametros != null)
                         cmd.Parameters.AddRange(parametros);
-
                     using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                         da.Fill(dt);
                 }
             }
-            catch (Exception ex)
-            {
-                pError = ex.Message;
-                return null;
-            }
-            finally
-            {
-                _conexion.CerrarConexion(out _);
-            }
+            catch (Exception ex) { pError = ex.Message; return null; }
+            finally { _conexion.CerrarConexion(out _); }
             return dt;
+        }
+
+        public DataTable ObtenerOrdenesActivas(out string pError)
+        {
+            string consulta = @"
+        SELECT o.OrdenId,
+               o.FechaHora,
+               c.Nombre + ' ' + c.Apellido AS Cliente,
+               t.TipoOrden,
+               e.Estado,
+               o.Total
+        FROM VENTA.ORDEN o
+        INNER JOIN VENTA.CLIENTE c ON o.ClienteId = c.ClienteId
+        INNER JOIN VENTA.TIPO_ORDEN t ON o.TipoOrdenId = t.TipoOrdenId
+        INNER JOIN GLOBAL.ESTADO e ON o.EstadoId = e.EstadoId
+        WHERE o.EstadoId NOT IN (
+            SELECT EstadoId FROM GLOBAL.ESTADO 
+            WHERE Estado IN ('COMPLETADA', 'CANCELADA') 
+              AND EntidadId = (SELECT EntidadId FROM GLOBAL.ENTIDAD WHERE Entidad = 'ORDEN')
+        )
+        ORDER BY o.FechaHora DESC";
+
+            return EjecutarReader(consulta, null, out pError, 30); // timeout de 30 segundos
         }
     }
 }

@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,14 +8,29 @@ namespace DAO
 {
     public class UsuarioDAO : AbstractDAO<Usuario>
     {
-        // Usado por el Login (b˙squeda por nombre de usuario exacto)
+        // ==================== AUDITOR√çA (NUEVO) ====================
+        private void Auditar(string accion, string detalle, int usuarioId)
+        {
+            try
+            {
+                SqlParameter[] parametros = {
+                    new SqlParameter("@AccionEvento", accion),
+                    new SqlParameter("@Detalle", detalle),
+                    new SqlParameter("@UsuarioRegistroId", usuarioId)
+                };
+                EjecutarComando("AUDITORIA.SpRegistrarAuditoria", parametros, out _);
+            }
+            catch { /* Si falla la auditor√≠a, no afecta la operaci√≥n principal */ }
+        }
+
+        // ==================== LOGIN (SIN CAMBIOS) ====================
         public override Usuario ObtenerPorId(string nombreUsuario, out string pError)
         {
             pError = string.Empty;
 
             SqlParameter[] parametros = {
-        new SqlParameter("@buscar", SqlDbType.VarChar) { Value = nombreUsuario }
-    };
+                new SqlParameter("@buscar", SqlDbType.VarChar) { Value = nombreUsuario }
+            };
 
             DataTable dt = ObtenerTabla("AUTENTICACION.SpSelectUsuario", parametros, out pError);
             if (dt == null) return null;
@@ -36,10 +51,9 @@ namespace DAO
                         EstadoNombre = row["EstadoNombre"].ToString()
                     };
 
-                    // Bloquear inicio de sesiÛn si el usuario est· inactivo
                     if (usuario.EstadoNombre != "ACTIVO")
                     {
-                        pError = "El usuario est· inactivo. Contacte al administrador.";
+                        pError = "El usuario est√° inactivo. Contacte al administrador.";
                         return null;
                     }
 
@@ -61,7 +75,7 @@ namespace DAO
             DataTable dt = ObtenerTabla("AUTENTICACION.SpSelectUsuario", parametros, out pError);
             if (dt == null || dt.Rows.Count == 0)
             {
-                if (string.IsNullOrEmpty(pError)) pError = "No se encontrÛ el usuario.";
+                if (string.IsNullOrEmpty(pError)) pError = "No se encontr√≥ el usuario.";
                 return null;
             }
             return MapearUsuario(dt.Rows[0]);
@@ -76,12 +90,12 @@ namespace DAO
             if (dt == null) return null;
 
             foreach (DataRow row in dt.Rows)
-            {
                 lista.Add(MapearUsuario(row));
-            }
+
             return lista;
         }
 
+        // ==================== GUARDAR (CON AUDITOR√çA) ====================
         public override void GuardarRegistro(Usuario reg, out string pError)
         {
             pError = string.Empty;
@@ -94,11 +108,29 @@ namespace DAO
                 new SqlParameter("@UsuarioRegistroId", SqlDbType.Int) { Value = SesionActual.UsuarioId }
             };
             EjecutarComando("AUTENTICACION.SpInsertUsuario", parametros, out pError);
+
+            if (string.IsNullOrEmpty(pError))
+                Auditar("INSERCION", $"Nuevo usuario: {reg.User} (Registrado por ID: {SesionActual.UsuarioId})", SesionActual.UsuarioId);
         }
 
+        // ==================== ACTUALIZAR (CON AUDITOR√çA Y COMPARACI√ìN) ====================
         public override void ActualizarRegistro(Usuario reg, out string pError)
         {
             pError = string.Empty;
+
+            // Obtener el usuario original para comparar cambios
+            Usuario original = ObtenerPorId(reg.UsuarioId, out _);
+            string cambios = "";
+
+            if (original != null)
+            {
+                if (original.User != reg.User) cambios += $"Nombre de usuario: {original.User} ‚Üí {reg.User}; ";
+                if (original.Clave != reg.Clave) cambios += "Clave modificada; ";
+                if (original.EmpleadoId != reg.EmpleadoId) cambios += $"EmpleadoId: {original.EmpleadoId} cambio a {reg.EmpleadoId}; ";
+                if (original.IdRol != reg.IdRol) cambios += $"RolId: {original.IdRol} ‚Üí {reg.IdRol}; ";
+                if (original.EstadoId != reg.EstadoId) cambios += $"EstadoId: {original.EstadoId} ‚Üí {reg.EstadoId}; ";
+            }
+
             SqlParameter[] parametros = {
                 new SqlParameter("@UsuarioId", SqlDbType.Int) { Value = reg.UsuarioId },
                 new SqlParameter("@Usuario", SqlDbType.VarChar) { Value = reg.User },
@@ -111,12 +143,19 @@ namespace DAO
             int filas = EjecutarComando("AUTENTICACION.SpUpdateUsuario", parametros, out pError);
             if (!string.IsNullOrEmpty(pError)) return;
             if (filas == 0)
-                pError = "No se actualizÛ ning˙n registro. Verifique que el usuario no estÈ duplicado.";
+                pError = "No se actualiz√≥ ning√∫n registro. Verifique que el usuario no est√© duplicado.";
+            else if (!string.IsNullOrEmpty(cambios))
+                Auditar("ACTUALIZACION", $"Usuario {reg.User} modificado por ID {SesionActual.UsuarioId}: {cambios.TrimEnd(' ', ';')}", SesionActual.UsuarioId);
         }
 
+        // ==================== ELIMINACI√ìN L√ìGICA (CON AUDITOR√çA) ====================
         public override void EliminarLogico(int id, out string pError)
         {
             pError = string.Empty;
+            // Obtener el usuario para el mensaje
+            Usuario usuario = ObtenerPorId(id, out _);
+            string nombre = usuario != null ? usuario.User : id.ToString();
+
             int idInactivo = ObtenerIdEstado("INACTIVO", out pError);
             if (!string.IsNullOrEmpty(pError)) return;
 
@@ -125,9 +164,12 @@ namespace DAO
                 new SqlParameter("@EstadoId", SqlDbType.Int) { Value = idInactivo }
             };
             EjecutarComando("AUTENTICACION.SpDeleteLogicoUsuario", parametros, out pError);
+
+            if (string.IsNullOrEmpty(pError))
+                Auditar("ELIMINACION LOGICA", $"Usuario desactivado: {nombre} (ID: {id}) por usuario ID {SesionActual.UsuarioId}", SesionActual.UsuarioId);
         }
 
-        // B˙squeda para el formulario (coincidencias parciales)
+        // ==================== RESTO DE M√âTODOS (SIN CAMBIOS) ====================
         public List<Usuario> Buscar(string buscar, out string pError)
         {
             List<Usuario> lista = new List<Usuario>();
@@ -140,13 +182,11 @@ namespace DAO
             if (dt == null) return null;
 
             foreach (DataRow row in dt.Rows)
-            {
                 lista.Add(MapearUsuario(row));
-            }
+
             return lista;
         }
 
-        // MÈtodos para cargar combos
         public DataTable ObtenerEstadosUsuario(out string pError)
         {
             DataTable dt = ObtenerTabla("GLOBAL.SpSelectAllEstado", null, out pError);
@@ -166,7 +206,6 @@ namespace DAO
             return ObtenerTabla("AUTENTICACION.SpSelectAllRol", null, out pError);
         }
 
-        // Auxiliar privado
         private int ObtenerIdEstado(string estadoNombre, out string pError)
         {
             pError = string.Empty;
@@ -177,7 +216,7 @@ namespace DAO
                 if (row["Estado"].ToString() == estadoNombre)
                     return Convert.ToInt32(row["Id"]);
             }
-            pError = $"No se encontrÛ el estado '{estadoNombre}' para USUARIO.";
+            pError = $"No se encontr√≥ el estado '{estadoNombre}' para USUARIO.";
             return 0;
         }
 

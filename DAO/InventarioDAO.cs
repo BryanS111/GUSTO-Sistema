@@ -36,6 +36,12 @@ namespace DAO
             if (dt == null || dt.Rows.Count == 0) return null;
             return MapearInventario(dt.Rows[0]);
         }
+        //metodo para la consulta de inventario stock
+        public DataTable ObtenerTodosDataTable(out string pError)
+        {
+            return ObtenerTabla("COMPRA.SpSelectAllInventario", null, out pError);
+        }
+        
 
         // NUEVA VERSIÓN de GuardarRegistro (no override, recibe usuarioId)
         public void GuardarRegistro(Inventario reg, int usuarioId, out string pError)

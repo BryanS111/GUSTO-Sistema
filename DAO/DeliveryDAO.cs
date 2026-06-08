@@ -177,5 +177,39 @@ namespace DAO
             }
             return 1; // fallback
         }
+
+        public DataTable ObtenerEnvios(string filtroRepartidor, string estadoEnvio, out string pError)
+        {
+            string consulta = @"
+        SELECT e.EnvioId,
+               o.OrdenId,
+               c.Nombre + ' ' + c.Apellido AS Cliente,
+               emp.Nombre + ' ' + emp.Apellido AS Repartidor,
+               e.Tarifa,
+               es.Estado AS EstadoEnvio,
+               e.DireccionId
+        FROM DELIVERY.ENVIO e
+        INNER JOIN VENTA.ORDEN o ON e.OrdenId = o.OrdenId
+        INNER JOIN VENTA.CLIENTE c ON o.ClienteId = c.ClienteId
+        INNER JOIN DELIVERY.REPARTIDOR r ON e.RepartidorId = r.RepartidorId
+        INNER JOIN RRHH.EMPLEADO emp ON r.EmpleadoId = emp.EmpleadoId
+        INNER JOIN GLOBAL.ESTADO es ON e.EstadoId = es.EstadoId
+        WHERE 1 = 1";
+
+            if (!string.IsNullOrWhiteSpace(filtroRepartidor))
+                consulta += " AND (emp.Nombre + ' ' + emp.Apellido LIKE '%' + @Repartidor + '%')";
+
+            if (!string.IsNullOrWhiteSpace(estadoEnvio) && estadoEnvio != "Todos")
+                consulta += " AND es.Estado = @EstadoEnvio";
+
+            consulta += " ORDER BY e.EnvioId DESC";
+
+            SqlParameter[] parametros = {
+        new SqlParameter("@Repartidor", filtroRepartidor ?? (object)DBNull.Value),
+        new SqlParameter("@EstadoEnvio", estadoEnvio ?? (object)DBNull.Value)
+    };
+
+            return EjecutarReader(consulta, parametros, out pError);
+        }
     }
 }

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Modelos;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using Modelos;
+using System.Linq;
 
 namespace DAO
 {
@@ -125,6 +126,7 @@ namespace DAO
             }
         }
 
+
         private DataTable ObtenerTabla(string storedProcedure, SqlParameter[] parameters, out string pError)
         {
             pError = string.Empty;
@@ -153,6 +155,63 @@ namespace DAO
                 _conexion.CerrarConexion(out _);
             }
             return dt;
+        }
+
+        private DataTable EjecutarReader(string consulta, SqlParameter[] parametros, out string pError, int timeout = 15)
+        {
+            pError = string.Empty;
+            DataTable dt = new DataTable();
+            SqlConnection conn = _conexion.AbrirConexion(out pError);
+            if (conn == null) return null;
+
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(consulta, conn))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandTimeout = timeout;   // ← agregamos timeout
+                    if (parametros != null)
+                        cmd.Parameters.AddRange(parametros);
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        da.Fill(dt);
+                }
+            }
+            catch (Exception ex) { pError = ex.Message; return null; }
+            finally { _conexion.CerrarConexion(out _); }
+            return dt;
+        }
+        public DataTable ObtenerComprasPorProveedor(int? proveedorId, DateTime fechaInicio, DateTime fechaFin, out string pError)
+        {
+            string consulta = @"
+        SELECT c.CompraId,
+               c.Fecha,
+               c.NoDocumento,
+               p.Nombre AS Proveedor,
+               c.Total,
+               e.Estado
+        FROM COMPRA.COMPRA c
+        INNER JOIN COMPRA.PROVEEDOR p ON c.ProveedorId = p.ProveedorId
+        INNER JOIN GLOBAL.ESTADO e ON c.EstadoId = e.EstadoId
+        WHERE c.Fecha >= @FechaInicio AND c.Fecha < DATEADD(DAY, 1, @FechaFin)";
+
+            if (proveedorId.HasValue)
+                consulta += " AND c.ProveedorId = @ProveedorId";
+
+            consulta += " ORDER BY c.Fecha DESC";
+
+            SqlParameter[] parametros = {
+        new SqlParameter("@FechaInicio", fechaInicio.Date),
+        new SqlParameter("@FechaFin", fechaFin.Date)
+    };
+
+            if (proveedorId.HasValue)
+            {
+                var list = parametros.ToList();
+                list.Add(new SqlParameter("@ProveedorId", proveedorId.Value));
+                parametros = list.ToArray();
+            }
+
+            return EjecutarReader(consulta, parametros, out pError);
         }
     }
 }   

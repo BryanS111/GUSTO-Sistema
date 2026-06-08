@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractDAO.cs" />
+    <Compile Include="AuditoriaDAO.cs" />
     <Compile Include="CategoriaDAO.cs" />
     <Compile Include="ClienteDAO.cs" />
     <Compile Include="CompraDAO.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="RepartidorDAO.cs" />
     <Compile Include="UsuarioDAO.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="VentaDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Modelos\Modelos.csproj">

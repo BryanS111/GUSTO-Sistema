@@ -8,6 +8,21 @@ namespace DAO
 {
     public class ClienteDAO : AbstractDAO<Cliente>
     {
+        // ==================== AUDITORÍA ====================
+        private void Auditar(string accion, string detalle, int usuarioId)
+        {
+            try
+            {
+                SqlParameter[] parametros = {
+                    new SqlParameter("@AccionEvento", accion),
+                    new SqlParameter("@Detalle", detalle),
+                    new SqlParameter("@UsuarioRegistroId", usuarioId)
+                };
+                EjecutarComando("AUDITORIA.SpRegistrarAuditoria", parametros, out _);
+            }
+            catch { /* La auditoría no debe trancar el sistema */ }
+        }
+
         public override List<Cliente> ObtenerTodos(out string pError)
         {
             List<Cliente> lista = new List<Cliente>();
@@ -23,8 +38,11 @@ namespace DAO
 
         public override Cliente ObtenerPorId(int id, out string pError)
         {
-            pError = "No implementado.";
-            return null;
+            // Implementación simple: busca en todos los clientes
+            pError = string.Empty;
+            List<Cliente> todos = ObtenerTodos(out pError);
+            if (todos == null) return null;
+            return todos.Find(c => c.ClienteId == id);
         }
 
         public override Cliente ObtenerPorId(string id, out string pError)
@@ -36,6 +54,7 @@ namespace DAO
             return MapearCliente(dt.Rows[0]);
         }
 
+        // ==================== GUARDAR (CON AUDITORÍA) ====================
         public override void GuardarRegistro(Cliente reg, out string pError)
         {
             pError = string.Empty;
@@ -50,11 +69,33 @@ namespace DAO
             if (!string.IsNullOrEmpty(pError)) return;
             if (filas == 0)
                 pError = "No se insertó el cliente. Verifique los datos.";
+            else
+                Auditar("INSERCION", $"Nuevo cliente: {reg.Nombre} {reg.Apellido} (Registrado por ID: {SesionActual.UsuarioId})", SesionActual.UsuarioId);
         }
 
+        // ==================== ACTUALIZAR (CON AUDITORÍA DETALLADA) ====================
         public override void ActualizarRegistro(Cliente reg, out string pError)
         {
             pError = string.Empty;
+
+            // Obtener el cliente original para comparar cambios
+            Cliente original = ObtenerPorId(reg.ClienteId, out _);
+            string cambios = "";
+
+            if (original != null)
+            {
+                if (original.Nombre != reg.Nombre) cambios += $"Nombre: {original.Nombre} a {reg.Nombre}; ";
+                if (original.Apellido != reg.Apellido) cambios += $"Apellido: {original.Apellido} a {reg.Apellido}; ";
+                if (original.Telefono != reg.Telefono) cambios += $"Teléfono: {original.Telefono} a {reg.Telefono}; ";
+                if (original.DireccionId != reg.DireccionId) cambios += $"DirecciónId: {original.DireccionId} a {reg.DireccionId}; ";
+                if (original.EstadoId != reg.EstadoId)
+                {
+                    string estadoOriginal = original.EstadoId == 1 ? "Activo" : "Inactivo";
+                    string estadoNuevo = reg.EstadoId == 1 ? "Activo" : "Inactivo";
+                    cambios += $"Estado: {estadoOriginal} a {estadoNuevo}; ";
+                }
+            }
+
             SqlParameter[] parametros = {
                 new SqlParameter("@ClienteId", SqlDbType.Int) { Value = reg.ClienteId },
                 new SqlParameter("@Nombre", SqlDbType.VarChar) { Value = reg.Nombre },
@@ -68,15 +109,26 @@ namespace DAO
             if (!string.IsNullOrEmpty(pError)) return;
             if (filas == 0)
                 pError = "No se actualizó ningún registro. Verifique el teléfono.";
+            else if (!string.IsNullOrEmpty(cambios))
+                Auditar("ACTUALIZACION", $"Cliente {reg.Nombre} {reg.Apellido} modificado por ID {SesionActual.UsuarioId}: {cambios.TrimEnd(' ', ';')}", SesionActual.UsuarioId);
         }
 
+        // ==================== ELIMINACIÓN LÓGICA (CON AUDITORÍA) ====================
         public override void EliminarLogico(int id, out string pError)
         {
             pError = string.Empty;
+            Cliente cliente = ObtenerPorId(id, out pError);
+            if (cliente == null) return;
+
+            string nombreCompleto = $"{cliente.Nombre} {cliente.Apellido}";
+
             SqlParameter[] parametros = { new SqlParameter("@ClienteId", SqlDbType.Int) { Value = id } };
-            EjecutarComando("VENTA.SpDeleteLogicoCliente", parametros, out pError);
+            int filas = EjecutarComando("VENTA.SpDeleteLogicoCliente", parametros, out pError);
+            if (string.IsNullOrEmpty(pError) && filas > 0)
+                Auditar("ELIMINACION LOGICA", $"Cliente desactivado: {nombreCompleto} (ID: {id}) por usuario ID {SesionActual.UsuarioId}", SesionActual.UsuarioId);
         }
 
+        // ==================== BÚSQUEDA Y MÉTODOS AUXILIARES (SIN CAMBIOS) ====================
         public List<Cliente> Buscar(string buscar, out string pError)
         {
             List<Cliente> lista = new List<Cliente>();

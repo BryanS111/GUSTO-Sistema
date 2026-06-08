@@ -31,15 +31,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.cmbProveedor = new System.Windows.Forms.ComboBox();
+            this.cboProveedor = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.btn_buscar = new System.Windows.Forms.Button();
-            this.btn_limpiar = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dtpFechaInicio = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaFinal = new System.Windows.Forms.DateTimePicker();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.dgvComprasProveedor = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvComprasProveedor)).BeginInit();
             this.SuspendLayout();
             // 
             // label3
@@ -47,10 +47,9 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.DarkRed;
-            this.label3.Location = new System.Drawing.Point(231, 82);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(346, 126);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(532, 31);
+            this.label3.Size = new System.Drawing.Size(780, 45);
             this.label3.TabIndex = 21;
             this.label3.Text = "CONSULTA DE COMPRAS POR PROVEEDOR";
             // 
@@ -59,10 +58,9 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label2.Location = new System.Drawing.Point(422, 234);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(633, 360);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 19);
+            this.label2.Size = new System.Drawing.Size(0, 29);
             this.label2.TabIndex = 22;
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -71,31 +69,31 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label1.Location = new System.Drawing.Point(135, 182);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(202, 280);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 19);
+            this.label1.Size = new System.Drawing.Size(138, 29);
             this.label1.TabIndex = 23;
             this.label1.Text = "Proveedor:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cmbProveedor
+            // cboProveedor
             // 
-            this.cmbProveedor.FormattingEnabled = true;
-            this.cmbProveedor.Location = new System.Drawing.Point(268, 183);
-            this.cmbProveedor.Name = "cmbProveedor";
-            this.cmbProveedor.Size = new System.Drawing.Size(200, 21);
-            this.cmbProveedor.TabIndex = 24;
+            this.cboProveedor.FormattingEnabled = true;
+            this.cboProveedor.Location = new System.Drawing.Point(402, 282);
+            this.cboProveedor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cboProveedor.Name = "cboProveedor";
+            this.cboProveedor.Size = new System.Drawing.Size(298, 28);
+            this.cboProveedor.TabIndex = 24;
+            this.cboProveedor.SelectedIndexChanged += new System.EventHandler(this.cboProveedor_SelectedIndexChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label4.Location = new System.Drawing.Point(135, 245);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(202, 377);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(107, 19);
+            this.label4.Size = new System.Drawing.Size(160, 29);
             this.label4.TabIndex = 25;
             this.label4.Text = "Fecha Inicio:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -105,81 +103,87 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label5.Location = new System.Drawing.Point(491, 246);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Location = new System.Drawing.Point(736, 378);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(153, 19);
+            this.label5.Size = new System.Drawing.Size(228, 29);
             this.label5.TabIndex = 26;
             this.label5.Text = "Fecha finalizacion:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // dateTimePicker1
+            // dtpFechaInicio
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(268, 245);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 27;
+            this.dtpFechaInicio.Location = new System.Drawing.Point(402, 377);
+            this.dtpFechaInicio.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtpFechaInicio.Name = "dtpFechaInicio";
+            this.dtpFechaInicio.Size = new System.Drawing.Size(298, 26);
+            this.dtpFechaInicio.TabIndex = 27;
+            this.dtpFechaInicio.ValueChanged += new System.EventHandler(this.dtpFechaInicio_ValueChanged);
             // 
-            // dateTimePicker2
+            // dtpFechaFinal
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(663, 246);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 28;
+            this.dtpFechaFinal.Location = new System.Drawing.Point(994, 378);
+            this.dtpFechaFinal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtpFechaFinal.Name = "dtpFechaFinal";
+            this.dtpFechaFinal.Size = new System.Drawing.Size(298, 26);
+            this.dtpFechaFinal.TabIndex = 28;
+            this.dtpFechaFinal.ValueChanged += new System.EventHandler(this.dtpFechaFinal_ValueChanged);
             // 
-            // btn_buscar
+            // btnBuscar
             // 
-            this.btn_buscar.BackColor = System.Drawing.Color.DarkRed;
-            this.btn_buscar.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_buscar.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_buscar.Location = new System.Drawing.Point(546, 168);
-            this.btn_buscar.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_buscar.Name = "btn_buscar";
-            this.btn_buscar.Size = new System.Drawing.Size(115, 48);
-            this.btn_buscar.TabIndex = 29;
-            this.btn_buscar.Text = "BUSCAR";
-            this.btn_buscar.UseVisualStyleBackColor = false;
+            this.btnBuscar.BackColor = System.Drawing.Color.DarkRed;
+            this.btnBuscar.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscar.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnBuscar.Location = new System.Drawing.Point(819, 258);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(172, 74);
+            this.btnBuscar.TabIndex = 29;
+            this.btnBuscar.Text = "BUSCAR";
+            this.btnBuscar.UseVisualStyleBackColor = false;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // btn_limpiar
+            // btnLimpiar
             // 
-            this.btn_limpiar.BackColor = System.Drawing.Color.DarkRed;
-            this.btn_limpiar.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_limpiar.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btn_limpiar.Location = new System.Drawing.Point(709, 168);
-            this.btn_limpiar.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_limpiar.Name = "btn_limpiar";
-            this.btn_limpiar.Size = new System.Drawing.Size(115, 48);
-            this.btn_limpiar.TabIndex = 30;
-            this.btn_limpiar.Text = "LIMPIAR";
-            this.btn_limpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.BackColor = System.Drawing.Color.DarkRed;
+            this.btnLimpiar.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiar.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnLimpiar.Location = new System.Drawing.Point(1064, 258);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(172, 74);
+            this.btnLimpiar.TabIndex = 30;
+            this.btnLimpiar.Text = "LIMPIAR";
+            this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
-            // dataGridView1
+            // dgvComprasProveedor
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(96, 327);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(835, 286);
-            this.dataGridView1.TabIndex = 31;
+            this.dgvComprasProveedor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvComprasProveedor.Location = new System.Drawing.Point(144, 503);
+            this.dgvComprasProveedor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dgvComprasProveedor.Name = "dgvComprasProveedor";
+            this.dgvComprasProveedor.RowHeadersWidth = 62;
+            this.dgvComprasProveedor.Size = new System.Drawing.Size(1252, 440);
+            this.dgvComprasProveedor.TabIndex = 31;
             // 
             // frmConsultaComprasProveedor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(862, 508);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.btn_limpiar);
-            this.Controls.Add(this.btn_buscar);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.ClientSize = new System.Drawing.Size(1293, 782);
+            this.Controls.Add(this.dgvComprasProveedor);
+            this.Controls.Add(this.btnLimpiar);
+            this.Controls.Add(this.btnBuscar);
+            this.Controls.Add(this.dtpFechaFinal);
+            this.Controls.Add(this.dtpFechaInicio);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.cmbProveedor);
+            this.Controls.Add(this.cboProveedor);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmConsultaComprasProveedor";
             this.Text = "frmConsultaComprasProveedor";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvComprasProveedor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,13 +194,13 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbProveedor;
+        private System.Windows.Forms.ComboBox cboProveedor;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.Button btn_buscar;
-        private System.Windows.Forms.Button btn_limpiar;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DateTimePicker dtpFechaInicio;
+        private System.Windows.Forms.DateTimePicker dtpFechaFinal;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.DataGridView dgvComprasProveedor;
     }
 }
