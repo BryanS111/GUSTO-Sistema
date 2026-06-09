@@ -7,9 +7,9 @@
 		<add key="SmtpHost" value="smtp.gmail.com" />
 		<add key="SmtpPort" value="587" />
 		<add key="SmtpEnableSsl" value="true" />
-		<add key="SmtpUser" value="facturacion.systemgusto@gmail.com" />
-		<add key="SmtpPassword" value="ugre bzoi jcmj vwqg" />
-		<add key="SmtpFromAddress" value="facturacion.systemgusto@gmail.com" />
+		<add key="SmtpUser" value="systemgusto@gmail.com" />
+		<add key="SmtpPassword" value="ugrebzoijcmjvwqg" />
+		<add key="SmtpFromAddress" value="systemgusto@gmail.com" />
 		<add key="SmtpFromName" value="G.U.S.T.O" />
 		<add key="FacturaSubject" value="FACTURA - G.U.S.T.O" />
 		<add key="FacturaBody" value="Factura emitida por el sistema G.U.S.T.O, gracias por su compra 👋." />
