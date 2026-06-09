@@ -42,7 +42,7 @@
             this.btnSi.Cursor = System.Windows.Forms.Cursors.Cross;
             this.btnSi.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSi.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnSi.Location = new System.Drawing.Point(141, 282);
+            this.btnSi.Location = new System.Drawing.Point(202, 295);
             this.btnSi.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSi.Name = "btnSi";
             this.btnSi.Size = new System.Drawing.Size(180, 44);
@@ -54,10 +54,10 @@
             // txtMensaje
             // 
             this.txtMensaje.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMensaje.Location = new System.Drawing.Point(45, 228);
+            this.txtMensaje.Location = new System.Drawing.Point(49, 241);
             this.txtMensaje.Margin = new System.Windows.Forms.Padding(4);
             this.txtMensaje.Name = "txtMensaje";
-            this.txtMensaje.Size = new System.Drawing.Size(626, 32);
+            this.txtMensaje.Size = new System.Drawing.Size(733, 32);
             this.txtMensaje.TabIndex = 37;
             this.txtMensaje.TextChanged += new System.EventHandler(this.txtMensaje_TextChanged);
             // 
@@ -67,7 +67,7 @@
             this.btnNo.Cursor = System.Windows.Forms.Cursors.Cross;
             this.btnNo.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNo.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnNo.Location = new System.Drawing.Point(386, 282);
+            this.btnNo.Location = new System.Drawing.Point(447, 295);
             this.btnNo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNo.Name = "btnNo";
             this.btnNo.Size = new System.Drawing.Size(180, 44);
@@ -79,7 +79,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::SistemaInventarioWF.Properties.Resources.whatsapp_icono;
-            this.pictureBox1.Location = new System.Drawing.Point(198, -1);
+            this.pictureBox1.Location = new System.Drawing.Point(259, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(326, 261);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -90,7 +90,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(729, 386);
+            this.ClientSize = new System.Drawing.Size(837, 386);
             this.Controls.Add(this.txtMensaje);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnNo);

@@ -86,7 +86,7 @@
             this.btnEstablecerDireccion.Cursor = System.Windows.Forms.Cursors.Cross;
             this.btnEstablecerDireccion.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEstablecerDireccion.ForeColor = System.Drawing.Color.DarkRed;
-            this.btnEstablecerDireccion.Location = new System.Drawing.Point(484, 122);
+            this.btnEstablecerDireccion.Location = new System.Drawing.Point(593, 122);
             this.btnEstablecerDireccion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEstablecerDireccion.Name = "btnEstablecerDireccion";
             this.btnEstablecerDireccion.Size = new System.Drawing.Size(206, 107);
@@ -98,11 +98,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(53, 39);
+            this.label1.Font = new System.Drawing.Font("Arial", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(48, 36);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(539, 33);
+            this.label1.Size = new System.Drawing.Size(642, 37);
             this.label1.TabIndex = 37;
             this.label1.Text = "ESTABLECE LA DIRECCIOND EL LOCAL:";
             // 
@@ -110,7 +110,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(725, 276);
+            this.ClientSize = new System.Drawing.Size(856, 288);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnEstablecerDireccion);
             this.Controls.Add(this.label4);

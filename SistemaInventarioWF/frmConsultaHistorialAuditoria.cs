@@ -115,5 +115,10 @@ namespace SistemaInventarioWF
         private void cboAccion_SelectedIndexChanged(object sender, EventArgs e) { }
         private void dgvFechaFinal_ValueChanged(object sender, EventArgs e) { }
         private void dgvHistorialAuditoria_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

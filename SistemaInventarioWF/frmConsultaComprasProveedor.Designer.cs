@@ -45,11 +45,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.DarkRed;
-            this.label3.Location = new System.Drawing.Point(346, 126);
+            this.label3.Font = new System.Drawing.Font("Arial", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(51, 28);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(780, 45);
+            this.label3.Size = new System.Drawing.Size(691, 37);
             this.label3.TabIndex = 21;
             this.label3.Text = "CONSULTA DE COMPRAS POR PROVEEDOR";
             // 
@@ -67,75 +67,78 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label1.Location = new System.Drawing.Point(202, 280);
+            this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(53, 94);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 29);
+            this.label1.Size = new System.Drawing.Size(121, 27);
             this.label1.TabIndex = 23;
-            this.label1.Text = "Proveedor:";
+            this.label1.Text = "Proveedor";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cboProveedor
             // 
+            this.cboProveedor.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboProveedor.FormattingEnabled = true;
-            this.cboProveedor.Location = new System.Drawing.Point(402, 282);
+            this.cboProveedor.Location = new System.Drawing.Point(58, 126);
             this.cboProveedor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cboProveedor.Name = "cboProveedor";
-            this.cboProveedor.Size = new System.Drawing.Size(298, 28);
+            this.cboProveedor.Size = new System.Drawing.Size(298, 33);
             this.cboProveedor.TabIndex = 24;
             this.cboProveedor.SelectedIndexChanged += new System.EventHandler(this.cboProveedor_SelectedIndexChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label4.Location = new System.Drawing.Point(202, 377);
+            this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(53, 189);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(160, 29);
+            this.label4.Size = new System.Drawing.Size(141, 27);
             this.label4.TabIndex = 25;
-            this.label4.Text = "Fecha Inicio:";
+            this.label4.Text = "Fecha Inicio";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label5.Location = new System.Drawing.Point(736, 378);
+            this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(400, 189);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(228, 29);
+            this.label5.Size = new System.Drawing.Size(213, 27);
             this.label5.TabIndex = 26;
-            this.label5.Text = "Fecha finalizacion:";
+            this.label5.Text = "Fecha Finalización";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dtpFechaInicio
             // 
-            this.dtpFechaInicio.Location = new System.Drawing.Point(402, 377);
+            this.dtpFechaInicio.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpFechaInicio.Location = new System.Drawing.Point(58, 221);
             this.dtpFechaInicio.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dtpFechaInicio.Name = "dtpFechaInicio";
-            this.dtpFechaInicio.Size = new System.Drawing.Size(298, 26);
+            this.dtpFechaInicio.Size = new System.Drawing.Size(298, 33);
             this.dtpFechaInicio.TabIndex = 27;
             this.dtpFechaInicio.ValueChanged += new System.EventHandler(this.dtpFechaInicio_ValueChanged);
             // 
             // dtpFechaFinal
             // 
-            this.dtpFechaFinal.Location = new System.Drawing.Point(994, 378);
+            this.dtpFechaFinal.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpFechaFinal.Location = new System.Drawing.Point(405, 221);
             this.dtpFechaFinal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dtpFechaFinal.Name = "dtpFechaFinal";
-            this.dtpFechaFinal.Size = new System.Drawing.Size(298, 26);
+            this.dtpFechaFinal.Size = new System.Drawing.Size(298, 33);
             this.dtpFechaFinal.TabIndex = 28;
             this.dtpFechaFinal.ValueChanged += new System.EventHandler(this.dtpFechaFinal_ValueChanged);
             // 
             // btnBuscar
             // 
-            this.btnBuscar.BackColor = System.Drawing.Color.DarkRed;
-            this.btnBuscar.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnBuscar.Location = new System.Drawing.Point(819, 258);
+            this.btnBuscar.BackColor = System.Drawing.Color.White;
+            this.btnBuscar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscar.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnBuscar.Location = new System.Drawing.Point(751, 211);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(172, 74);
+            this.btnBuscar.Size = new System.Drawing.Size(172, 54);
             this.btnBuscar.TabIndex = 29;
             this.btnBuscar.Text = "BUSCAR";
             this.btnBuscar.UseVisualStyleBackColor = false;
@@ -143,12 +146,12 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.BackColor = System.Drawing.Color.DarkRed;
-            this.btnLimpiar.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLimpiar.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnLimpiar.Location = new System.Drawing.Point(1064, 258);
+            this.btnLimpiar.BackColor = System.Drawing.Color.White;
+            this.btnLimpiar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiar.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnLimpiar.Location = new System.Drawing.Point(962, 211);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(172, 74);
+            this.btnLimpiar.Size = new System.Drawing.Size(172, 54);
             this.btnLimpiar.TabIndex = 30;
             this.btnLimpiar.Text = "LIMPIAR";
             this.btnLimpiar.UseVisualStyleBackColor = false;
@@ -157,11 +160,11 @@
             // dgvComprasProveedor
             // 
             this.dgvComprasProveedor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvComprasProveedor.Location = new System.Drawing.Point(144, 503);
+            this.dgvComprasProveedor.Location = new System.Drawing.Point(58, 309);
             this.dgvComprasProveedor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvComprasProveedor.Name = "dgvComprasProveedor";
             this.dgvComprasProveedor.RowHeadersWidth = 62;
-            this.dgvComprasProveedor.Size = new System.Drawing.Size(1252, 440);
+            this.dgvComprasProveedor.Size = new System.Drawing.Size(1399, 639);
             this.dgvComprasProveedor.TabIndex = 31;
             // 
             // frmConsultaComprasProveedor

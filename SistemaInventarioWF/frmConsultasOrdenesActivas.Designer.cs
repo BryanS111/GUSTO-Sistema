@@ -38,22 +38,22 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.DarkRed;
-            this.label3.Location = new System.Drawing.Point(416, 117);
+            this.label3.Font = new System.Drawing.Font("Arial", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(50, 36);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(623, 45);
+            this.label3.Size = new System.Drawing.Size(548, 37);
             this.label3.TabIndex = 21;
             this.label3.Text = "CONSULTA DE ÓRDENES ACTIVAS";
             // 
             // btnVerDetalle
             // 
-            this.btnVerDetalle.BackColor = System.Drawing.Color.DarkRed;
-            this.btnVerDetalle.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVerDetalle.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnVerDetalle.Location = new System.Drawing.Point(410, 258);
+            this.btnVerDetalle.BackColor = System.Drawing.Color.White;
+            this.btnVerDetalle.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVerDetalle.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnVerDetalle.Location = new System.Drawing.Point(57, 115);
             this.btnVerDetalle.Name = "btnVerDetalle";
-            this.btnVerDetalle.Size = new System.Drawing.Size(195, 89);
+            this.btnVerDetalle.Size = new System.Drawing.Size(223, 63);
             this.btnVerDetalle.TabIndex = 26;
             this.btnVerDetalle.Text = "VER DETALLE";
             this.btnVerDetalle.UseVisualStyleBackColor = false;
@@ -61,12 +61,12 @@
             // 
             // btnRefrescar
             // 
-            this.btnRefrescar.BackColor = System.Drawing.Color.DarkRed;
-            this.btnRefrescar.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefrescar.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnRefrescar.Location = new System.Drawing.Point(846, 258);
+            this.btnRefrescar.BackColor = System.Drawing.Color.White;
+            this.btnRefrescar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefrescar.ForeColor = System.Drawing.Color.DarkRed;
+            this.btnRefrescar.Location = new System.Drawing.Point(309, 115);
             this.btnRefrescar.Name = "btnRefrescar";
-            this.btnRefrescar.Size = new System.Drawing.Size(195, 89);
+            this.btnRefrescar.Size = new System.Drawing.Size(223, 63);
             this.btnRefrescar.TabIndex = 27;
             this.btnRefrescar.Text = "REFRESCAR";
             this.btnRefrescar.UseVisualStyleBackColor = false;
@@ -75,11 +75,11 @@
             // dgvOrdenesActivas
             // 
             this.dgvOrdenesActivas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvOrdenesActivas.Location = new System.Drawing.Point(99, 425);
+            this.dgvOrdenesActivas.Location = new System.Drawing.Point(57, 224);
             this.dgvOrdenesActivas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvOrdenesActivas.Name = "dgvOrdenesActivas";
             this.dgvOrdenesActivas.RowHeadersWidth = 62;
-            this.dgvOrdenesActivas.Size = new System.Drawing.Size(1284, 495);
+            this.dgvOrdenesActivas.Size = new System.Drawing.Size(1326, 696);
             this.dgvOrdenesActivas.TabIndex = 28;
             this.dgvOrdenesActivas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrdenesActivas_CellContentClick);
             // 
