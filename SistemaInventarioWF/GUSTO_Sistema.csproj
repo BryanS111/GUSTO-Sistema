@@ -411,6 +411,12 @@
   <ItemGroup>
     <None Include="Resources\whatsapp-icono.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\assets\documentacion\ManualDeUso-GUSTO.pdf">
+      <Link>assets\documentacion\ManualDeUso-GUSTO.pdf</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SkiaSharp.NativeAssets.macOS.3.119.4\build\net462\SkiaSharp.NativeAssets.macOS.targets" Condition="Exists('..\packages\SkiaSharp.NativeAssets.macOS.3.119.4\build\net462\SkiaSharp.NativeAssets.macOS.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
