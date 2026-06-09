@@ -8,21 +8,6 @@ namespace DAO
 {
     public class UsuarioDAO : AbstractDAO<Usuario>
     {
-        // ==================== AUDITORÍA (NUEVO) ====================
-        private void Auditar(string accion, string detalle, int usuarioId)
-        {
-            try
-            {
-                SqlParameter[] parametros = {
-                    new SqlParameter("@AccionEvento", accion),
-                    new SqlParameter("@Detalle", detalle),
-                    new SqlParameter("@UsuarioRegistroId", usuarioId)
-                };
-                EjecutarComando("AUDITORIA.SpRegistrarAuditoria", parametros, out _);
-            }
-            catch { /* Si falla la auditoría, no afecta la operación principal */ }
-        }
-
         // ==================== LOGIN (SIN CAMBIOS) ====================
         public override Usuario ObtenerPorId(string nombreUsuario, out string pError)
         {
@@ -95,7 +80,7 @@ namespace DAO
             return lista;
         }
 
-        // ==================== GUARDAR (CON AUDITORÍA) ====================
+        // ==================== GUARDAR ====================
         public override void GuardarRegistro(Usuario reg, out string pError)
         {
             pError = string.Empty;
@@ -108,28 +93,12 @@ namespace DAO
                 new SqlParameter("@UsuarioRegistroId", SqlDbType.Int) { Value = SesionActual.UsuarioId }
             };
             EjecutarComando("AUTENTICACION.SpInsertUsuario", parametros, out pError);
-
-            if (string.IsNullOrEmpty(pError))
-                Auditar("INSERCION", $"Nuevo usuario: {reg.User} (Registrado por ID: {SesionActual.UsuarioId})", SesionActual.UsuarioId);
         }
 
-        // ==================== ACTUALIZAR (CON AUDITORÍA Y COMPARACIÓN) ====================
+        // ==================== ACTUALIZAR ====================
         public override void ActualizarRegistro(Usuario reg, out string pError)
         {
             pError = string.Empty;
-
-            // Obtener el usuario original para comparar cambios
-            Usuario original = ObtenerPorId(reg.UsuarioId, out _);
-            string cambios = "";
-
-            if (original != null)
-            {
-                if (original.User != reg.User) cambios += $"Nombre de usuario: {original.User} → {reg.User}; ";
-                if (original.Clave != reg.Clave) cambios += "Clave modificada; ";
-                if (original.EmpleadoId != reg.EmpleadoId) cambios += $"EmpleadoId: {original.EmpleadoId} cambio a {reg.EmpleadoId}; ";
-                if (original.IdRol != reg.IdRol) cambios += $"RolId: {original.IdRol} → {reg.IdRol}; ";
-                if (original.EstadoId != reg.EstadoId) cambios += $"EstadoId: {original.EstadoId} → {reg.EstadoId}; ";
-            }
 
             SqlParameter[] parametros = {
                 new SqlParameter("@UsuarioId", SqlDbType.Int) { Value = reg.UsuarioId },
@@ -144,29 +113,21 @@ namespace DAO
             if (!string.IsNullOrEmpty(pError)) return;
             if (filas == 0)
                 pError = "No se actualizó ningún registro. Verifique que el usuario no esté duplicado.";
-            else if (!string.IsNullOrEmpty(cambios))
-                Auditar("ACTUALIZACION", $"Usuario {reg.User} modificado por ID {SesionActual.UsuarioId}: {cambios.TrimEnd(' ', ';')}", SesionActual.UsuarioId);
         }
 
-        // ==================== ELIMINACIÓN LÓGICA (CON AUDITORÍA) ====================
+        // ==================== ELIMINACIÓN LÓGICA ====================
         public override void EliminarLogico(int id, out string pError)
         {
             pError = string.Empty;
-            // Obtener el usuario para el mensaje
-            Usuario usuario = ObtenerPorId(id, out _);
-            string nombre = usuario != null ? usuario.User : id.ToString();
-
             int idInactivo = ObtenerIdEstado("INACTIVO", out pError);
             if (!string.IsNullOrEmpty(pError)) return;
 
             SqlParameter[] parametros = {
                 new SqlParameter("@UsuarioId", SqlDbType.Int) { Value = id },
-                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = idInactivo }
+                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = idInactivo },
+                new SqlParameter("@UsuarioModificacionId", SqlDbType.Int) { Value = SesionActual.UsuarioId }
             };
             EjecutarComando("AUTENTICACION.SpDeleteLogicoUsuario", parametros, out pError);
-
-            if (string.IsNullOrEmpty(pError))
-                Auditar("ELIMINACION LOGICA", $"Usuario desactivado: {nombre} (ID: {id}) por usuario ID {SesionActual.UsuarioId}", SesionActual.UsuarioId);
         }
 
         // ==================== RESTO DE MÉTODOS (SIN CAMBIOS) ====================

@@ -21,7 +21,9 @@ namespace DAO
                        'Id: ' + CAST(o.OrdenId AS VARCHAR) + ' - ' + c.Nombre + ' ' + c.Apellido AS DisplayOrden,
                        o.Total,
                        c.Nombre + ' ' + c.Apellido AS ClienteNombre,
+                       c.CorreoElectronico,
                        t.TipoOrden,
+                       t.TipoOrdenId,
                        o.EstadoId
                 FROM VENTA.ORDEN o
                 INNER JOIN VENTA.CLIENTE c ON o.ClienteId = c.ClienteId

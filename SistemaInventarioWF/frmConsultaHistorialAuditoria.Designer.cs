@@ -173,13 +173,13 @@
             // 
             // dgvHistorialAuditoria
             // 
-            this.dgvHistorialAuditoria.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.dgvHistorialAuditoria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvHistorialAuditoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHistorialAuditoria.Location = new System.Drawing.Point(32, 520);
             this.dgvHistorialAuditoria.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvHistorialAuditoria.Name = "dgvHistorialAuditoria";
             this.dgvHistorialAuditoria.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dgvHistorialAuditoria.Size = new System.Drawing.Size(1482, 553);
+            this.dgvHistorialAuditoria.Size = new System.Drawing.Size(1482, 400);
             this.dgvHistorialAuditoria.TabIndex = 34;
             this.dgvHistorialAuditoria.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHistorialAuditoria_CellContentClick);
             // 
@@ -187,7 +187,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1293, 782);
+            this.ClientSize = new System.Drawing.Size(1293, 950);
             this.Controls.Add(this.dgvHistorialAuditoria);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnBuscar);

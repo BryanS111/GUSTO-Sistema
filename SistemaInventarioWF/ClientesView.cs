@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Net.Mail;
 using System.Windows.Forms;
 
 namespace SistemaInventarioWF
@@ -76,6 +77,7 @@ namespace SistemaInventarioWF
             txtNombre.Text = cli.Nombre;
             txtApellido.Text = cli.Apellido;
             txtTelefono.Text = cli.Telefono;
+            txtCorreoElectronico.Text = cli.CorreoElectronico ?? string.Empty;
             cboDireccion.SelectedValue = cli.DireccionId;
 
             if (cli.EstadoId > 0)
@@ -107,6 +109,7 @@ namespace SistemaInventarioWF
                 Apellido = txtApellido.Text.Trim(),
                 NombreCompleto = txtNombre.Text.Trim() + " " + txtApellido.Text.Trim(),  // ← agregar
                 Telefono = txtTelefono.Text.Trim(),
+                CorreoElectronico = txtCorreoElectronico.Text.Trim(),
                 DireccionId = (int)cboDireccion.SelectedValue,
                 EstadoId = (int)cboEstado.SelectedValue
             };
@@ -242,6 +245,7 @@ namespace SistemaInventarioWF
             txtNombre.Clear();
             txtApellido.Clear();
             txtTelefono.Clear();
+            txtCorreoElectronico.Clear();
             if (cboDireccion.Items.Count > 0) cboDireccion.SelectedIndex = 0;
             if (cboEstado.Items.Count > 0) cboEstado.SelectedIndex = 0;
         }
@@ -276,6 +280,19 @@ namespace SistemaInventarioWF
                 txtTelefono.Focus();
                 return false;
             }
+            if (!string.IsNullOrWhiteSpace(txtCorreoElectronico.Text))
+            {
+                try
+                {
+                    _ = new MailAddress(txtCorreoElectronico.Text.Trim());
+                }
+                catch
+                {
+                    MessageBox.Show("El correo electrónico no tiene un formato válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCorreoElectronico.Focus();
+                    return false;
+                }
+            }
             return true;
         }
 
@@ -284,6 +301,7 @@ namespace SistemaInventarioWF
         private void txtNombre_TextChanged(object sender, EventArgs e) { }
         private void txtApellido_TextChanged(object sender, EventArgs e) { }
         private void txtTelefono_TextChanged(object sender, EventArgs e) { }
+        private void txtCorreoElectronico_TextChanged(object sender, EventArgs e) { }
         private void cboDireccion_SelectedIndexChanged(object sender, EventArgs e) { }
         private void cboEstado_SelectedIndexChanged(object sender, EventArgs e) { }
         private void dgvClientes_CellContentClick(object sender, DataGridViewCellEventArgs e) { }

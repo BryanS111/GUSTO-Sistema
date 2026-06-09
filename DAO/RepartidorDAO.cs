@@ -8,21 +8,6 @@ namespace DAO
 {
     public class RepartidorDAO : AbstractDAO<Repartidor>
     {
-        // ==================== AUDITORÍA ====================
-        private void Auditar(string accion, string detalle, int usuarioId)
-        {
-            try
-            {
-                SqlParameter[] parametros = {
-                    new SqlParameter("@AccionEvento", accion),
-                    new SqlParameter("@Detalle", detalle),
-                    new SqlParameter("@UsuarioRegistroId", usuarioId)
-                };
-                EjecutarComando("AUDITORIA.SpRegistrarAuditoria", parametros, out _);
-            }
-            catch { /* La auditoría no debe trancar el sistema */ }
-        }
-
         public override List<Repartidor> ObtenerTodos(out string pError)
         {
             List<Repartidor> lista = new List<Repartidor>();
@@ -63,14 +48,13 @@ namespace DAO
             SqlParameter[] parametros = {
                 new SqlParameter("@EmpleadoId", SqlDbType.Int) { Value = reg.EmpleadoId },
                 new SqlParameter("@NoPlacaMoto", SqlDbType.VarChar) { Value = reg.NoPlacaMoto },
-                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = reg.EstadoId }
+                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = reg.EstadoId },
+                new SqlParameter("@UsuarioRegistroId", SqlDbType.Int) { Value = SesionActual.UsuarioId }
             };
             int filas = EjecutarComando("DELIVERY.SpInsertRepartidor", parametros, out pError);
             if (!string.IsNullOrEmpty(pError)) return;
             if (filas == 0)
                 pError = "No se insertó el registro. Verifique los datos.";
-            else
-                Auditar("INSERCION", $"Nuevo repartidor: {reg.EmpleadoNombre} (Placa: {reg.NoPlacaMoto}) (Registrado por ID: {SesionActual.UsuarioId})", SesionActual.UsuarioId);
         }
 
         // ==================== ACTUALIZAR (CON AUDITORÍA DETALLADA) ====================
@@ -98,14 +82,13 @@ namespace DAO
                 new SqlParameter("@RepartidorId", SqlDbType.Int) { Value = reg.RepartidorId },
                 new SqlParameter("@EmpleadoId", SqlDbType.Int) { Value = reg.EmpleadoId },
                 new SqlParameter("@NoPlacaMoto", SqlDbType.VarChar) { Value = reg.NoPlacaMoto },
-                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = reg.EstadoId }
+                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = reg.EstadoId },
+                new SqlParameter("@UsuarioModificacionId", SqlDbType.Int) { Value = SesionActual.UsuarioId }
             };
             int filas = EjecutarComando("DELIVERY.SpUpdateRepartidor", parametros, out pError);
             if (!string.IsNullOrEmpty(pError)) return;
             if (filas == 0)
                 pError = "No se actualizó ningún registro. Verifique la placa de moto.";
-            else if (!string.IsNullOrEmpty(cambios))
-                Auditar("ACTUALIZACION", $"Repartidor {reg.EmpleadoNombre} modificado por ID {SesionActual.UsuarioId}: {cambios.TrimEnd(' ', ';')}", SesionActual.UsuarioId);
         }
 
         // ==================== ELIMINACIÓN LÓGICA (CON AUDITORÍA) ====================
@@ -122,11 +105,12 @@ namespace DAO
 
             SqlParameter[] parametros = {
                 new SqlParameter("@RepartidorId", SqlDbType.Int) { Value = id },
-                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = idNoDisponible }
+                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = idNoDisponible },
+                new SqlParameter("@UsuarioModificacionId", SqlDbType.Int) { Value = SesionActual.UsuarioId }
             };
             int filas = EjecutarComando("DELIVERY.SpDeleteLogicoRepartidor", parametros, out pError);
-            if (string.IsNullOrEmpty(pError) && filas > 0)
-                Auditar("ELIMINACION LOGICA", $"Repartidor desactivado: {nombreRepartidor} (ID: {id}) por usuario ID {SesionActual.UsuarioId}", SesionActual.UsuarioId);
+            if (filas == 0 && string.IsNullOrEmpty(pError))
+                pError = "No se pudo desactivar el repartidor. Verifique los datos.";
         }
 
         // ==================== BÚSQUEDA Y MÉTODOS AUXILIARES (SIN CAMBIOS) ====================

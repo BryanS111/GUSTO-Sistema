@@ -13,6 +13,7 @@ namespace Modelos
         public string Apellido { get; set; }
         public string NombreCompleto { get; set; }
         public string Telefono { get; set; }
+        public string CorreoElectronico { get; set; }
         public int DireccionId { get; set; }
         public string DireccionNombre { get; set; }
         public string PuntoReferencia { get; set; }

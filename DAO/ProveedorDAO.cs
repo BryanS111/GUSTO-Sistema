@@ -8,21 +8,6 @@ namespace DAO
 {
     public class ProveedorDAO : AbstractDAO<Proveedor>
     {
-        // ==================== AUDITORÍA ====================
-        private void Auditar(string accion, string detalle, int usuarioId)
-        {
-            try
-            {
-                SqlParameter[] parametros = {
-                    new SqlParameter("@AccionEvento", accion),
-                    new SqlParameter("@Detalle", detalle),
-                    new SqlParameter("@UsuarioRegistroId", usuarioId)
-                };
-                EjecutarComando("AUDITORIA.SpRegistrarAuditoria", parametros, out _);
-            }
-            catch { /* La auditoría no debe trancar el sistema */ }
-        }
-
         public override List<Proveedor> ObtenerTodos(out string pError)
         {
             List<Proveedor> lista = new List<Proveedor>();
@@ -64,12 +49,10 @@ namespace DAO
                 new SqlParameter("@telefono", SqlDbType.VarChar) { Value = reg.Telefono },
                 new SqlParameter("@noRegistro", SqlDbType.VarChar) { Value = reg.NoRegistro ?? (object)DBNull.Value },
                 new SqlParameter("@NIT", SqlDbType.VarChar) { Value = reg.NIT ?? (object)DBNull.Value },
-                new SqlParameter("@estado", SqlDbType.Int) { Value = reg.EstadoId }
+                new SqlParameter("@estado", SqlDbType.Int) { Value = reg.EstadoId },
+                new SqlParameter("@UsuarioRegistroId", SqlDbType.Int) { Value = SesionActual.UsuarioId }
             };
             EjecutarComando("COMPRA.SpInsertProveedor", parametros, out pError);
-
-            if (string.IsNullOrEmpty(pError))
-                Auditar("INSERCION", $"Nuevo proveedor: {reg.Nombre} (Registrado por ID: {SesionActual.UsuarioId})", SesionActual.UsuarioId);
         }
 
         // ==================== ACTUALIZAR (CON AUDITORÍA DETALLADA) ====================
@@ -103,15 +86,14 @@ namespace DAO
                 new SqlParameter("@Telefono", SqlDbType.VarChar) { Value = reg.Telefono },
                 new SqlParameter("@NoRegistro", SqlDbType.VarChar) { Value = reg.NoRegistro ?? (object)DBNull.Value },
                 new SqlParameter("@NIT", SqlDbType.VarChar) { Value = reg.NIT ?? (object)DBNull.Value },
-                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = reg.EstadoId }
+                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = reg.EstadoId },
+                new SqlParameter("@UsuarioModificacionId", SqlDbType.Int) { Value = SesionActual.UsuarioId }
             };
 
             int filas = EjecutarComando("COMPRA.SpUpdateProveedor", parametros, out pError);
             if (!string.IsNullOrEmpty(pError)) return;
             if (filas == 0)
                 pError = "No se actualizó ningún registro. Verifique que los datos no estén duplicados (teléfono, NCR o NIT).";
-            else if (!string.IsNullOrEmpty(cambios))
-                Auditar("ACTUALIZACION", $"Proveedor {reg.Nombre} modificado por ID {SesionActual.UsuarioId}: {cambios.TrimEnd(' ', ';')}", SesionActual.UsuarioId);
         }
 
         // ==================== ELIMINACIÓN LÓGICA (CON AUDITORÍA) ====================
@@ -136,12 +118,13 @@ namespace DAO
                 new SqlParameter("@Telefono", SqlDbType.VarChar) { Value = prov.Telefono },
                 new SqlParameter("@NoRegistro", SqlDbType.VarChar) { Value = prov.NoRegistro ?? (object)DBNull.Value },
                 new SqlParameter("@NIT", SqlDbType.VarChar) { Value = prov.NIT ?? (object)DBNull.Value },
-                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = prov.EstadoId }
+                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = prov.EstadoId },
+                new SqlParameter("@UsuarioModificacionId", SqlDbType.Int) { Value = SesionActual.UsuarioId }
             };
 
             int filas = EjecutarComando("COMPRA.SpUpdateProveedor", parametros, out pError);
-            if (string.IsNullOrEmpty(pError) && filas > 0)
-                Auditar("ELIMINACION LOGICA", $"Proveedor desactivado: {nombreProveedor} (ID: {id}) por usuario ID {SesionActual.UsuarioId}", SesionActual.UsuarioId);
+            if (filas == 0 && string.IsNullOrEmpty(pError))
+                pError = "No se pudo desactivar el proveedor. Verifique los datos.";
         }
 
         // ==================== BÚSQUEDA Y MÉTODOS AUXILIARES (SIN CAMBIOS) ====================

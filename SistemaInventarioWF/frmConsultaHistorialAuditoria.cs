@@ -97,6 +97,15 @@ namespace SistemaInventarioWF
             // Ocultar ID del historial
             if (dgvHistorialAuditoria.Columns["HistorialId"] != null)
                 dgvHistorialAuditoria.Columns["HistorialId"].Visible = false;
+
+            if (dgvHistorialAuditoria.Columns["FechaHora"] != null)
+                dgvHistorialAuditoria.Columns["FechaHora"].HeaderText = "Fecha y Hora";
+
+            if (dgvHistorialAuditoria.Columns["UsuarioId"] != null)
+                dgvHistorialAuditoria.Columns["UsuarioId"].HeaderText = "Usuario ID";
+
+            if (dgvHistorialAuditoria.Columns["Usuario"] != null)
+                dgvHistorialAuditoria.Columns["Usuario"].HeaderText = "Usuario";
         }
 
         // Eventos vacíos del diseñador (no eliminar)

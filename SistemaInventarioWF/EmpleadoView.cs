@@ -141,18 +141,21 @@ namespace SistemaInventarioWF
 
             Empleado empSeleccionado = (Empleado)dgvDatosIngresados.SelectedRows[0].DataBoundItem;
 
+            if (string.Equals(empSeleccionado.EstadoNombre, "INACTIVO", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("El empleado ya esta inactivo.", "Aviso",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             DialogResult confirmacion = MessageBox.Show(
                 $"¿Está seguro de desactivar al empleado {empSeleccionado.NombreCompleto}?",
                 "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (confirmacion != DialogResult.Yes) return;
 
-            // Cambiar estado a inactivo y asignar usuario que modifica
-            empSeleccionado.EstadoId = 2; // Inactivo
-            empSeleccionado.UsuarioModificacionId = SesionActual.UsuarioId;
-
             string error;
-            _empleadoDAO.ActualizarRegistro(empSeleccionado, out error);
+            _empleadoDAO.EliminarLogico(empSeleccionado.EmpleadoId, out error);
             if (!string.IsNullOrEmpty(error))
             {
                 MessageBox.Show($"Error al eliminar: {error}", "Error",

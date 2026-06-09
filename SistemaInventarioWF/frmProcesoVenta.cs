@@ -11,6 +11,9 @@ namespace SistemaInventarioWF
     public partial class frmProcesoVenta : Form
     {
         private VentaDAO _dao;
+        private string _correoClienteActual = string.Empty;
+        private string _tipoOrdenActual = string.Empty;
+        private string _clienteActual = string.Empty;
 
         public frmProcesoVenta()
         {
@@ -69,6 +72,9 @@ namespace SistemaInventarioWF
                 txtCliente.Text = drv["ClienteNombre"].ToString();
                 txtTipoOrden.Text = drv["TipoOrden"].ToString();
                 txtTotalOrden.Text = Convert.ToDecimal(drv["Total"]).ToString("F2");
+                _clienteActual = drv["ClienteNombre"].ToString();
+                _tipoOrdenActual = drv["TipoOrden"].ToString();
+                _correoClienteActual = drv["CorreoElectronico"] == DBNull.Value ? string.Empty : drv["CorreoElectronico"].ToString();
 
                 int ordenId = Convert.ToInt32(drv["OrdenId"]);
                 CargarDetalleOrden(ordenId);
@@ -109,16 +115,41 @@ namespace SistemaInventarioWF
                 return;
             }
 
-            // Generar factura en PDF
-            GenerarFacturaPDF(ordenId, total, metodoPago, montoRecibido);
+            string rutaFactura = GenerarFacturaPDF(ordenId, total, metodoPago, montoRecibido);
 
-            MessageBox.Show("Venta registrada exitosamente. Factura generada.", "Éxito");
+            bool esDelivery = string.Equals(_tipoOrdenActual, "Delivery", StringComparison.OrdinalIgnoreCase);
+            bool tieneCorreo = !string.IsNullOrWhiteSpace(_correoClienteActual);
+
+            if (esDelivery && tieneCorreo)
+            {
+                string errorCorreo;
+                if (FacturaCorreoService.EnviarFactura(
+                    _correoClienteActual,
+                    _clienteActual,
+                    rutaFactura,
+                    out errorCorreo))
+                {
+                    MessageBox.Show($"Factura enviada al correo: {_correoClienteActual}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Venta registrada exitosamente, pero no se pudo enviar la factura por correo: " + errorCorreo,
+                        "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    System.Diagnostics.Process.Start(rutaFactura);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Venta registrada exitosamente. Factura generada.", "Éxito");
+                System.Diagnostics.Process.Start(rutaFactura);
+            }
+
             Limpiar(true);
             GenerarNumeroDocumento();
             CargarOrdenesPendientes();
         }
 
-        private void GenerarFacturaPDF(int ordenId, decimal total, string metodoPago, decimal montoRecibido)
+        private string GenerarFacturaPDF(int ordenId, decimal total, string metodoPago, decimal montoRecibido)
         {
             string ruta = Path.Combine(Application.StartupPath, $"Factura_{ordenId}.pdf");
 
@@ -128,7 +159,6 @@ namespace SistemaInventarioWF
                 PdfWriter.GetInstance(doc, fs);
                 doc.Open();
 
-                BaseColor colorRojo = new BaseColor(139, 0, 0);
                 iTextSharp.text.Font tituloFont = FontFactory.GetFont("Arial", 14, iTextSharp.text.Font.BOLD);
                 iTextSharp.text.Font normalFont = FontFactory.GetFont("Arial", 10);
                 iTextSharp.text.Font negrita = FontFactory.GetFont("Arial", 10, iTextSharp.text.Font.BOLD);
@@ -182,8 +212,7 @@ namespace SistemaInventarioWF
 
                 doc.Close();
             }
-
-            System.Diagnostics.Process.Start(ruta);
+            return ruta;
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -197,6 +226,9 @@ namespace SistemaInventarioWF
             txtTipoOrden.Text = "";
             txtTotalOrden.Text = "";
             txtMontoRecibido.Text = "";
+            _correoClienteActual = string.Empty;
+            _tipoOrdenActual = string.Empty;
+            _clienteActual = string.Empty;
             dgvDetalleOrden.DataSource = null;
             if (cboOrdenesPendientes.Items.Count > 0)
                 cboOrdenesPendientes.SelectedIndex = -1;

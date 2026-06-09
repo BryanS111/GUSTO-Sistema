@@ -8,21 +8,6 @@ namespace DAO
 {
     public class ClienteDAO : AbstractDAO<Cliente>
     {
-        // ==================== AUDITORÍA ====================
-        private void Auditar(string accion, string detalle, int usuarioId)
-        {
-            try
-            {
-                SqlParameter[] parametros = {
-                    new SqlParameter("@AccionEvento", accion),
-                    new SqlParameter("@Detalle", detalle),
-                    new SqlParameter("@UsuarioRegistroId", usuarioId)
-                };
-                EjecutarComando("AUDITORIA.SpRegistrarAuditoria", parametros, out _);
-            }
-            catch { /* La auditoría no debe trancar el sistema */ }
-        }
-
         public override List<Cliente> ObtenerTodos(out string pError)
         {
             List<Cliente> lista = new List<Cliente>();
@@ -62,15 +47,15 @@ namespace DAO
                 new SqlParameter("@Nombre", SqlDbType.VarChar) { Value = reg.Nombre },
                 new SqlParameter("@Apellido", SqlDbType.VarChar) { Value = reg.Apellido },
                 new SqlParameter("@Telefono", SqlDbType.VarChar) { Value = reg.Telefono },
+                new SqlParameter("@CorreoElectronico", SqlDbType.VarChar) { Value = string.IsNullOrWhiteSpace(reg.CorreoElectronico) ? (object)DBNull.Value : reg.CorreoElectronico },
                 new SqlParameter("@DireccionId", SqlDbType.Int) { Value = reg.DireccionId },
-                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = reg.EstadoId }
+                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = reg.EstadoId },
+                new SqlParameter("@UsuarioRegistroId", SqlDbType.Int) { Value = SesionActual.UsuarioId }
             };
             int filas = EjecutarComando("VENTA.SpInsertCliente", parametros, out pError);
             if (!string.IsNullOrEmpty(pError)) return;
             if (filas == 0)
                 pError = "No se insertó el cliente. Verifique los datos.";
-            else
-                Auditar("INSERCION", $"Nuevo cliente: {reg.Nombre} {reg.Apellido} (Registrado por ID: {SesionActual.UsuarioId})", SesionActual.UsuarioId);
         }
 
         // ==================== ACTUALIZAR (CON AUDITORÍA DETALLADA) ====================
@@ -102,15 +87,15 @@ namespace DAO
                 new SqlParameter("@Apellido", SqlDbType.VarChar) { Value = reg.Apellido },
                 new SqlParameter("@NombreCompleto", SqlDbType.VarChar) { Value = reg.NombreCompleto },
                 new SqlParameter("@Telefono", SqlDbType.VarChar) { Value = reg.Telefono },
+                new SqlParameter("@CorreoElectronico", SqlDbType.VarChar) { Value = string.IsNullOrWhiteSpace(reg.CorreoElectronico) ? (object)DBNull.Value : reg.CorreoElectronico },
                 new SqlParameter("@DireccionId", SqlDbType.Int) { Value = reg.DireccionId },
-                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = reg.EstadoId }
+                new SqlParameter("@EstadoId", SqlDbType.Int) { Value = reg.EstadoId },
+                new SqlParameter("@UsuarioModificacionId", SqlDbType.Int) { Value = SesionActual.UsuarioId }
             };
             int filas = EjecutarComando("VENTA.SpUpdateCliente", parametros, out pError);
             if (!string.IsNullOrEmpty(pError)) return;
             if (filas == 0)
                 pError = "No se actualizó ningún registro. Verifique el teléfono.";
-            else if (!string.IsNullOrEmpty(cambios))
-                Auditar("ACTUALIZACION", $"Cliente {reg.Nombre} {reg.Apellido} modificado por ID {SesionActual.UsuarioId}: {cambios.TrimEnd(' ', ';')}", SesionActual.UsuarioId);
         }
 
         // ==================== ELIMINACIÓN LÓGICA (CON AUDITORÍA) ====================
@@ -120,12 +105,13 @@ namespace DAO
             Cliente cliente = ObtenerPorId(id, out pError);
             if (cliente == null) return;
 
-            string nombreCompleto = $"{cliente.Nombre} {cliente.Apellido}";
-
-            SqlParameter[] parametros = { new SqlParameter("@ClienteId", SqlDbType.Int) { Value = id } };
+            SqlParameter[] parametros = {
+                new SqlParameter("@ClienteId", SqlDbType.Int) { Value = id },
+                new SqlParameter("@UsuarioModificacionId", SqlDbType.Int) { Value = SesionActual.UsuarioId }
+            };
             int filas = EjecutarComando("VENTA.SpDeleteLogicoCliente", parametros, out pError);
-            if (string.IsNullOrEmpty(pError) && filas > 0)
-                Auditar("ELIMINACION LOGICA", $"Cliente desactivado: {nombreCompleto} (ID: {id}) por usuario ID {SesionActual.UsuarioId}", SesionActual.UsuarioId);
+            if (filas == 0 && string.IsNullOrEmpty(pError))
+                pError = "No se pudo desactivar el cliente. Verifique los datos.";
         }
 
         // ==================== BÚSQUEDA Y MÉTODOS AUXILIARES (SIN CAMBIOS) ====================
@@ -169,12 +155,20 @@ namespace DAO
                 Apellido = row["Apellido"].ToString(),
                 NombreCompleto = row["NombreCompleto"].ToString(),
                 Telefono = row["Telefono"].ToString(),
+                CorreoElectronico = LeerString(row, "CorreoElectronico"),
                 DireccionId = Convert.ToInt32(row["DireccionId"]),
                 DireccionNombre = row["DireccionNombre"].ToString(),
                 PuntoReferencia = row["PuntoReferencia"]?.ToString(),
                 EstadoId = Convert.ToInt32(row["EstadoId"]),
                 EstadoNombre = row["EstadoNombre"].ToString()
             };
+        }
+
+        private string LeerString(DataRow row, string columna)
+        {
+            return row.Table.Columns.Contains(columna) && row[columna] != DBNull.Value
+                ? row[columna].ToString()
+                : string.Empty;
         }
     }
 }

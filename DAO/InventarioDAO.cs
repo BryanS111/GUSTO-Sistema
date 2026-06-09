@@ -94,7 +94,10 @@ namespace DAO
         public override void EliminarLogico(int id, out string pError)
         {
             pError = string.Empty;
-            SqlParameter[] parametros = { new SqlParameter("@InventarioId", SqlDbType.Int) { Value = id } };
+            SqlParameter[] parametros = {
+                new SqlParameter("@InventarioId", SqlDbType.Int) { Value = id },
+                new SqlParameter("@UsuarioModificacionId", SqlDbType.Int) { Value = SesionActual.UsuarioId }
+            };
             EjecutarComando("COMPRA.SpDeleteLogicoInventario", parametros, out pError);
         }
 

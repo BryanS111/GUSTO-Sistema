@@ -3,6 +3,17 @@
 	<startup>
 		<supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
 	</startup>
+	<appSettings>
+		<add key="SmtpHost" value="smtp.gmail.com" />
+		<add key="SmtpPort" value="587" />
+		<add key="SmtpEnableSsl" value="true" />
+		<add key="SmtpUser" value="facturacion.systemgusto@gmail.com" />
+		<add key="SmtpPassword" value="ugre bzoi jcmj vwqg" />
+		<add key="SmtpFromAddress" value="facturacion.systemgusto@gmail.com" />
+		<add key="SmtpFromName" value="G.U.S.T.O" />
+		<add key="FacturaSubject" value="FACTURA - G.U.S.T.O" />
+		<add key="FacturaBody" value="Factura emitida por el sistema G.U.S.T.O, gracias por su compra 👋." />
+	</appSettings>
 	<connectionStrings>
 		<add name="connSQLServer"
 			 connectionString="Data Source=TU_SERVIDOR\SQLEXPRESS;Initial Catalog=PUPUSERIA;Integrated Security=True;TrustServerCertificate=True"
